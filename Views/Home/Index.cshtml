@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+    <script defer src="~/js/chat.js"></script>
+</head>
+<body>
+    <div id="loginBlock">
+        <p>
+            Введите email:<br />
+            <input id="email" type="text" />
+        </p>
+
+        <input id="loginBtn" type="button" value="Войти" />
+    </div>
+    <br/>
+
+    <div id="inputForm">
+        <p>
+            Введите кому хотите отправить сообщение:<br />
+            <input id="sendTo" type="text" />
+        </p>
+        <input type="text" id="message" />
+        <input type="button" id="sendBtn" disabled value="Отправить" />
+    </div>
+    <div id="chatroom"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+</body>
+</html>
