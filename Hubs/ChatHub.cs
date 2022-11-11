@@ -12,7 +12,7 @@ namespace StepChat.Hubs
         [Authorize]
         public async Task Send(string message, string userId)
         {
-            //var _userId = Context.UserIdentifier;
+            var _userId = Context.UserIdentifier;
 
             await Clients.User(userId).SendAsync("Receive", userId, message);
         }
