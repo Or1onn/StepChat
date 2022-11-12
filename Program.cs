@@ -152,7 +152,6 @@ namespace StepChat
 
             using (Aes myAes = Aes.Create())
             {
-
                 // Encrypt the string to an array of bytes.
                 byte[] encrypted = Encryption.EncryptStringToBytes(original, myAes.Key, myAes.IV);
 
