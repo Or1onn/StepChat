@@ -1,4 +1,24 @@
-﻿let token;
+﻿function EncryptMessage(message) {
+    var key = CryptoJS.lib.WordArray.random(32).toString();
+    var iv = CryptoJS.lib.WordArray.random(25).toString();
+
+    var encrypted = CryptoJS.AES.encrypt(message, key, { iv: iv }).toString();
+
+    var context = {
+        Text: encrypted,
+        PrivateKey: key,
+        IV: iv
+    };
+
+    return context;
+}
+
+function DecryptMessage(context) {
+    return CryptoJS.AES.decrypt(context.text, context.privateKey, { iv: context.iv }).toString(CryptoJS.enc.Utf8);
+}
+
+
+let token;
 let username;
 const hubConnection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub", { accessTokenFactory: () => token })
@@ -39,15 +59,20 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
 document.getElementById("sendBtn").addEventListener("click", () => {
     const message = document.getElementById("message").value;
     const username = document.getElementById("sendTo").value;
-    hubConnection.invoke("Send", message, username)
+
+
+    let context = EncryptMessage(message);
+
+    hubConnection.invoke("Send", context, username)
         .catch(error => console.error(error));
 });
 // получение сообщения от сервера
-hubConnection.on("Receive", (user, message) => {
+hubConnection.on("Receive", (context) => {
+    let message = DecryptMessage(context);
 
     // создаем элемент <b> для имени пользователя
     const userNameElem = document.createElement("b");
-    userNameElem.textContent = `${user}: `;
+    userNameElem.textContent = `User: `;
 
     // создает элемент <p> для сообщения пользователя
     const elem = document.createElement("p");

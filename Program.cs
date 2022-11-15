@@ -120,7 +120,6 @@ namespace StepChat
             app.UseAuthentication();
             app.UseAuthorization();
 
-
             app.MapPost("/auth", (UsersModel loginModel) =>
             {
                 // находим пользователя 
@@ -147,21 +146,6 @@ namespace StepChat
 
                 return Results.Json(response);
             });
-
-            string original = "Hello BOYSSS!";
-
-            using (Aes myAes = Aes.Create())
-            {
-                // Encrypt the string to an array of bytes.
-                byte[] encrypted = Encryption.EncryptStringToBytes(original, myAes.Key, myAes.IV);
-
-                // Decrypt the bytes to a string.
-                string roundtrip = Encryption.DecryptStringFromBytes(encrypted, myAes.Key, myAes.IV);
-
-                //Display the original data and the decrypted data.
-                Console.WriteLine("Original:   {0}", original);
-                Console.WriteLine("Round Trip: {0}", roundtrip);
-            }
 
 
             app.MapControllerRoute(

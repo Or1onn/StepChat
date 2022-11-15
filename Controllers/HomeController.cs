@@ -15,7 +15,7 @@ namespace StepChat.Controllers
 
         public IActionResult Index()
         {
-            return View("MainView");
+            return View();
         }
 
         public IActionResult Privacy()

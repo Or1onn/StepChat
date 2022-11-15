@@ -229,6 +229,226 @@
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\CONTRIBUTING.md",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\CONTRIBUTING.md"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\crypto-js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\README.md",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\README.md"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\aes.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\aes.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\bower.json",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\bower.json"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\cipher-core.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\cipher-core.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\core.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\core.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\crypto-js.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\crypto-js.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\docs\\QuickStartGuide.wiki",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\docs\\QuickStartGuide.wiki"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\enc-base64.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\enc-base64.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\enc-base64url.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\enc-base64url.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\enc-hex.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\enc-hex.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\enc-latin1.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\enc-latin1.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\enc-utf16.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\enc-utf16.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\enc-utf8.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\enc-utf8.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\evpkdf.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\evpkdf.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\format-hex.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\format-hex.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\format-openssl.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\format-openssl.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\hmac-md5.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\hmac-md5.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\hmac-ripemd160.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\hmac-ripemd160.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\hmac-sha1.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\hmac-sha1.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\hmac-sha224.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\hmac-sha224.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\hmac-sha256.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\hmac-sha256.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\hmac-sha3.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\hmac-sha3.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\hmac-sha384.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\hmac-sha384.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\hmac-sha512.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\hmac-sha512.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\hmac.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\hmac.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\index.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\lib-typedarrays.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\lib-typedarrays.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\md5.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\md5.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\mode-cfb.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\mode-cfb.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\mode-ctr-gladman.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\mode-ctr-gladman.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\mode-ctr.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\mode-ctr.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\mode-ecb.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\mode-ecb.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\mode-ofb.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\mode-ofb.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\package.json",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\package.json"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\pad-ansix923.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\pad-ansix923.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\pad-iso10126.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\pad-iso10126.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\pad-iso97971.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\pad-iso97971.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\pad-nopadding.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\pad-nopadding.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\pad-pkcs7.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\pad-pkcs7.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\pad-zeropadding.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\pad-zeropadding.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\pbkdf2.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\pbkdf2.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\rabbit-legacy.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\rabbit-legacy.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\rabbit.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\rabbit.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\rc4.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\rc4.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\ripemd160.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\ripemd160.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\sha1.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\sha1.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\sha224.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\sha224.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\sha256.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\sha256.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\sha3.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\sha3.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\sha384.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\sha384.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\sha512.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\sha512.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\tripledes.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\tripledes.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\x64-core.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\x64-core.js"
+    },
+    {
       "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
