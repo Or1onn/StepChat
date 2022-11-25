@@ -11,62 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\lib\crypto-js\aes.js" />
-    <None Include="wwwroot\lib\crypto-js\cipher-core.js" />
-    <None Include="wwwroot\lib\crypto-js\CONTRIBUTING.md" />
-    <None Include="wwwroot\lib\crypto-js\core.js" />
-    <None Include="wwwroot\lib\crypto-js\crypto-js.js" />
-    <None Include="wwwroot\lib\crypto-js\docs\QuickStartGuide.wiki" />
-    <None Include="wwwroot\lib\crypto-js\enc-base64.js" />
-    <None Include="wwwroot\lib\crypto-js\enc-base64url.js" />
-    <None Include="wwwroot\lib\crypto-js\enc-hex.js" />
-    <None Include="wwwroot\lib\crypto-js\enc-latin1.js" />
-    <None Include="wwwroot\lib\crypto-js\enc-utf16.js" />
-    <None Include="wwwroot\lib\crypto-js\enc-utf8.js" />
-    <None Include="wwwroot\lib\crypto-js\evpkdf.js" />
-    <None Include="wwwroot\lib\crypto-js\format-hex.js" />
-    <None Include="wwwroot\lib\crypto-js\format-openssl.js" />
-    <None Include="wwwroot\lib\crypto-js\hmac-md5.js" />
-    <None Include="wwwroot\lib\crypto-js\hmac-ripemd160.js" />
-    <None Include="wwwroot\lib\crypto-js\hmac-sha1.js" />
-    <None Include="wwwroot\lib\crypto-js\hmac-sha224.js" />
-    <None Include="wwwroot\lib\crypto-js\hmac-sha256.js" />
-    <None Include="wwwroot\lib\crypto-js\hmac-sha3.js" />
-    <None Include="wwwroot\lib\crypto-js\hmac-sha384.js" />
-    <None Include="wwwroot\lib\crypto-js\hmac-sha512.js" />
-    <None Include="wwwroot\lib\crypto-js\hmac.js" />
-    <None Include="wwwroot\lib\crypto-js\index.js" />
-    <None Include="wwwroot\lib\crypto-js\lib-typedarrays.js" />
-    <None Include="wwwroot\lib\crypto-js\LICENSE" />
-    <None Include="wwwroot\lib\crypto-js\md5.js" />
-    <None Include="wwwroot\lib\crypto-js\mode-cfb.js" />
-    <None Include="wwwroot\lib\crypto-js\mode-ctr-gladman.js" />
-    <None Include="wwwroot\lib\crypto-js\mode-ctr.js" />
-    <None Include="wwwroot\lib\crypto-js\mode-ecb.js" />
-    <None Include="wwwroot\lib\crypto-js\mode-ofb.js" />
-    <None Include="wwwroot\lib\crypto-js\pad-ansix923.js" />
-    <None Include="wwwroot\lib\crypto-js\pad-iso10126.js" />
-    <None Include="wwwroot\lib\crypto-js\pad-iso97971.js" />
-    <None Include="wwwroot\lib\crypto-js\pad-nopadding.js" />
-    <None Include="wwwroot\lib\crypto-js\pad-pkcs7.js" />
-    <None Include="wwwroot\lib\crypto-js\pad-zeropadding.js" />
-    <None Include="wwwroot\lib\crypto-js\pbkdf2.js" />
-    <None Include="wwwroot\lib\crypto-js\rabbit-legacy.js" />
-    <None Include="wwwroot\lib\crypto-js\rabbit.js" />
-    <None Include="wwwroot\lib\crypto-js\rc4.js" />
-    <None Include="wwwroot\lib\crypto-js\README.md" />
-    <None Include="wwwroot\lib\crypto-js\ripemd160.js" />
-    <None Include="wwwroot\lib\crypto-js\sha1.js" />
-    <None Include="wwwroot\lib\crypto-js\sha224.js" />
-    <None Include="wwwroot\lib\crypto-js\sha256.js" />
-    <None Include="wwwroot\lib\crypto-js\sha3.js" />
-    <None Include="wwwroot\lib\crypto-js\sha384.js" />
-    <None Include="wwwroot\lib\crypto-js\sha512.js" />
-    <None Include="wwwroot\lib\crypto-js\tripledes.js" />
-    <None Include="wwwroot\lib\crypto-js\x64-core.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="wwwroot\js\chat.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

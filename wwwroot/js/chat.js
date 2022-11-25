@@ -1,11 +1,12 @@
 ﻿function EncryptMessage(message, key) {
     var iv = CryptoJS.lib.WordArray.random(25).toString();
+    var key2 = CryptoJS.lib.WordArray.random(32).toString();
 
-    var encrypted = CryptoJS.AES.encrypt(message, key, { iv: iv }).toString();
+    var encrypted = CryptoJS.AES.encrypt(message, key2, { iv: iv }).toString();
 
     var context = {
         Text: encrypted,
-        PrivateKey: key,
+        PrivateKey: key2,
         IV: iv
     };
 
@@ -13,7 +14,7 @@
 }
 
 function DecryptMessage(context) {
-    return CryptoJS.AES.decrypt(context.Text, context.PrivateKey, { iv: context.IV }).toString(CryptoJS.enc.Utf8);
+    return CryptoJS.AES.decrypt(context.text, context.privateKey, { iv: context.iv }).toString(CryptoJS.enc.Utf8);
 }
 
 let token;
