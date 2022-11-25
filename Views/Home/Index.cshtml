@@ -10,11 +10,14 @@
 <head>
     <meta charset="utf-8" />
     <title>METANIT.COM</title>
+    <script defer src="~/js/data_base.js"></script>
     <script defer src="~/js/chat.js"></script>
 
     @*<script defer src="~/lib/"></script>*@
 </head>
 <body>
+    <div style="display: flex;">
+
     <div id="loginBlock">
         <p>
             Введите email:<br />
@@ -22,6 +25,15 @@
         </p>
 
         <input id="loginBtn" type="button" value="Войти" />
+    </div>
+    <div id="registerBlock" style="margin-left: 50%;">
+        <p>
+            Введите email для регистрации:<br />
+            <input id="reg_email" type="text" />
+        </p>
+
+        <input id="registerBtn" type="button" value="Зарегестрироваться" />
+    </div>
     </div>
     <br/>
 

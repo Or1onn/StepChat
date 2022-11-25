@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\js\\chat.js"
     },
     {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\js\\data_base.js",
+      "PackagePath": "staticwebassets\\js\\data_base.js"
+    },
+    {
       "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",
       "PackagePath": "staticwebassets\\js\\signalr\\dist\\browser\\signalr.js"
     },

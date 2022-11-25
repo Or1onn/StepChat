@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using StepChat.Classes;
 using StepChat.Hubs;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.Negotiate;
-using System;
 using StepChat.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OAuth;
-using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,8 +10,8 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationM
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.DataProtection;
 using System.Text;
-using System.Collections;
-
+using StepChat.Contexts;
+using Newtonsoft.Json.Linq;
 
 //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⡇⠀⠀⠀⠀⠀⠀⠀⠀
 //⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣶⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀
@@ -52,11 +47,7 @@ namespace StepChat
     {
         public static void Main(string[] args)
         {
-            var people = new List<UsersModel>
-            {
-                new UsersModel(){ Id = 0, Email ="tom@gmail.com", Name="Tom"},
-                new  UsersModel(){ Id = 0, Email ="bob@gmail.com", Name="Bob"}
-            };
+            UsersDbContext context = new();
 
             var builder = WebApplication.CreateBuilder(args);
 
@@ -120,15 +111,14 @@ namespace StepChat
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapPost("/auth", (UsersModel loginModel) =>
+            app.MapPost("/log", (UsersModel loginModel) =>
             {
-                // находим пользователя 
-                UsersModel? person = people.FirstOrDefault(p => p.Email == loginModel.Email);
-                // если пользователь не найден, отправляем статусный код 401
+                UsersModel? person = context.Users.FirstOrDefault(p => p.Email == loginModel.Email);
+
                 if (person is null) return Results.Unauthorized();
 
                 var claims = new List<Claim> { new Claim(ClaimTypes.Name, person.Email!) };
-                // создаем JWT-токен
+
                 var jwt = new JwtSecurityToken(
                         issuer: AuthOptions.ISSUER,
                         audience: AuthOptions.AUDIENCE,
@@ -137,7 +127,6 @@ namespace StepChat
                         signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-                // формируем ответ
                 var response = new
                 {
                     access_token = encodedJwt,
@@ -147,6 +136,35 @@ namespace StepChat
                 return Results.Json(response);
             });
 
+            app.MapPost("/reg", async (object json) =>
+            {
+                dynamic data = JObject.Parse(json!.ToString());
+                string email = data["email"];
+
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, email) };
+
+                var jwt = new JwtSecurityToken(
+                        issuer: AuthOptions.ISSUER,
+                        audience: AuthOptions.AUDIENCE,
+                        claims: claims,
+                        expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+                        signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+                var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+                UsersModel usersModel = new UsersModel { Email = email, JWT = Encoding.ASCII.GetBytes(encodedJwt), BirthDate = DateTime.Now, ImageId = 0, FullName = "fd", Password="fsd", PhoneNumber="122123" };
+
+
+                await context.Users.AddAsync(usersModel);
+                await context.SaveChangesAsync();
+
+                var response = new
+                {
+                    access_token = encodedJwt,
+                    username = usersModel.Email
+                };
+
+                return Results.Json(response);
+            });
 
             app.MapControllerRoute(
                 name: "default",

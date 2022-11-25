@@ -1,5 +1,4 @@
-﻿function EncryptMessage(message) {
-    var key = CryptoJS.lib.WordArray.random(32).toString();
+﻿function EncryptMessage(message, key) {
     var iv = CryptoJS.lib.WordArray.random(25).toString();
 
     var encrypted = CryptoJS.AES.encrypt(message, key, { iv: iv }).toString();
@@ -14,22 +13,19 @@
 }
 
 function DecryptMessage(context) {
-    return CryptoJS.AES.decrypt(context.text, context.privateKey, { iv: context.iv }).toString(CryptoJS.enc.Utf8);
+    return CryptoJS.AES.decrypt(context.Text, context.PrivateKey, { iv: context.IV }).toString(CryptoJS.enc.Utf8);
 }
-
 
 let token;
 let username;
+
 const hubConnection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub", { accessTokenFactory: () => token })
     .build();
 
-// аутентификация
-document.getElementById("loginBtn").addEventListener("click", async () => {
 
-    // отправляем запрос на аутентификацию
-    // посылаем запрос на адрес "/login", в ответ получим токен и имя пользователя
-    const response = await fetch("/auth", {
+document.getElementById("loginBtn").addEventListener("click", async () => {
+    const response = await fetch("/log", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -37,7 +33,7 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
         })
     });
 
-    // если запрос прошел нормально
+        // если запрос прошел нормально
     if (response.ok === true) {
         // получаем данные
         const data = await response.json();
@@ -53,6 +49,22 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
         // если произошла ошибка, получаем код статуса
         console.log(`Status: ${response.status}`);
     }
+    
+});
+
+// аутентификация
+document.getElementById("registerBtn").addEventListener("click", async () => {
+
+    // отправляем запрос на аутентификацию
+    // посылаем запрос на адрес "/auth", в ответ получим токен и имя пользователя
+    const response = await fetch("/reg", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            email: document.getElementById("reg_email").value,
+        })
+    });
+
 });
 
 // отправка сообщения от простого пользователя
@@ -63,11 +75,12 @@ document.getElementById("sendBtn").addEventListener("click", () => {
 
     let context = EncryptMessage(message);
 
-    hubConnection.invoke("Send", context, username)
+    hubConnection.invoke("SendMessage", context, username)
         .catch(error => console.error(error));
 });
+
 // получение сообщения от сервера
-hubConnection.on("Receive", (context) => {
+hubConnection.on("ReceiveMessage", (context) => {
     let message = DecryptMessage(context);
 
     // создаем элемент <b> для имени пользователя
@@ -81,4 +94,10 @@ hubConnection.on("Receive", (context) => {
 
     var firstElem = document.getElementById("chatroom").firstChild;
     document.getElementById("chatroom").insertBefore(elem, firstElem);
+});
+
+hubConnection.on("SendPrivateKeys", (key) => {
+    let message = DecryptMessage(context);
+
+    
 });

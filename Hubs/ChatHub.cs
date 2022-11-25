@@ -1,21 +1,29 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
-using NuGet.Configuration;
-using StepChat.Classes;
 using StepChat.Models;
-using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace StepChat.Hubs
 {
     public class ChatHub : Hub
     {
         [Authorize]
-        public async Task Send(MessagesModel? context, string? userId)
+        public async Task StartMessaging(string? userId)
         {
-            await Clients.User(userId!).SendAsync("Receive", context);
+            var aes = Aes.Create();
+            aes.BlockSize = 256;
+            aes.KeySize = 32;
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
+
+            await Clients.Caller.SendAsync("SendPrivateKeys", aes.Key);
+            await Clients.User(userId!).SendAsync("SendPrivateKeys", aes.Key);
         }
+        [Authorize]
+        public async Task SendMessage(MessagesModel? context, string? userId)
+        {
+            await Clients.User(userId!).SendAsync("ReceiveMessage", context);
+        }
+
     }
 }

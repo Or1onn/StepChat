@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kH0c1LiIMzSJ3o94+BZW/a9xxqaWlibcBz581ejZjAA=",
+  "Hash": "t5cbVKVEWhalpodw60pbr4ruhF4fizQusukRqIifNIM=",
   "Source": "StepChat",
   "BasePath": "_content/StepChat",
   "Mode": "Default",
@@ -202,6 +202,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\chat.js"
+    },
+    {
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\js\\data_base.js",
+      "SourceId": "StepChat",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\",
+      "BasePath": "_content/StepChat",
+      "RelativePath": "js/data_base.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\data_base.js"
     },
     {
       "Identity": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",
