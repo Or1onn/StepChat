@@ -168,7 +168,7 @@ namespace StepChat
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Login}/{action=LoginPage}/{id?}");
             app.MapHub<ChatHub>("/chatHub");
             app.Run();
         }

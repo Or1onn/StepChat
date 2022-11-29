@@ -1,0 +1,55 @@
+﻿@page
+@model StepChat.Models.UsersModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/login.css">
+    <script defer src="~/js/login.js"></script>
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-panel">
+            <img src="/icons/step_logo.svg" alt="" class="step-logo">
+            <label class="login-label">Sign In</label>
+            <form action="/Login/LogIn">
+                <div class="group">
+                    <div class="input-container">
+                        <input name="email" id="email" required="" type="text" class="input">
+                        <label class="input-label">Email Adress</label>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="input-container">
+                        <input name="password" id="password" required="" type="password" class="input">
+                        <label class="input-label">Password</label>
+                        <img id="eye" src="/icons/show_pass.svg" alt="show password" class="show-pass">
+                    </div>
+                </div>
+
+                <input type="submit" value="Log In" class="login-submit">
+
+                <div class="span-container">
+                    <hr><label class="or-gmail">or</label><hr>
+                </div>
+
+                <button class="google-sign-in-cta__button"
+                        data-tracking-control-name="homepage-basic_google-sign-in-button" data-tracking-litms=""
+                        type="button">
+                    <img src="/icons/outlook.svg" alt="">
+                    <span class="google-sign-in-cta__text">Sign in with Outlook</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

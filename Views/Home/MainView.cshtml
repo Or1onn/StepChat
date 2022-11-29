@@ -5,19 +5,25 @@
 }
 
 <!DOCTYPE html>
+<html lang="en">
 
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/main_style.css">
-    <title>View</title>
+    <title>Step Chat</title>
 </head>
+
 <body>
     <div class="container">
         <div class="search-box">
             <div class="header">
-                <div class="burger-menu">
-                    <img src="~/icons/burgermenu.png" width="30px" height="30px" class="cover">
+                <div id="burger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
                 <div class="search-chat">
                     <input type="text" placeholder="Search">
@@ -27,7 +33,7 @@
                 <div class="block">
                     <div class="image-box">
                         <div class="image-padding">
-                            <img class="image" src="~/icons/stepwpicon.jpg">
+                            <img class="image" src="/images/stepwpicon.jpg">
                         </div>
                     </div>
                     <div class="details">
@@ -35,73 +41,82 @@
                             <h4>FBMS_1211_ru</h4>
                             <p class="time">10:51</p>
                         </div>
-                        <div class="message">
-                            <p>Elvin.M: Где ваши домашки ребята?</p>
+                        <div class="message-container">
+                            <div class="message">
+                                <p>Elvin.M: Где ваши домашки ребята?</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="block">
                     <div class="image-box">
                         <div class="image-padding">
-                            <img class="image" src="~/icons/blank-profile-picture-ga960cbbcc_1280.png">
+                            <img class="image" src="/images/blank-profile-picture.png">
                         </div>
                     </div>
                     <div class="details">
                         <div class="head-list">
-                            <h4>Орхан</h4>
-                            <p class="time">02:27</p>
+                            <div class="user-name">
+                                <h4>Орхан</h4>
+                            </div>
+                            <div class="message-time">
+                                <p class="time">02:27</p>
+                            </div>
                         </div>
-                        <div class="message">
-                            <p>Где дизайн падла?</p>
-                            <b>1</b>
+                        <div class="message-container">
+                            <div class="message">
+                                <p>Где дизайн?</p>
+                            </div>
+                            <div class="new-message_container">
+                                <div class="new-message">1</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="block">
                     <div class="image-box">
                         <div class="image-padding">
-                            <img class="image" src="~/icons/blank-profile-picture-ga960cbbcc_1280.png">
+                            <img class="image" src="/images/blank-profile-picture.png">
                         </div>
                     </div>
                     <div class="details">
                         <div class="head-list">
-                            <h4>Эмиль</h4>
-                            <p class="time">07:59</p>
+                            <div class="user-name">
+                                <h4>Elvin Azimov</h4>
+                            </div>
+                            <div class="message-time">
+                                <p class="time">19:42</p>
+                            </div>
                         </div>
-                        <div class="message">
-                            <p>Ала опарыши бомба на вкус</p>
-                            <b>3</b>
-                        </div>
-                    </div>
-                </div>
-                <div class="block">
-                    <div class="image-box">
-                        <div class="image-padding">
-                            <img class="image" src="~/icons/blank-profile-picture-ga960cbbcc_1280.png">
-                        </div>
-                    </div>
-                    <div class="details">
-                        <div class="head-list">
-                            <h4>Тамерлан</h4>
-                            <p class="time">23:42</p>
-                        </div>
-                        <div class="message">
-                            <p>Почему игноришь???</p>
-                            <b>56</b>
+                        <div class="message-container">
+                            <div class="message">
+                                <div class="last-message-status_container">
+                                    <div class="last-message-status">
+                                        <svg viewBox="0 0 18 18" width="18" height="18" class="">
+                                            <path fill="#0ed145"
+                                                  d="m17.394 5.035-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-.427-.388a.381.381 0 0 0-.578.038l-.451.576a.497.497 0 0 0 .043.645l1.575 1.51a.38.38 0 0 0 .577-.039l7.483-9.602a.436.436 0 0 0-.076-.609zm-4.892 0-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-2.614-2.556a.435.435 0 0 0-.614.007l-.505.516a.435.435 0 0 0 .007.614l3.887 3.8a.38.38 0 0 0 .577-.039l7.483-9.602a.435.435 0 0 0-.075-.609z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p>Го в казаков?</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
 
         <div class="chat-box">
-            <img class="step-icon" src="~/icons/logos.svg" width="300" height="310">
+            <img class="step-icon" src="/icons/logos.svg" width="300" height="310">
         </div>
     </div>
-
+</body>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-</body>
 </html>
+

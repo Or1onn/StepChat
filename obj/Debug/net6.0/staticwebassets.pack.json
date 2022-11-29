@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\StepChat.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
       "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\css\\main_style.css",
       "PackagePath": "staticwebassets\\css\\main_style.css"
     },
@@ -21,20 +25,36 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\icons\\blank-profile-picture-ga960cbbcc_1280.png",
-      "PackagePath": "staticwebassets\\icons\\blank-profile-picture-ga960cbbcc_1280.png"
-    },
-    {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\icons\\burgermenu.png",
-      "PackagePath": "staticwebassets\\icons\\burgermenu.png"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\icons\\hide_pass.svg",
+      "PackagePath": "staticwebassets\\icons\\hide_pass.svg"
     },
     {
       "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\icons\\logos.svg",
       "PackagePath": "staticwebassets\\icons\\logos.svg"
     },
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\icons\\stepwpicon.jpg",
-      "PackagePath": "staticwebassets\\icons\\stepwpicon.jpg"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\icons\\outlook.svg",
+      "PackagePath": "staticwebassets\\icons\\outlook.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\icons\\show_pass.svg",
+      "PackagePath": "staticwebassets\\icons\\show_pass.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\icons\\step_logo.svg",
+      "PackagePath": "staticwebassets\\icons\\step_logo.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\images\\blank-profile-picture.png",
+      "PackagePath": "staticwebassets\\images\\blank-profile-picture.png"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\images\\burgermenu.png",
+      "PackagePath": "staticwebassets\\images\\burgermenu.png"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\images\\stepwpicon.jpg",
+      "PackagePath": "staticwebassets\\images\\stepwpicon.jpg"
     },
     {
       "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\js\\chat.js",
@@ -43,6 +63,10 @@
     {
       "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\js\\data_base.js",
       "PackagePath": "staticwebassets\\js\\data_base.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\js\\login.js",
+      "PackagePath": "staticwebassets\\js\\login.js"
     },
     {
       "Id": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\LICENSE",
