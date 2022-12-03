@@ -13,7 +13,7 @@ form {
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 70px;
+    /* margin-top: 70px; */
     align-items: center;
 }
 
@@ -35,9 +35,9 @@ form {
     flex-direction: column;
     border-radius: 16px;
     background-color: #ffff;
-    backdrop-filter: blur(10px);
     padding: 0px 35px;
     border: none;
+    box-shadow: 0 0 40px rgb(8 7 16 / 60%);
 }
 
 
@@ -54,25 +54,23 @@ form {
 
 .input-container {
     font-size: 16px;
-    padding: 10px 5px 10px 5px;
+    padding: 10px 0px 10px 0px;
     display: flex;
     width: 100%;
-    border-style: solid;
-    border-color: #1E1E1E;
     color: white;
-    background-color: rgba(255, 255, 255, 0.13);
+    background-color: #e8e8e8;
     border-radius: 8px;
     margin-bottom: 40px;
 }
 
 .input {
-    font-size: 1.2rem;
+    font-size: 16px;
     display: block;
     width: 100%;
     background-color: transparent;
     border: none;
     color: #1E1E1E;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
     .input:focus {
@@ -81,7 +79,7 @@ form {
 
 .input-label {
     color: #1E1E1E;
-    font-size: 1.2rem;
+    font-size: 18px;
     font-weight: normal;
     position: absolute;
     pointer-events: none;
@@ -99,10 +97,15 @@ form {
     color: #1E1E1E;
 }
 
+.login-label_container {
+    height: 30%;
+    display: flex;
+    align-items: center;
+}
+
 .login-label {
-    font-size: 3rem;
+    font-size: 2.375rem;
     color: #1E1E1E;
-    margin-top: 15px;
 }
 
 .step-logo {
@@ -116,9 +119,8 @@ form {
     font-size: 1.5rem;
     letter-spacing: 0.5px;
     font-weight: 500;
-    color: #1E1E1E;
     border: none;
-    border-radius: 45px;
+    border-radius: 8px;
     border-color: #3963ff;
     border-style: solid;
     color: #3963ff;
@@ -126,6 +128,7 @@ form {
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
+    background-color: transparent;
 }
 
     .login-submit:hover {
@@ -166,6 +169,8 @@ hr {
     padding: 0;
 }
 
+
+
 .google-sign-in-cta__button {
     justify-content: center;
     width: 100%;
@@ -177,7 +182,7 @@ hr {
     overflow: hidden;
     padding: 0 32px;
     text-align: center;
-    border-radius: 28px;
+    border-radius: 8px;
     line-height: normal;
     font-weight: normal;
     display: -ms-flexbox;
@@ -187,8 +192,4 @@ hr {
     -ms-flex-pack: center;
     background-color: #fff;
     border-color: #1E1E1E;
-}
-
-.google-sign-in-cta__text {
-    margin-left: 5px;
 }

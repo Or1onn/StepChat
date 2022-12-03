@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7ZUKGhnH9N8YuRKcXyf1WyY7m60DmGDy5C+ZCxKIznmWMirNCeYLYLJrNJAG5qOt3ZdSmXYM3mjDtrWZBUXHXg==",
+  "dgSpecHash": "/GydYN5thbpifXqhgXUYdVN0Oxl1VsoVJj7OaCG9iXn3efyRgfevdf6cPYoFrcsu3pGURa3VRXiExd/eSIRs3A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\StepChat.csproj",
+  "projectFilePath": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\StepChat.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Orion\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Orion\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

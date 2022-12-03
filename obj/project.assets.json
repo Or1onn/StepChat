@@ -10796,11 +10796,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\StepChat.csproj",
+      "projectUniqueName": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\StepChat.csproj",
       "projectName": "StepChat",
-      "projectPath": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\StepChat.csproj",
+      "projectPath": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\StepChat.csproj",
       "packagesPath": "C:\\Users\\Orion\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Orion\\source\\repos\\Сourse Work\\StepChat\\StepChat\\obj\\",
+      "outputPath": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -3,7 +3,6 @@
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,11 +19,13 @@
     <div class="container">
         <div class="login-panel">
             <img src="/icons/step_logo.svg" alt="" class="step-logo">
-            <label class="login-label">Sign In</label>
-            <form action="/Login/LogIn">
+            <div class="login-label_container">
+                <label class="login-label">Sign In</label>
+            </div>
+            <form asp-controller="Login" asp-action="LogIn">
                 <div class="group">
                     <div class="input-container">
-                        <input name="email" id="email" required="" type="text" class="input">
+                        <input name="email" id="email"  required="" type="text" class="input">
                         <label class="input-label">Email Adress</label>
                     </div>
                 </div>
@@ -39,7 +40,8 @@
                 <input type="submit" value="Log In" class="login-submit">
 
                 <div class="span-container">
-                    <hr><label class="or-gmail">or</label><hr>
+                    <hr><label class="or-gmail">or</label>
+                    <hr>
                 </div>
 
                 <button class="google-sign-in-cta__button"
@@ -52,4 +54,5 @@
         </div>
     </div>
 </body>
+
 </html>
