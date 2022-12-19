@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System.Security.Claims;
 
-namespace StepChat.Classes
+namespace StepChat.Classes.Provider
 {
     public class UserIdProvider : IUserIdProvider
     {
