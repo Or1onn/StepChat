@@ -5,16 +5,17 @@ using StepChat.Classes.Auth;
 using StepChat.Classes.Configuration;
 using StepChat.Contexts;
 using StepChat.Models;
+using System;
 
 namespace StepChat.Controllers
 {
-    public class LoginController : Controller
+    public class AuthorizationController : Controller
     {
         private readonly IConfigService? _configService;
         private readonly ITokenService? _tokenService;
         MessengerDataDbContext _context = new();
 
-        public LoginController(ITokenService tokenService, IConfigService configService)
+        public AuthorizationController(ITokenService tokenService, IConfigService configService)
         {
             _tokenService = tokenService;
             _configService = configService;
@@ -72,19 +73,30 @@ namespace StepChat.Controllers
             return View();
         }
 
+        public ActionResult RegistrationPage()
+        {
+            return View();
+        }
+
         // POST: LoginController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(UsersModel user)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (user != null)
+                {
+                    await _context.AddAsync(user);
+                    await _context.SaveChangesAsync();
+                }
             }
             catch
             {
                 return View();
             }
+
+            return View("LoginPage");
         }
 
         // GET: LoginController/Edit/5

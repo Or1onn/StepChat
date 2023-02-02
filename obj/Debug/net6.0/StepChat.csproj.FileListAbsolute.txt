@@ -634,3 +634,4 @@ C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\refin
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\StepChat.pdb
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\StepChat.genruntimeconfig.cache
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\ref\StepChat.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\System.Reflection.MetadataLoadContext.dll
