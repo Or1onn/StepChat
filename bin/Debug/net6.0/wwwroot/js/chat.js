@@ -24,48 +24,15 @@ const hubConnection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub", { accessTokenFactory: () => token })
     .build();
 
+document.getElementById("sendBtn").addEventListener("click", () => {
+    const message = document.getElementById("message").value;
+    const username = document.getElementById("sendTo").value;
 
-document.getElementById("loginBtn").addEventListener("click", async () => {
-    const response = await fetch("/log", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            email: document.getElementById("email").value,
-        })
-    });
 
-        // если запрос прошел нормально
-    if (response.ok === true) {
-        // получаем данные
-        const data = await response.json();
-        token = data.access_token;
-        username = data.username;
-        document.getElementById("loginBtn").disabled = true;
+    let context = EncryptMessage(message);
 
-        hubConnection.start()       // начинаем соединение с хабом
-            .then(() => document.getElementById("sendBtn").disabled = false)
-            .catch(err => console.error(err.toString()));
-    }
-    else {
-        // если произошла ошибка, получаем код статуса
-        console.log(`Status: ${response.status}`);
-    }
-    
-});
-
-// аутентификация
-document.getElementById("registerBtn").addEventListener("click", async () => {
-
-    // отправляем запрос на аутентификацию
-    // посылаем запрос на адрес "/auth", в ответ получим токен и имя пользователя
-    const response = await fetch("/reg", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            email: document.getElementById("reg_email").value,
-        })
-    });
-
+    hubConnection.invoke("SendMessage", context, username)
+        .catch(error => console.error(error));
 });
 
 // отправка сообщения от простого пользователя

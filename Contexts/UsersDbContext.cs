@@ -16,7 +16,7 @@ public partial class UsersDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Image> Images { get; set; }
+    public virtual DbSet<ImagesModel> Images { get; set; }
 
     public virtual DbSet<UsersModel> Users { get; set; }
 
@@ -26,11 +26,11 @@ public partial class UsersDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Image>(entity =>
+        modelBuilder.Entity<ImagesModel>(entity =>
         {
             entity.HasKey(e => e.ImageId).HasName("PK__Images__7516F70CD8FA8BCA");
 
-            entity.Property(e => e.Image1).HasColumnName("Image");
+            entity.Property(e => e.Image).HasColumnName("Image");
         });
 
         modelBuilder.Entity<UsersModel>(entity =>

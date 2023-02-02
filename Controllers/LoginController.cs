@@ -54,7 +54,7 @@ namespace StepChat.Controllers
 
                 if (generatedToken != null)
                 {
-                    //HttpContext.Session.SetString("Token", generatedToken);
+                    HttpContext.Session.SetString("Token", generatedToken);
 
                     return RedirectToAction("MainView", "Home");
 

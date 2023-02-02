@@ -22,13 +22,14 @@ body {
 
 .search-box {
     position: relative;
-    background-color: #134074;
+    background-color: #13315c;
     width: 35%;
     height: 100%;
 }
 
 .chat-box {
-    background-color: #13315c;
+    position: relative;
+    background-color: #134074;
     width: 100%;
     display: flex;
 }
@@ -56,15 +57,15 @@ body {
     align-items: center;
 }
 
-input {
-    margin-left: 9px;
-    padding: 6px 100px 10px 10px;
-    background-color: #0b2545;
-    width: 68%;
-    max-width: fit-content;
-    border-radius: 6px;
-    border: none;
-}
+    .search-chat input {
+        margin-left: 9px;
+        padding: 6px 100px 10px 10px;
+        background-color: #0b2545;
+        width: 68%;
+        max-width: fit-content;
+        border-radius: 6px;
+        border: none;
+    }
 
 .step-icon {
     margin: auto;
@@ -79,11 +80,12 @@ input {
     display: flex;
     align-items: center;
     padding: 0.5625rem;
+    pointer-events: all;
 }
 
 .image-box {
     width: 77px;
-    height: 77px;
+    height: 65px;
     display: flex;
     border-radius: 50%;
     cursor: pointer;
@@ -229,7 +231,7 @@ input {
         position: absolute;
         height: 2px;
         width: 35px;
-        background: black;
+        background: #1f1f1f;
         border-radius: 9px;
         opacity: 1;
         -webkit-transform: rotate(0deg);
@@ -280,3 +282,143 @@ input {
         width: 0%;
         left: 50%;
     }
+
+.block:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.convo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.convo-head {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    background: #0b2545;
+}
+
+.convo-user {
+    display: flex;
+    align-self: baseline;
+    width: 12%;
+    height: -webkit-fill-available;
+}
+
+    .convo-user h4 {
+        font-style: normal;
+        font-weight: 60;
+        font-size: 1rem;
+        color: #e9edef;
+        margin-bottom: 37%;
+    }
+
+.convo-main {
+    position: relative;
+    align-items: flex-end;
+    display: flex;
+    width: 100%;
+    height: 80%;
+}
+
+.convo-input {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    background: #13315c;
+}
+
+.chat-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+    .chat-input input {
+        margin-left: 15px;
+        padding: 10px 75% 10px 5px;
+        background-color: #0b2545;
+        max-width: fit-content;
+        border-radius: 6px;
+        border: none;
+        width: 20%;
+        height: 30%;
+    }
+
+.smile {
+    position: relative;
+    display: flex;
+    height: 50%;
+    margin-right: 25px;
+    margin-top: 16px;
+}
+
+.paper-clip {
+    position: relative;
+    display: flex;
+    height: 50%;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.send {
+    position: relative;
+    display: flex;
+    height: 50%;
+    margin-top: 15px;
+    margin-right: 15px;
+}
+
+.chatting {
+    color: #e9edef;
+    margin-left: 15px;
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 15%;
+}
+
+    .chatting p {
+        position: relative;
+        text-align: right;
+        right: 0;
+        max-width: 65%;
+        background: #00A884;
+        border-radius: 5px;
+    }
+
+.calls {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    overflow: hidden;
+}
+
+.convo-search {
+    position: relative;
+    display: flex;
+    height: 40%;
+    margin-left: 68%;
+    margin-right: 5%;
+}
+
+.audio-call {
+    position: relative;
+    display: flex;
+    height: 35%;
+}
+
+.video-call {
+    position: relative;
+    display: flex;
+    height: 50%;
+    margin-left: 37%;
+}
