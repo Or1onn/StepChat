@@ -5,18 +5,22 @@ using StepChat.Models;
 
 namespace StepChat.Contexts;
 
-public partial class UsersDbContext : DbContext
+public partial class MessengerDataDbContext : DbContext
 {
-    public UsersDbContext()
+    public MessengerDataDbContext()
     {
     }
 
-    public UsersDbContext(DbContextOptions<UsersDbContext> options)
+    public MessengerDataDbContext(DbContextOptions<MessengerDataDbContext> options)
         : base(options)
     {
     }
 
+    public virtual DbSet<GroupsModel> Groups { get; set; }
+
     public virtual DbSet<ImagesModel> Images { get; set; }
+
+    public virtual DbSet<TeachersModel> Teachers { get; set; }
 
     public virtual DbSet<UsersModel> Users { get; set; }
 
@@ -26,11 +30,31 @@ public partial class UsersDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<GroupsModel>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Groups__3214EC07214EBC37");
+
+            entity.Property(e => e.Name).IsUnicode(false);
+        });
+
         modelBuilder.Entity<ImagesModel>(entity =>
         {
-            entity.HasKey(e => e.ImageId).HasName("PK__Images__7516F70CD8FA8BCA");
+            entity.HasKey(e => e.Image).HasName("PK__Images__7516F70CD8FA8BCA");
 
-            entity.Property(e => e.Image).HasColumnName("Image");
+            entity.Property(e => e.Id).HasColumnName("Image");
+        });
+
+        modelBuilder.Entity<TeachersModel>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Teachers__3214EC073C7C8295");
+
+            entity.Property(e => e.Email)
+                .HasMaxLength(60)
+                .IsUnicode(false);
+            entity.Property(e => e.Name).IsUnicode(false);
+            entity.Property(e => e.Patronymic).IsUnicode(false);
+            entity.Property(e => e.Surname).IsUnicode(false);
+            entity.Property(e => e.TeachingGroups).IsUnicode(false);
         });
 
         modelBuilder.Entity<UsersModel>(entity =>

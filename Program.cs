@@ -15,7 +15,7 @@ using StepChat.Classes.Provider;
 using StepChat.Classes.Auth;
 using StepChat.Classes.Configuration;
 
-       
+
 
 //                              :-= +*****************************************+=
 //                          :+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%
@@ -43,7 +43,7 @@ using StepChat.Classes.Configuration;
 //            -@@@@@.   =#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@#:                       
 //            *@@@@#   :@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%+:                         
 //            .*%% *.    =#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*+-.                            
-               
+
 
 namespace StepChat
 {
@@ -51,7 +51,7 @@ namespace StepChat
     {
         public static void Main(string[] args)
         {
-            UsersDbContext context = new();
+            MessengerDataDbContext context = new();
 
             var builder = WebApplication.CreateBuilder(args);
 

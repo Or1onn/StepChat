@@ -12,7 +12,7 @@ namespace StepChat.Controllers
     {
         private readonly IConfigService? _configService;
         private readonly ITokenService? _tokenService;
-        UsersDbContext _context = new();
+        MessengerDataDbContext _context = new();
 
         public LoginController(ITokenService tokenService, IConfigService configService)
         {

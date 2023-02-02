@@ -2,7 +2,7 @@
 {
     public class ImagesModel
     {
-        public int ImageId { get; set; }
+        public int Id { get; set; }
 
         public byte[] Image { get; set; } = null!;
 
