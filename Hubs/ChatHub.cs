@@ -22,7 +22,10 @@ namespace StepChat.Hubs
         [Authorize]
         public async Task SendMessage(MessagesModel? context, string? userId)
         {
-            await Clients.User(userId!).SendAsync("ReceiveMessage", context);
+            if (userId != null && context != null)
+            {
+                await Clients.User(userId!).SendAsync("ReceiveMessage", context);
+            }
         }
 
     }

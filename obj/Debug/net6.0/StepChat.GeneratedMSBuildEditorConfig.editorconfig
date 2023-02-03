@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Orion\source\repos\Course Work\StepChat\StepChat
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Orion/source/repos/Course Work/StepChat/StepChat/Views/Authorization/EmailConfirmationPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yaXphdGlvblxFbWFpbENvbmZpcm1hdGlvblBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Orion/source/repos/Course Work/StepChat/StepChat/Views/Authorization/LoginPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yaXphdGlvblxMb2dpblBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

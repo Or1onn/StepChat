@@ -1,11 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using StepChat.Classes.Auth;
 using StepChat.Classes.Configuration;
 using StepChat.Contexts;
 using StepChat.Models;
+using StepChat.Services;
 using System;
+using System.Text;
 
 namespace StepChat.Controllers
 {
@@ -14,6 +19,8 @@ namespace StepChat.Controllers
         private readonly IConfigService? _configService;
         private readonly ITokenService? _tokenService;
         MessengerDataDbContext _context = new();
+        EmailSender _sender = new();
+        UserManager<UsersModel> _userManager;
 
         public AuthorizationController(ITokenService tokenService, IConfigService configService)
         {
@@ -87,8 +94,16 @@ namespace StepChat.Controllers
             {
                 if (user != null)
                 {
-                    await _context.AddAsync(user);
-                    await _context.SaveChangesAsync();
+                    var callbackUrl = Url.Action(
+                        "ConfirmEmail",
+                        "Authorization",
+                        values: new { email = user.Email, password = user.Password, fullname = user.FullName, birthDate = user.BirthDate, phoneNumber = user.PhoneNumber, imageId = user.ImageId, role = user.Role },
+                        protocol: HttpContext.Request.Scheme);
+
+                    EmailSender _emailSender = new();
+                    await _emailSender.SendEmailAsync(user.Email, $"<a href='{callbackUrl}'>Verify<a>");
+
+                    return RedirectToAction("EmailConfirmationPage", "Authorization");
                 }
             }
             catch
@@ -98,7 +113,29 @@ namespace StepChat.Controllers
 
             return View("LoginPage");
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string? email, string? password, string fullname, DateTime birthDate, string phoneNumber, int imageId, string role)
+        {
+            UsersModel user = new() { Email = email, Password = password, FullName = fullname, BirthDate = birthDate, PhoneNumber = phoneNumber, ImageId = imageId, Role = role };
+            
+            if (user != null)
+            {
+                await _context.AddAsync(user);
+                await _context.SaveChangesAsync();
+                return View("LoginPage");
+            }
+            else
+            {
+                return View(null);
+            }
+        }
 
+
+        public ActionResult EmailConfirmationPage(int id)
+        {
+            return View();
+        }
         // GET: LoginController/Edit/5
         public ActionResult Edit(int id)
         {
