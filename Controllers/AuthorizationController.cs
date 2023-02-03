@@ -60,7 +60,7 @@ namespace StepChat.Controllers
                 {
                     HttpContext.Session.SetString("Token", generatedToken);
 
-                    return RedirectToAction("MainView", "Home");
+                    return RedirectToAction("Index", "Home");
 
                 }
                 else
@@ -117,12 +117,38 @@ namespace StepChat.Controllers
             return _context.Users.ToList<UsersModel>();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditUser(int id)
+        {
+            return View(await _context.Users.FindAsync(id));
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(int id)
+        {
+            UsersModel? user = await _context.Users.FindAsync(id);
+
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("MainView", "Home");
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string? email, string? password, string fullname, DateTime birthDate, string phoneNumber, int imageId, string role)
         {
             UsersModel user = new() { Email = email, Password = password, FullName = fullname, BirthDate = birthDate, PhoneNumber = phoneNumber, ImageId = imageId, Role = role };
-            
+
             if (user != null)
             {
                 await _context.AddAsync(user);
