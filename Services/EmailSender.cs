@@ -38,7 +38,7 @@ namespace StepChat.Services
             }
             else
             {
-                throw new ArgumentException("Recipient not set");
+                throw new ArgumentException("Receiver not set");
             }
         }
     }

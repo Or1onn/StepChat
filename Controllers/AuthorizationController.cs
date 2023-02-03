@@ -10,6 +10,7 @@ using StepChat.Contexts;
 using StepChat.Models;
 using StepChat.Services;
 using System;
+using System.Linq;
 using System.Text;
 
 namespace StepChat.Controllers
@@ -24,8 +25,10 @@ namespace StepChat.Controllers
 
         public AuthorizationController(ITokenService tokenService, IConfigService configService)
         {
+
             _tokenService = tokenService;
             _configService = configService;
+            var a = GetAll();
         }
 
         // GET: LoginController
@@ -40,11 +43,6 @@ namespace StepChat.Controllers
             return View();
         }
 
-        // GET: LoginController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -113,6 +111,14 @@ namespace StepChat.Controllers
 
             return View("LoginPage");
         }
+
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        public List<UsersModel> GetAll()
+        {
+            return _context.Users.ToList<UsersModel>();
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string? email, string? password, string fullname, DateTime birthDate, string phoneNumber, int imageId, string role)
