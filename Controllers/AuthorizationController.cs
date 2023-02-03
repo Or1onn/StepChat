@@ -25,10 +25,8 @@ namespace StepChat.Controllers
 
         public AuthorizationController(ITokenService tokenService, IConfigService configService)
         {
-
             _tokenService = tokenService;
             _configService = configService;
-            var a = GetAll();
         }
 
         // GET: LoginController
