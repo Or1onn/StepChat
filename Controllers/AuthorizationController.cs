@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Plugins;
 using StepChat.Classes.Auth;
 using StepChat.Classes.Configuration;
 using StepChat.Contexts;
@@ -11,6 +12,7 @@ using StepChat.Models;
 using StepChat.Services;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 
 namespace StepChat.Controllers
@@ -21,7 +23,6 @@ namespace StepChat.Controllers
         private readonly ITokenService? _tokenService;
         MessengerDataDbContext _context = new();
         EmailSender _sender = new();
-        UserManager<UsersModel> _userManager;
 
         public AuthorizationController(ITokenService tokenService, IConfigService configService)
         {
@@ -58,9 +59,12 @@ namespace StepChat.Controllers
 
                 if (generatedToken != null)
                 {
+                    var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email!) };
+
                     HttpContext.Session.SetString("Token", generatedToken);
 
-                    return RedirectToAction("Index", "Home");
+
+                    return RedirectToAction("MainView", "Home");
 
                 }
                 else
@@ -147,7 +151,7 @@ namespace StepChat.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string? email, string? password, string fullname, DateTime birthDate, string phoneNumber, int imageId, string role)
         {
-            UsersModel user = new() { Email = email, Password = password, FullName = fullname, BirthDate = birthDate, PhoneNumber = phoneNumber, ImageId = imageId, Role = role };
+            UsersModel user = new() { Email = email!, Password = password!, FullName = fullname, BirthDate = birthDate, PhoneNumber = phoneNumber, ImageId = imageId, Role = role };
 
             if (user != null)
             {
@@ -185,12 +189,6 @@ namespace StepChat.Controllers
             {
                 return View();
             }
-        }
-
-        // GET: LoginController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: LoginController/Delete/5

@@ -1,4 +1,6 @@
-﻿function EncryptMessage(message, key) {
+﻿"use strict";
+
+function EncryptMessage(message, key) {
     var iv = CryptoJS.lib.WordArray.random(25).toString();
     var key2 = CryptoJS.lib.WordArray.random(32).toString();
 
@@ -24,22 +26,19 @@ const hubConnection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub", { accessTokenFactory: () => token })
     .build();
 
-document.getElementById("sendBtn").addEventListener("click", () => {
-    const message = document.getElementById("message").value;
-    const username = document.getElementById("sendTo").value;
 
 
-    let context = EncryptMessage(message);
-
-    hubConnection.invoke("SendMessage", context, username)
-        .catch(error => console.error(error));
+const divs = document.querySelectorAll("div");
+divs.forEach(function (div) {
+    div.addEventListener("click", function () {
+        if (this.getAttribute("data-email") != null) {
+            username = this.getAttribute("data-email").toString();
+        }
+    });
 });
 
-// отправка сообщения от простого пользователя
 document.getElementById("sendBtn").addEventListener("click", () => {
     const message = document.getElementById("message").value;
-    const username = document.getElementById("sendTo").value;
-
 
     let context = EncryptMessage(message);
 
@@ -61,11 +60,13 @@ hubConnection.on("ReceiveMessage", (context) => {
     elem.appendChild(document.createTextNode(message));
 
     var firstElem = document.getElementById("chatroom").firstChild;
-    document.getElementById("chatroom").insertBefore(elem, firstElem);
+    document.getElementById("chatting").insertBefore(elem, firstElem);
 });
+
+
 
 hubConnection.on("SendPrivateKeys", (key) => {
     let message = DecryptMessage(context);
-
-    
 });
+
+hubConnection.start();

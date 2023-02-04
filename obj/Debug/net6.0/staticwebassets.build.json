@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "y0r3m7/kDTctvSL8qiIUE4jAa96wFkD2UxgRPI2FY+I=",
+  "Hash": "WODP2eaY7Edxrvkgid90Uau/JBWeiw7IVvzfN++wqsg=",
   "Source": "StepChat",
   "BasePath": "_content/StepChat",
   "Mode": "Default",
@@ -136,12 +136,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\folder.png",
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\arrow-forward-up.svg",
       "SourceId": "StepChat",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
       "BasePath": "_content/StepChat",
-      "RelativePath": "icons/folder.png",
+      "RelativePath": "icons/arrow-forward-up.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -150,15 +150,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\icons\\folder.png"
+      "OriginalItemSpec": "wwwroot\\icons\\arrow-forward-up.svg"
     },
     {
-      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\happy.png",
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\circle-plus.svg",
       "SourceId": "StepChat",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
       "BasePath": "_content/StepChat",
-      "RelativePath": "icons/happy.png",
+      "RelativePath": "icons/circle-plus.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -167,7 +167,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\icons\\happy.png"
+      "OriginalItemSpec": "wwwroot\\icons\\circle-plus.svg"
+    },
+    {
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\file-plus.svg",
+      "SourceId": "StepChat",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
+      "BasePath": "_content/StepChat",
+      "RelativePath": "icons/file-plus.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\icons\\file-plus.svg"
     },
     {
       "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\hide_pass.svg",
@@ -187,12 +204,12 @@
       "OriginalItemSpec": "wwwroot\\icons\\hide_pass.svg"
     },
     {
-      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\logos.svg",
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\mail-forward.svg",
       "SourceId": "StepChat",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
       "BasePath": "_content/StepChat",
-      "RelativePath": "icons/logos.svg",
+      "RelativePath": "icons/mail-forward.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -201,15 +218,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\icons\\logos.svg"
+      "OriginalItemSpec": "wwwroot\\icons\\mail-forward.svg"
     },
     {
-      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\magnifying-glass.png",
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\mood-crazy-happy.svg",
       "SourceId": "StepChat",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
       "BasePath": "_content/StepChat",
-      "RelativePath": "icons/magnifying-glass.png",
+      "RelativePath": "icons/mood-crazy-happy.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -218,7 +235,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\icons\\magnifying-glass.png"
+      "OriginalItemSpec": "wwwroot\\icons\\mood-crazy-happy.svg"
+    },
+    {
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\mood-smile.svg",
+      "SourceId": "StepChat",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
+      "BasePath": "_content/StepChat",
+      "RelativePath": "icons/mood-smile.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\icons\\mood-smile.svg"
     },
     {
       "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\outlook.svg",
@@ -238,12 +272,12 @@
       "OriginalItemSpec": "wwwroot\\icons\\outlook.svg"
     },
     {
-      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\phone-call.png",
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\search.svg",
       "SourceId": "StepChat",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
       "BasePath": "_content/StepChat",
-      "RelativePath": "icons/phone-call.png",
+      "RelativePath": "icons/search.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -252,41 +286,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\icons\\phone-call.png"
-    },
-    {
-      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\plus.png",
-      "SourceId": "StepChat",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
-      "BasePath": "_content/StepChat",
-      "RelativePath": "icons/plus.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\icons\\plus.png"
-    },
-    {
-      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\send-message.png",
-      "SourceId": "StepChat",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
-      "BasePath": "_content/StepChat",
-      "RelativePath": "icons/send-message.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\icons\\send-message.png"
+      "OriginalItemSpec": "wwwroot\\icons\\search.svg"
     },
     {
       "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\show_pass.svg",
@@ -323,12 +323,12 @@
       "OriginalItemSpec": "wwwroot\\icons\\step_logo.svg"
     },
     {
-      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\stepwpicon.jpg",
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\user-minus.svg",
       "SourceId": "StepChat",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
       "BasePath": "_content/StepChat",
-      "RelativePath": "icons/stepwpicon.jpg",
+      "RelativePath": "icons/user-minus.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -337,15 +337,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\icons\\stepwpicon.jpg"
+      "OriginalItemSpec": "wwwroot\\icons\\user-minus.svg"
     },
     {
-      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\upload.png",
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\user-plus.svg",
       "SourceId": "StepChat",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
       "BasePath": "_content/StepChat",
-      "RelativePath": "icons/upload.png",
+      "RelativePath": "icons/user-plus.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -354,15 +354,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\icons\\upload.png"
+      "OriginalItemSpec": "wwwroot\\icons\\user-plus.svg"
     },
     {
-      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\video.png",
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\users.svg",
       "SourceId": "StepChat",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
       "BasePath": "_content/StepChat",
-      "RelativePath": "icons/video.png",
+      "RelativePath": "icons/users.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -371,7 +371,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\icons\\video.png"
+      "OriginalItemSpec": "wwwroot\\icons\\users.svg"
     },
     {
       "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\images\\blank-profile-picture.png",

@@ -15,7 +15,8 @@ using StepChat.Classes.Provider;
 using StepChat.Classes.Auth;
 using StepChat.Classes.Configuration;
 using Microsoft.AspNetCore.Authentication.OAuth;
-
+using System.Net;
+using System;
 
 
 //                              :-= +*****************************************+=
@@ -120,6 +121,7 @@ namespace StepChat
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, "tom@gmail.com") };
 
             app.UseSession();
             app.UseHttpsRedirection();

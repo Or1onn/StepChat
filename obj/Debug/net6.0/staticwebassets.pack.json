@@ -25,40 +25,40 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\folder.png",
-      "PackagePath": "staticwebassets\\icons\\folder.png"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\arrow-forward-up.svg",
+      "PackagePath": "staticwebassets\\icons\\arrow-forward-up.svg"
     },
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\happy.png",
-      "PackagePath": "staticwebassets\\icons\\happy.png"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\circle-plus.svg",
+      "PackagePath": "staticwebassets\\icons\\circle-plus.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\file-plus.svg",
+      "PackagePath": "staticwebassets\\icons\\file-plus.svg"
     },
     {
       "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\hide_pass.svg",
       "PackagePath": "staticwebassets\\icons\\hide_pass.svg"
     },
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\logos.svg",
-      "PackagePath": "staticwebassets\\icons\\logos.svg"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\mail-forward.svg",
+      "PackagePath": "staticwebassets\\icons\\mail-forward.svg"
     },
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\magnifying-glass.png",
-      "PackagePath": "staticwebassets\\icons\\magnifying-glass.png"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\mood-crazy-happy.svg",
+      "PackagePath": "staticwebassets\\icons\\mood-crazy-happy.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\mood-smile.svg",
+      "PackagePath": "staticwebassets\\icons\\mood-smile.svg"
     },
     {
       "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\outlook.svg",
       "PackagePath": "staticwebassets\\icons\\outlook.svg"
     },
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\phone-call.png",
-      "PackagePath": "staticwebassets\\icons\\phone-call.png"
-    },
-    {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\plus.png",
-      "PackagePath": "staticwebassets\\icons\\plus.png"
-    },
-    {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\send-message.png",
-      "PackagePath": "staticwebassets\\icons\\send-message.png"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\search.svg",
+      "PackagePath": "staticwebassets\\icons\\search.svg"
     },
     {
       "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\show_pass.svg",
@@ -69,16 +69,16 @@
       "PackagePath": "staticwebassets\\icons\\step_logo.svg"
     },
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\stepwpicon.jpg",
-      "PackagePath": "staticwebassets\\icons\\stepwpicon.jpg"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\user-minus.svg",
+      "PackagePath": "staticwebassets\\icons\\user-minus.svg"
     },
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\upload.png",
-      "PackagePath": "staticwebassets\\icons\\upload.png"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\user-plus.svg",
+      "PackagePath": "staticwebassets\\icons\\user-plus.svg"
     },
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\video.png",
-      "PackagePath": "staticwebassets\\icons\\video.png"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\users.svg",
+      "PackagePath": "staticwebassets\\icons\\users.svg"
     },
     {
       "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\images\\blank-profile-picture.png",

@@ -23,7 +23,6 @@ namespace StepChat.Controllers
             if (HttpContext.Session.GetString("Token") != null)
             {
                 return View();
-
             }
             else
                 return NotFound();

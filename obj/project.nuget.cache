@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oaa8Mh0EWSUToaZlMfr5rNEgqKi9Z1iihV2t6uCnxWz7TSDNFjD2AUMbc3JEZh38j1CO3uxnEgyWC9QSo1w5WQ==",
+  "dgSpecHash": "q+DfXXGgd4anYiff1zmhlNzhMOtIuga4kfJknPHFIyEa6Hh0BbBdclI5IehBP13vZG0wpcQ4qCpTv4ti7pdaOA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\StepChat.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\Orion\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\Orion\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
     "C:\\Users\\Orion\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.11\\microsoft.aspnetcore.authentication.jwtbearer.6.0.11.nupkg.sha512",
+    "C:\\Users\\Orion\\.nuget\\packages\\microsoft.aspnetcore.authentication.microsoftaccount\\6.0.13\\microsoft.aspnetcore.authentication.microsoftaccount.6.0.13.nupkg.sha512",
     "C:\\Users\\Orion\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\6.0.0\\microsoft.aspnetcore.razor.language.6.0.0.nupkg.sha512",
     "C:\\Users\\Orion\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "C:\\Users\\Orion\\.nuget\\packages\\microsoft.build\\17.3.2\\microsoft.build.17.3.2.nupkg.sha512",
