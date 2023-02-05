@@ -55,11 +55,12 @@ namespace StepChat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> LogIn(UsersModel users)
+        public async Task<ActionResult> LogIn(UsersModel loginUser)
         {
-            UsersModel? user = await _context!.Users!.FirstOrDefaultAsync(x => x.Email == users.Email && x.Password == users.Password);
+            PasswordHasher? hasher = new PasswordHasher();
+            UsersModel? user = await _context!.Users!.FirstOrDefaultAsync(x => x.Email == loginUser.Email);
 
-            if (user != null)
+            if (user != null && hasher.VerifyHashedPassword(user.Password, loginUser.Password))
             {
                 var issuer = _configService?.GetValue("Jwt:Issuer");
                 var audience = _configService?.GetValue("Jwt:Audience");
@@ -107,10 +108,11 @@ namespace StepChat.Controllers
             {
                 if (user != null)
                 {
+                    PasswordHasher? hasher = new PasswordHasher();
                     var callbackUrl = Url.Action(
                         "ConfirmEmail",
                         "Authorization",
-                        values: new { email = user.Email, password = user.Password, fullname = user.FullName, birthDate = user.BirthDate, phoneNumber = user.PhoneNumber, imageId = user.ImageId, role = user.Role },
+                        values: new { email = user.Email, password = hasher.HashPassword(user.Password), fullname = user.FullName, birthDate = user.BirthDate, phoneNumber = user.PhoneNumber, imageId = user.ImageId, role = user.Role },
                         protocol: HttpContext.Request.Scheme);
 
                     EmailSender _emailSender = new();

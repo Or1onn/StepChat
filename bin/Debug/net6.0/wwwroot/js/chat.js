@@ -36,28 +36,6 @@ fetch("/getToken")
         console.log('request failed', error)
     });
 
-//// если запрос прошел нормально
-//if (response.ok === true) {
-//    // получаем данные
-//    const data = response.value;
-//    token = data;
-//    alert(token)
-//    hubConnection.start()       // начинаем соединение с хабом
-//        .catch(err => console.error(err.toString()));
-//}
-//else {
-//    // если произошла ошибка, получаем код статуса
-//    console.log(`Status: ${response.status}`);
-//}
-
-
-//const data = response;
-
-//token = data.toString();
-//alert(token);
-//hubConnection.start()       // начинаем соединение с хабом
-//    .catch(err => console.error(err.toString()));
-
 const divs = document.querySelectorAll("div");
 divs.forEach(function (div) {
     div.addEventListener("click", function () {
