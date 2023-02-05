@@ -27,6 +27,36 @@ const hubConnection = new signalR.HubConnectionBuilder()
     .build();
 
 
+fetch("/getToken")
+    .then(data => token = data.text())
+    .then(() => {
+        hubConnection.start()       // начинаем соединение с хабом
+            .catch(err => console.error(err.toString()));
+    }).catch(function (error) {
+        console.log('request failed', error)
+    });
+
+//// если запрос прошел нормально
+//if (response.ok === true) {
+//    // получаем данные
+//    const data = response.value;
+//    token = data;
+//    alert(token)
+//    hubConnection.start()       // начинаем соединение с хабом
+//        .catch(err => console.error(err.toString()));
+//}
+//else {
+//    // если произошла ошибка, получаем код статуса
+//    console.log(`Status: ${response.status}`);
+//}
+
+
+//const data = response;
+
+//token = data.toString();
+//alert(token);
+//hubConnection.start()       // начинаем соединение с хабом
+//    .catch(err => console.error(err.toString()));
 
 const divs = document.querySelectorAll("div");
 divs.forEach(function (div) {
@@ -50,18 +80,25 @@ document.getElementById("sendBtn").addEventListener("click", () => {
 hubConnection.on("ReceiveMessage", (context) => {
     let message = DecryptMessage(context);
 
-    // создаем элемент <b> для имени пользователя
-    const userNameElem = document.createElement("b");
-    userNameElem.textContent = `User: `;
+    document.getElementById('messageBox').insertAdjacentHTML(
+        'afterbegin',
+        `<p>${message}?<br><span>12:15</span></p>`
+    )
 
-    // создает элемент <p> для сообщения пользователя
-    const elem = document.createElement("p");
-    elem.appendChild(userNameElem);
-    elem.appendChild(document.createTextNode(message));
+}
 
-    var firstElem = document.getElementById("chatroom").firstChild;
-    document.getElementById("chatting").insertBefore(elem, firstElem);
-});
+    //// создаем элемент <b> для имени пользователя
+    //const userNameElem = document.createElement("b");
+    //userNameElem.textContent = `User: `;
+
+    //// создает элемент <p> для сообщения пользователя
+    //const elem = document.createElement("p");
+    //elem.appendChild(userNameElem);
+    //elem.appendChild(document.createTextNode(message));
+
+    //var firstElem = document.getElementById("chatroom").firstChild;
+    //document.getElementById("chatting").insertBefore(elem, firstElem);
+);
 
 
 
@@ -69,4 +106,3 @@ hubConnection.on("SendPrivateKeys", (key) => {
     let message = DecryptMessage(context);
 });
 
-hubConnection.start();

@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.OAuth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using NuGet.Protocol.Plugins;
 using StepChat.Classes.Auth;
 using StepChat.Classes.Configuration;
@@ -11,6 +15,7 @@ using StepChat.Contexts;
 using StepChat.Models;
 using StepChat.Services;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -23,6 +28,7 @@ namespace StepChat.Controllers
         private readonly ITokenService? _tokenService;
         MessengerDataDbContext _context = new();
         EmailSender _sender = new();
+        private static string? Token { get; set; }
 
         public AuthorizationController(ITokenService tokenService, IConfigService configService)
         {
@@ -42,6 +48,10 @@ namespace StepChat.Controllers
             return View();
         }
 
+        public SymmetricSecurityKey GetSymmetricSecurityKey(string? key)
+        {
+            return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -55,22 +65,18 @@ namespace StepChat.Controllers
                 var audience = _configService?.GetValue("Jwt:Audience");
                 var key = _configService?.GetValue("Jwt:Key");
 
-                string generatedToken = _tokenService!.BuildToken(key, issuer, user);
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email!) };
+                var jwt = new JwtSecurityToken(
+                issuer: issuer,
+                audience: audience,
+                claims: claims,
+                expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(60)),
+                   signingCredentials: new SigningCredentials(GetSymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256));
+                var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-                if (generatedToken != null)
-                {
-                    var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email!) };
-
-                    HttpContext.Session.SetString("Token", generatedToken);
-
-
-                    return RedirectToAction("MainView", "Home");
-
-                }
-                else
-                {
-                    return NotFound();
-                }
+                HttpContext.Session.SetString("Token", encodedJwt);
+                Token = encodedJwt;
+                return RedirectToAction("MainView", "Home");
             }
             return NotFound();
         }
@@ -79,6 +85,13 @@ namespace StepChat.Controllers
         {
             return View();
         }
+        [HttpGet("/getToken")]
+        public string? GetToken()
+        {
+
+            return Token;
+        }
+
 
         public ActionResult RegistrationPage()
         {

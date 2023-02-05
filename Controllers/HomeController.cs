@@ -20,12 +20,7 @@ namespace StepChat.Controllers
 
         public IActionResult MainView()
         {
-            if (HttpContext.Session.GetString("Token") != null)
-            {
                 return View();
-            }
-            else
-                return NotFound();
         }
 
         public IActionResult Privacy()

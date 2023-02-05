@@ -54,7 +54,7 @@ namespace StepChat
         public static void Main(string[] args)
         {
             MessengerDataDbContext context = new();
-
+            HttpContext httpContext;
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();
@@ -85,7 +85,6 @@ namespace StepChat
                         OnMessageReceived = context =>
                         {
                             var accessToken = context.Request.Query["access_token"];
-
                             // если запрос направлен хабу
                             var path = context.HttpContext.Request.Path;
                             if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/chatHub"))
@@ -98,6 +97,7 @@ namespace StepChat
                     };
                 });
 
+            builder.Services.AddRazorPages();
             builder.Services.AddSignalR();
 
             builder.Services.AddDataProtection()
@@ -132,6 +132,7 @@ namespace StepChat
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Authorization}/{action=LoginPage}/{id?}");

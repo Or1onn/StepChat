@@ -318,7 +318,6 @@ C:\Users\Orion\source\repos\Сourse Work\StepChat\StepChat\bin\Debug\net6.0\runt
 C:\Users\Orion\source\repos\Сourse Work\StepChat\StepChat\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\wwwroot\js\chat.js
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\appsettings.json
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\libman.json
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\StepChat.staticwebassets.runtime.json
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\StepChat.exe
@@ -636,3 +635,14 @@ C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\StepC
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\ref\StepChat.dll
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\System.Reflection.MetadataLoadContext.dll
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\System.IO.Pipelines.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\System.Threading.Channels.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\appsettings.json
