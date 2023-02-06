@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace StepChat.Models
+namespace StepChat.Models;
+
+public partial class GroupsModel
 {
-    public class GroupsModel
-    {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-    }
+    public int Id { get; set; }
+
+    public string Name { get; set; } = null!;
 }

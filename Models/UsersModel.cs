@@ -1,21 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace StepChat.Models
+namespace StepChat.Models;
+
+public partial class UsersModel
 {
-    public class UsersModel
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string Email { get; set; } = null!;
+    public string Email { get; set; } = null!;
 
-        public string Password { get; set; } = null!;
+    public string Password { get; set; } = null!;
 
-        public string FullName { get; set; } = null!;
+    public string FullName { get; set; } = null!;
 
-        public string PhoneNumber { get; set; } = null!;
+    public string PhoneNumber { get; set; } = null!;
 
-        public int ImageId { get; set; }
+    public int ImageId { get; set; } = 0;
 
-        public string? Role { get; set; }
-    }
+    public int PrivateKeysStorageId { get; set; }
+
+    public string? Role { get; set; }
+
+    public virtual PrivateKeysStorageModel? PrivateKeysStorage { get; set; }
 }

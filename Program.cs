@@ -53,8 +53,6 @@ namespace StepChat
     {
         public static void Main(string[] args)
         {
-            MessengerDataDbContext context = new();
-            HttpContext httpContext;
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();

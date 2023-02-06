@@ -50,7 +50,7 @@ namespace StepChat.Controllers
 
         public SymmetricSecurityKey GetSymmetricSecurityKey(string? key)
         {
-            return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
+            return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key!));
         }
 
         [HttpPost]
