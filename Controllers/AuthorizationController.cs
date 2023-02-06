@@ -112,7 +112,7 @@ namespace StepChat.Controllers
                     var callbackUrl = Url.Action(
                         "ConfirmEmail",
                         "Authorization",
-                        values: new { email = user.Email, password = hasher.HashPassword(user.Password), fullname = user.FullName, birthDate = user.BirthDate, phoneNumber = user.PhoneNumber, imageId = user.ImageId, role = user.Role },
+                        values: new { email = user.Email, password = hasher.HashPassword(user.Password), fullname = user.FullName, phoneNumber = user.PhoneNumber, imageId = user.ImageId, role = user.Role },
                         protocol: HttpContext.Request.Scheme);
 
                     EmailSender _emailSender = new();
@@ -166,7 +166,7 @@ namespace StepChat.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string? email, string? password, string fullname, DateTime birthDate, string phoneNumber, int imageId, string role)
         {
-            UsersModel user = new() { Email = email!, Password = password!, FullName = fullname, BirthDate = birthDate, PhoneNumber = phoneNumber, ImageId = imageId, Role = role };
+            UsersModel user = new() { Email = email!, Password = password!, FullName = fullname, PhoneNumber = phoneNumber, ImageId = imageId, Role = role };
 
             if (user != null)
             {

@@ -121,7 +121,6 @@ namespace StepChat
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, "tom@gmail.com") };
 
             app.UseSession();
             app.UseHttpsRedirection();

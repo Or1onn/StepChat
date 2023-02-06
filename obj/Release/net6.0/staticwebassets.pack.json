@@ -1,0 +1,365 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\StepChat.bundle.scp.css",
+      "PackagePath": "staticwebassets\\StepChat.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\css\\main_style.css",
+      "PackagePath": "staticwebassets\\css\\main_style.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\arrow-forward-up.svg",
+      "PackagePath": "staticwebassets\\icons\\arrow-forward-up.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\circle-plus.svg",
+      "PackagePath": "staticwebassets\\icons\\circle-plus.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\file-plus.svg",
+      "PackagePath": "staticwebassets\\icons\\file-plus.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\hide_pass.svg",
+      "PackagePath": "staticwebassets\\icons\\hide_pass.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\mail-forward.svg",
+      "PackagePath": "staticwebassets\\icons\\mail-forward.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\mood-crazy-happy.svg",
+      "PackagePath": "staticwebassets\\icons\\mood-crazy-happy.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\mood-smile.svg",
+      "PackagePath": "staticwebassets\\icons\\mood-smile.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\outlook.svg",
+      "PackagePath": "staticwebassets\\icons\\outlook.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\search.svg",
+      "PackagePath": "staticwebassets\\icons\\search.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\show_pass.svg",
+      "PackagePath": "staticwebassets\\icons\\show_pass.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\step_logo.svg",
+      "PackagePath": "staticwebassets\\icons\\step_logo.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\user-minus.svg",
+      "PackagePath": "staticwebassets\\icons\\user-minus.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\user-plus.svg",
+      "PackagePath": "staticwebassets\\icons\\user-plus.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\icons\\users.svg",
+      "PackagePath": "staticwebassets\\icons\\users.svg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\images\\blank-profile-picture.png",
+      "PackagePath": "staticwebassets\\images\\blank-profile-picture.png"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\images\\burgermenu.png",
+      "PackagePath": "staticwebassets\\images\\burgermenu.png"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\images\\stepwpicon.jpg",
+      "PackagePath": "staticwebassets\\images\\stepwpicon.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\js\\chat.js",
+      "PackagePath": "staticwebassets\\js\\chat.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\js\\data_base.js",
+      "PackagePath": "staticwebassets\\js\\data_base.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\js\\login.js",
+      "PackagePath": "staticwebassets\\js\\login.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\crypto-js\\crypto-js.min.js",
+      "PackagePath": "staticwebassets\\lib\\crypto-js\\crypto-js.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\signalr\\dist\\browser\\signalr.min.js",
+      "PackagePath": "staticwebassets\\lib\\signalr\\dist\\browser\\signalr.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\lib\\signalr\\dist\\browser\\signalr.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\signalr\\dist\\browser\\signalr.min.js.map"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.StepChat.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.build.StepChat.props",
+      "PackagePath": "build\\StepChat.props"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.StepChat.props",
+      "PackagePath": "buildMultiTargeting\\StepChat.props"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.buildTransitive.StepChat.props",
+      "PackagePath": "buildTransitive\\StepChat.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

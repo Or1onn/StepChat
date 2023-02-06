@@ -63,7 +63,6 @@ public partial class MessengerDataDbContext : DbContext
 
             entity.HasIndex(e => e.Email, "UQ__Users__A9D10534B879DE27").IsUnique();
 
-            entity.Property(e => e.BirthDate).HasColumnType("date");
             entity.Property(e => e.Email).HasMaxLength(60);
             entity.Property(e => e.PhoneNumber).HasMaxLength(13);
         });

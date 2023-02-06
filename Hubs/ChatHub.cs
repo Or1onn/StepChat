@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using NuGet.Protocol;
+using StepChat.Contexts;
 using StepChat.Models;
 using System.Security.Cryptography;
 
@@ -19,12 +20,10 @@ namespace StepChat.Hubs
             await Clients.Caller.SendAsync("SendPrivateKeys", aes.Key);
             await Clients.User(userId!).SendAsync("SendPrivateKeys", aes.Key);
         }
-        public async Task SendMessage(MessagesModel? context, string? userId)
+        public async Task SendMessage(MessagesContext? context, string? userId)
         {
             if (userId != null && context != null)
             {
-                var a = Clients.All.ToJson();
-                var c = Clients.Users(userId!).ToJson();
                 await Clients.User(userId!).SendAsync("ReceiveMessage", context);
             }
         }
