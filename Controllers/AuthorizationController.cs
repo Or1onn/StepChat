@@ -24,16 +24,17 @@ namespace StepChat.Controllers
 {
     public class AuthorizationController : Controller
     {
-        private readonly IConfigService? _configService;
-        private readonly ITokenService? _tokenService;
-        MessengerDataDbContext _context = new();
-        EmailSender _sender = new();
-        private static string? Token { get; set; }
+        private readonly IConfigService _configService;
+        private readonly ITokenService _tokenService;
+        MessengerDataDbContext _context;
+        EmailSender _sender;
 
-        public AuthorizationController(ITokenService tokenService, IConfigService configService)
+        public AuthorizationController(ITokenService tokenService, IConfigService configService, MessengerDataDbContext context, EmailSender sender)
         {
             _tokenService = tokenService;
             _configService = configService;
+            _context = context;
+            _sender = sender;
         }
 
         // GET: LoginController
@@ -75,8 +76,8 @@ namespace StepChat.Controllers
                    signingCredentials: new SigningCredentials(GetSymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256));
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-                HttpContext.Session.SetString("Token", encodedJwt);
-                Token = encodedJwt;
+                TempData["Token"] = encodedJwt;
+                
                 return RedirectToAction("MainView", "Home");
             }
             return NotFound();
@@ -89,10 +90,8 @@ namespace StepChat.Controllers
         [HttpGet("/getToken")]
         public string? GetToken()
         {
-
-            return Token;
+            return TempData["Token"]?.ToString();
         }
-
 
         public ActionResult RegistrationPage()
         {
@@ -112,10 +111,20 @@ namespace StepChat.Controllers
                     var callbackUrl = Url.Action(
                         "ConfirmEmail",
                         "Authorization",
-                        values: new { email = user.Email, password = hasher.HashPassword(user.Password), fullname = user.FullName, phoneNumber = user.PhoneNumber, imageId = user.ImageId, role = user.Role },
+                        values: new
+                        {
+                            email = user.Email,
+                            password = hasher.HashPassword(user.Password),
+                            fullname = user.FullName,
+                            phoneNumber = user.PhoneNumber,
+                            imageId = user.ImageId,
+                            role = user.Role,
+                            privateKeysStorageId = _context.Users.Count() == 0 ? 0 : _context.Users.Max(x => x.PrivateKeysStorageId + 1)
+                        },
                         protocol: HttpContext.Request.Scheme);
 
                     EmailSender _emailSender = new();
+
                     await _emailSender.SendEmailAsync(user.Email, $"<a href='{callbackUrl}'>Verify<a>");
 
                     return RedirectToAction("EmailConfirmationPage", "Authorization");
@@ -164,14 +173,18 @@ namespace StepChat.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string? email, string? password, string fullname, DateTime birthDate, string phoneNumber, int imageId, string role)
+        public async Task<ActionResult> ConfirmEmail(string? email, string? password, string fullname, DateTime birthDate, string phoneNumber, int imageId, string role, int privateKeysStorageId)
         {
-            UsersModel user = new() { Email = email!, Password = password!, FullName = fullname, PhoneNumber = phoneNumber, ImageId = imageId, Role = role };
+            UsersModel user = new() { Email = email!, Password = password!, FullName = fullname, PhoneNumber = phoneNumber, ImageId = imageId, Role = role, PrivateKeysStorageId = privateKeysStorageId };
+            PrivateKeysStorageModel privateKeysStorageModel = new PrivateKeysStorageModel() { KeysId = user!.PrivateKeysStorageId };
 
             if (user != null)
             {
-                await _context.AddAsync(user);
+                await _context.Users.AddAsync(user);
+                await _context.PrivateKeysStorages.AddAsync(privateKeysStorageModel);
+
                 await _context.SaveChangesAsync();
+
                 return View("LoginPage");
             }
             else

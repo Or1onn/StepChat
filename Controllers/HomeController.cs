@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StepChat.Models;
 using System.Diagnostics;
 
@@ -17,7 +18,6 @@ namespace StepChat.Controllers
         {
             return View();
         }
-
         public IActionResult MainView()
         {
                 return View();

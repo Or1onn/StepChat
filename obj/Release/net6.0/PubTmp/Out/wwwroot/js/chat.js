@@ -20,7 +20,7 @@ function DecryptMessage(context) {
 }
 
 let token;
-let username;
+let userId;
 
 const hubConnection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub", { accessTokenFactory: () => token })
@@ -40,7 +40,7 @@ const divs = document.querySelectorAll("div");
 divs.forEach(function (div) {
     div.addEventListener("click", function () {
         if (this.getAttribute("data-email") != null) {
-            username = this.getAttribute("data-email").toString();
+            userId = this.getAttribute("data-email").toString();
         }
     });
 });
@@ -50,7 +50,7 @@ document.getElementById("sendBtn").addEventListener("click", () => {
 
     let context = EncryptMessage(message);
 
-    hubConnection.invoke("SendMessage", context, username)
+    hubConnection.invoke("SendMessage", context, userId)
         .catch(error => console.error(error));
 });
 
@@ -66,12 +66,12 @@ hubConnection.on("ReceiveMessage", (context) => {
 }
 
     //// создаем элемент <b> для имени пользователя
-    //const userNameElem = document.createElement("b");
-    //userNameElem.textContent = `User: `;
+    //const userIdElem = document.createElement("b");
+    //userIdElem.textContent = `User: `;
 
     //// создает элемент <p> для сообщения пользователя
     //const elem = document.createElement("p");
-    //elem.appendChild(userNameElem);
+    //elem.appendChild(userIdElem);
     //elem.appendChild(document.createTextNode(message));
 
     //var firstElem = document.getElementById("chatroom").firstChild;

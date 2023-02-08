@@ -7,5 +7,5 @@ public partial class ImagesModel
 {
     public int Id { get; set; }
 
-    public byte[] Image1 { get; set; } = null!;
+    public byte[] Image { get; set; } = null!;
 }

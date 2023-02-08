@@ -17,6 +17,7 @@ using StepChat.Classes.Configuration;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using System.Net;
 using System;
+using StepChat.Services;
 
 
 //                              :-= +*****************************************+=
@@ -63,6 +64,9 @@ namespace StepChat
             builder.Services.AddSingleton<IUserIdProvider, UserIdProvider>();
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            builder.Services.AddSingleton<MessengerDataDbContext>();
+            builder.Services.AddSingleton<EmailSender>();
+
             builder.Services.AddAuthorization();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -105,12 +109,7 @@ namespace StepChat
                 ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
             });
 
-            builder.Services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
+            builder.Services.AddSession();
 
             var app = builder.Build();
 

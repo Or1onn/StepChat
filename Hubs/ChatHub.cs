@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 using StepChat.Contexts;
 using StepChat.Models;
@@ -9,16 +10,53 @@ namespace StepChat.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task StartMessaging(string? userId)
+        MessengerDataDbContext? _context;
+        public ChatHub(MessengerDataDbContext? context)
         {
-            var aes = Aes.Create();
-            aes.BlockSize = 256;
-            aes.KeySize = 32;
-            aes.Mode = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
+            _context = context;
+        }
 
-            await Clients.Caller.SendAsync("SendPrivateKeys", aes.Key);
-            await Clients.User(userId!).SendAsync("SendPrivateKeys", aes.Key);
+        public async Task StartMessaging(string? userId, string? privateKey)
+        {
+            if (userId != null && privateKey != null)
+            {
+                try
+                {
+                    KeysModel keysModel = new();
+                    string? _tmp = null;
+
+                    var userEmail = Context?.User?.Identity?.Name;
+                    if (userEmail != null)
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            var user = await _context!.Users.FirstOrDefaultAsync(x => x.Email == userEmail);
+
+                            keysModel.KeyOwnerId = user!.PrivateKeysStorageId;
+                            keysModel.Email = userId;
+                            keysModel.Key = privateKey;
+
+                            await _context.Keys.AddAsync(keysModel);
+
+                            await _context.SaveChangesAsync();
+
+                            if (String.IsNullOrEmpty(_tmp))
+                            {
+                                _tmp = userEmail;
+                                userEmail = userId;
+                                userId = _tmp;
+
+                                keysModel = new();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
         }
         public async Task SendMessage(MessagesContext? context, string? userId)
         {

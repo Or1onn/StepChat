@@ -15,11 +15,9 @@ public partial class UsersModel
 
     public string PhoneNumber { get; set; } = null!;
 
-    public int ImageId { get; set; } = 0;
+    public int ImageId { get; set; }
 
     public int PrivateKeysStorageId { get; set; }
 
     public string? Role { get; set; }
-
-    public virtual PrivateKeysStorageModel? PrivateKeysStorage { get; set; }
 }
