@@ -77,7 +77,7 @@ namespace StepChat.Controllers
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
                 TempData["Token"] = encodedJwt;
-                
+
                 return RedirectToAction("MainView", "Home");
             }
             return NotFound();
@@ -118,8 +118,7 @@ namespace StepChat.Controllers
                             fullname = user.FullName,
                             phoneNumber = user.PhoneNumber,
                             imageId = user.ImageId,
-                            role = user.Role,
-                            privateKeysStorageId = _context.Users.Count() == 0 ? 0 : _context.Users.Max(x => x.PrivateKeysStorageId + 1)
+                            role = user.Role
                         },
                         protocol: HttpContext.Request.Scheme);
 
@@ -173,23 +172,33 @@ namespace StepChat.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string? email, string? password, string fullname, DateTime birthDate, string phoneNumber, int imageId, string role, int privateKeysStorageId)
+        public async Task<ActionResult> ConfirmEmail(string? email, string? password, string fullname, string phoneNumber, int imageId, string role)
         {
-            UsersModel user = new() { Email = email!, Password = password!, FullName = fullname, PhoneNumber = phoneNumber, ImageId = imageId, Role = role, PrivateKeysStorageId = privateKeysStorageId };
-            PrivateKeysStorageModel privateKeysStorageModel = new PrivateKeysStorageModel() { KeysId = user!.PrivateKeysStorageId };
+            UsersModel user = new() { Email = email!, Password = password!, FullName = fullname, PhoneNumber = phoneNumber, ImageId = imageId, Role = role };
 
             if (user != null)
             {
-                await _context.Users.AddAsync(user);
-                await _context.PrivateKeysStorages.AddAsync(privateKeysStorageModel);
+                user.PrivateKeysStorageId = _context.Users.Count() == 0 ? 0 : _context.Users.Max(x => x.PrivateKeysStorageId + 1);
 
-                await _context.SaveChangesAsync();
+                PrivateKeysStorageModel privateKeysStorageModel = new PrivateKeysStorageModel() { KeysId = user!.PrivateKeysStorageId };
 
-                return View("LoginPage");
+                if (user != null)
+                {
+                    await _context.Users.AddAsync(user);
+                    await _context.PrivateKeysStorages.AddAsync(privateKeysStorageModel);
+
+                    await _context.SaveChangesAsync();
+
+                    return View("LoginPage");
+                }
+                else
+                {
+                    return View(null);
+                }
             }
             else
             {
-                return View(null);
+                throw new ArgumentNullException();
             }
         }
 

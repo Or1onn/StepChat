@@ -7,11 +7,11 @@ public partial class MessagesModel
 {
     public int Id { get; set; }
 
-    public string User { get; set; } = null!;
+    public int ChatId { get; set; }
+
+    public int UserId { get; set; }
 
     public string Text { get; set; } = null!;
 
-    public DateTime Time { get; set; }
-
-    public virtual ChatsModel IdNavigation { get; set; } = null!;
+    public DateTime CreateTime { get; set; } = DateTime.Now;
 }

@@ -40,11 +40,11 @@ fetch("/getToken")
 
 
 
-document.getElementById("messageStart").addEventListener("click", () => {
+//document.getElementById("messageStart").addEventListener("click", () => {
 
-    hubConnection.invoke("StartMessaging", userId, privateKey)
-        .catch(error => console.error(error));
-});
+//    hubConnection.invoke("StartMessaging", userId, privateKey)
+//        .catch(error => console.error(error));
+//});
 
 const divs = document.querySelectorAll("div");
 divs.forEach(function (div) {

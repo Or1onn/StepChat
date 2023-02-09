@@ -7,9 +7,8 @@ public partial class ChatsModel
 {
     public int Id { get; set; }
 
-    public int UserId { get; set; }
+    public int ChatId { get; set; }
+    public string? Name { get; set; }
 
-    public virtual ChatsStorageModel IdNavigation { get; set; } = null!;
-
-    public virtual MessagesModel? Message { get; set; }
+    public int CreateChatUserId { get; set; }
 }

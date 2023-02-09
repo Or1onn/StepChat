@@ -36,7 +36,12 @@ namespace StepChat.Hubs
                             keysModel.Email = userId;
                             keysModel.Key = privateKey;
 
+                            ChatsModel chatsModel = new ChatsModel() { ChatId = _context.Chats.Count() == 0 ? 0 : _context.Chats.Max(x => x.ChatId + 1), Name = user.FullName, CreateChatUserId = user.Id };
+                            ChatUserModel chatUserModel = new ChatUserModel() { ChatId = chatsModel.Id, UserId = user.Id };
+
                             await _context.Keys.AddAsync(keysModel);
+                            await _context.Chats.AddAsync(chatsModel);
+                            await _context.ChatUsers.AddAsync(chatUserModel);
 
                             await _context.SaveChangesAsync();
 
@@ -45,6 +50,7 @@ namespace StepChat.Hubs
                                 _tmp = userEmail;
                                 userEmail = userId;
                                 userId = _tmp;
+
 
                                 keysModel = new();
                             }
@@ -62,6 +68,16 @@ namespace StepChat.Hubs
         {
             if (userId != null && context != null)
             {
+                var userEmail = Context?.User?.Identity?.Name;
+
+                var user = await _context!.Users.FirstOrDefaultAsync(x => x.Email == userEmail);
+                var chat = await _context!.Chats.FirstOrDefaultAsync(x => x.CreateChatUserId == user!.Id);
+
+                MessagesModel messagesModel = new MessagesModel() { UserId = user!.Id, ChatId = chat!.Id, Text = context.Text!, CreateTime = DateTime.Now };
+                
+                await _context.AddAsync(messagesModel);
+                await _context.SaveChangesAsync();
+
                 await Clients.User(userId!).SendAsync("ReceiveMessage", context);
             }
         }

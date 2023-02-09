@@ -19,7 +19,7 @@ public partial class MessengerDataDbContext : DbContext
 
     public virtual DbSet<ChatsModel> Chats { get; set; }
 
-    public virtual DbSet<ChatsStorageModel> ChatsStorages { get; set; }
+    public virtual DbSet<ChatUserModel> ChatUsers { get; set; }
 
     public virtual DbSet<GroupsModel> Groups { get; set; }
 
@@ -50,28 +50,17 @@ public partial class MessengerDataDbContext : DbContext
     {
         modelBuilder.Entity<ChatsModel>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Chats__3214EC07AF265FD5");
-
-            entity.HasIndex(e => e.UserId, "UQ__Chats__1788CC4D5E161CC9").IsUnique();
-
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Chat)
-                .HasPrincipalKey<ChatsStorageModel>(p => p.ChatId)
-                .HasForeignKey<ChatsModel>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Chats__Id__245D67DE");
+            entity.HasKey(e => e.Id).HasName("PK__Chats__3214EC07D7910FD2");
         });
 
-        modelBuilder.Entity<ChatsStorageModel>(entity =>
+        modelBuilder.Entity<MessagesModel>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ChatsSto__3214EC074F7BC46A");
+            entity.HasKey(e => e.Id).HasName("PK__ChatMess__3214EC076285B573");
+        });
 
-            entity.ToTable("ChatsStorage");
-
-            entity.HasIndex(e => e.ChatId, "UQ__ChatsSto__A9FBE6276AC395BB").IsUnique();
-
-            entity.Property(e => e.ChatId).HasColumnName("ChatID");
+        modelBuilder.Entity<ChatUserModel>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ChatUser__3214EC07C32704BA");
         });
 
         modelBuilder.Entity<GroupsModel>(entity =>
@@ -98,18 +87,11 @@ public partial class MessengerDataDbContext : DbContext
                 .HasColumnName("Key");
         });
 
-        modelBuilder.Entity<MessagesModel>(entity =>
+        modelBuilder.Entity<MessagesStatusModel>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Messages__3214EC07060349D9");
+            entity.HasKey(e => e.Id).HasName("PK__Messages__3214EC07E2DEECFE");
 
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.User).IsUnicode(false);
-
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Message)
-                .HasPrincipalKey<ChatsModel>(p => p.UserId)
-                .HasForeignKey<MessagesModel>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Messages__Id__2739D489");
+            entity.ToTable("MessagesStatus");
         });
 
         modelBuilder.Entity<PrivateKeysStorageModel>(entity =>
@@ -136,11 +118,11 @@ public partial class MessengerDataDbContext : DbContext
 
         modelBuilder.Entity<UsersModel>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07F4E2FBA0");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07C2FFB5C0");
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D105349372D545").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D105341CD7B234").IsUnique();
 
-            entity.HasIndex(e => e.PrivateKeysStorageId, "UQ__Users__F2956E4BE9FC4FF3").IsUnique();
+            entity.HasIndex(e => e.PrivateKeysStorageId, "UQ__Users__F2956E4B632E199B").IsUnique();
 
             entity.Property(e => e.Email).HasMaxLength(60);
             entity.Property(e => e.PhoneNumber).HasMaxLength(13);
