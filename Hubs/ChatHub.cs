@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging.Signing;
 using NuGet.Protocol;
 using StepChat.Contexts;
 using StepChat.Models;
@@ -74,13 +75,42 @@ namespace StepChat.Hubs
                 var chat = await _context!.Chats.FirstOrDefaultAsync(x => x.CreateChatUserId == user!.Id);
 
                 MessagesModel messagesModel = new MessagesModel() { UserId = user!.Id, ChatId = chat!.Id, Text = context.Text!, CreateTime = DateTime.Now };
-                
+
                 await _context.AddAsync(messagesModel);
                 await _context.SaveChangesAsync();
 
                 await Clients.User(userId!).SendAsync("ReceiveMessage", context);
             }
         }
+
+        public async Task LoadMessages(string? userId)
+        {
+            if (userId != null)
+            {
+                var userEmail = Context?.User?.Identity?.Name;
+                try
+                {
+                    var user = await _context!.Users.FirstOrDefaultAsync(x => x.Email == userEmail);
+                    var chat = await _context!.Chats.FirstOrDefaultAsync(x => x.CreateChatUserId == user!.Id);
+                    var messages = await _context!.Messages.Where(x => x.ChatId == chat.Id).ToListAsync();
+
+                    var keys = await _context!.Keys.FirstOrDefaultAsync(x => x.KeyOwnerId == user!.PrivateKeysStorageId);
+
+                    foreach (var item in messages)
+                    {
+
+                        MessagesContext? context = new MessagesContext() { Text = item.Text, PrivateKey = keys!.Key };
+                        await Clients.User(userEmail!).SendAsync("ReceiveMessage1", context);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
+        }
+
 
     }
 }
