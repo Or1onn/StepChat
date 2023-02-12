@@ -45,24 +45,34 @@ document.getElementById("messageStart").addEventListener("click", () => {
     //    .catch(error => console.error(error));
 });
 
-const divs = document.querySelectorAll("div");
-divs.forEach(function (div) {
-    div.addEventListener("click", function () {
-        if (this.getAttribute("data-email") != null) {
-            userId = this.getAttribute("data-email").toString();
-            $.post('/getPrivateKey', { email: userId }, function (data) {
-                privateKey = data
-            });
-        }
-    })
+
+$(document).ready(function () {
+    $(".block").click(function () {
+        userId = this.getAttribute("data-email").toString();
+        $.post('/getPrivateKey', { email: userId }, function (data) {
+            privateKey = data
+        });
+    });
 });
+
+// const divs = document.querySelectorAll("div");
+// divs.forEach(function (div) {
+//     div.addEventListener("click", function () {
+//         if (this.getAttribute("data-email") != null) {
+//             userId = this.getAttribute("data-email").toString();
+//             $.post('/getPrivateKey', { email: userId }, function (data) {
+//                 privateKey = data
+//             });
+//         }
+//     })
+// });
 
 document.getElementById("sendBtn").addEventListener("click", () => {
     const message = document.getElementById("message").value;
 
-    let context = EncryptMessage(message);
+    let text = EncryptMessage(message);
 
-    hubConnection.invoke("SendMessage", context, userId)
+    hubConnection.invoke("SendMessage", text, userId)
         .catch(error => console.error(error));
 });
 
@@ -77,8 +87,8 @@ hubConnection.on("ReceiveMessage1", (context) => {
 });
 
 // получение сообщения от сервера
-hubConnection.on("ReceiveMessage", (context) => {
-    let message = DecryptMessage(context);
+hubConnection.on("ReceiveMessage", (text) => {
+    let message = DecryptMessage(text);
 
     document.getElementById('messageBox').insertAdjacentHTML(
         'afterbegin',

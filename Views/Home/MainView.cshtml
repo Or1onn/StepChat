@@ -1,4 +1,7 @@
-﻿@model StepChat.Models.MessagesModel
+﻿@using Microsoft.EntityFrameworkCore;
+@using StepChat.Contexts;
+@model StepChat.Models.MessagesModel
+@inject MessengerDataDbContext _context
 
 @{
     Layout = null;
@@ -23,6 +26,10 @@
     <title>Step Chat</title>
 </head>
 
+@{
+   var chats = await _context.Chats.ToListAsync();
+}
+
 <body>
     <div class="container">
         <div class="search-box">
@@ -39,24 +46,28 @@
                 </div>
             </div>
             <div class="chat-list">
-                <div id="user-cl" class="block">
-                    <div class="image-box">
-                        <div class="image-padding">
-                            <img class="image" src="/images/stepwpicon.jpg">
+                @foreach (var item in chats)
+                {
+                    <div id="user-cl" class="block">
+                        <div class="image-box">
+                            <div class="image-padding">
+                                <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId).Image)">
+                            </div>
                         </div>
-                    </div>
-                    <div id="user-cl" class="details">
-                        <div class="head-list">
-                            <h4>FBMS_1211_ru</h4>
-                            <p class="time">10:51</p>
-                        </div>
-                        <div id="user-cl" class="message-container">
-                            <div class="message">
-                                <p>Elvin.M: Где ваши домашки ребята?</p>
+                        <div id="user-cl" class="details">
+                            <div class="head-list">
+                                <h4>@item.Name</h4>
+                                <p class="time">@item.Time.Value.ToString(@"hh\:mm")</p>
+                            </div>
+                            <div id="user-cl" class="message-container">
+                                <div class="message">
+                                    <p>Elvin.M: Где ваши домашки ребята?</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+               
                 <div id="user-cl" class="block" data-email="osalaxetdinov@gmail.com">
                     <div id="messageStart" class="image-box">
                         <div class="image-padding">

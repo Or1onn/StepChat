@@ -6,6 +6,7 @@ namespace StepChat.Models;
 public partial class ImagesModel
 {
     public int Id { get; set; }
+    public int ImageId { get; set; }
 
     public byte[] Image { get; set; } = null!;
 }

@@ -7,8 +7,13 @@ public partial class ChatsModel
 {
     public int Id { get; set; }
 
-    public int ChatId { get; set; }
     public string? Name { get; set; }
+
+    public TimeSpan? Time { get; set; }
+
+    public int ChatId { get; set; }
+
+    public int ImageId { get; set; }
 
     public int CreateChatUserId { get; set; }
 }

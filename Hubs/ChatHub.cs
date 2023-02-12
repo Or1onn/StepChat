@@ -65,21 +65,21 @@ namespace StepChat.Hubs
             }
 
         }
-        public async Task SendMessage(MessagesContext? context, string? userId)
+        public async Task SendMessage(string? text, string? userId)
         {
-            if (userId != null && context != null)
+            if (userId != null && text != null)
             {
                 var userEmail = Context?.User?.Identity?.Name;
 
                 var user = await _context!.Users.FirstOrDefaultAsync(x => x.Email == userEmail);
                 var chat = await _context!.Chats.FirstOrDefaultAsync(x => x.CreateChatUserId == user!.Id);
 
-                MessagesModel messagesModel = new MessagesModel() { UserId = user!.Id, ChatId = chat!.Id, Text = context.Text!, CreateTime = DateTime.Now };
+                MessagesModel messagesModel = new MessagesModel() { UserId = user!.Id, ChatId = chat!.Id, Text = text, CreateTime = DateTime.Now };
 
                 await _context.AddAsync(messagesModel);
                 await _context.SaveChangesAsync();
 
-                await Clients.User(userId!).SendAsync("ReceiveMessage", context);
+                await Clients.User(userId!).SendAsync("ReceiveMessage", text);
             }
         }
 

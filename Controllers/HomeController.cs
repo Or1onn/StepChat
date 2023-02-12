@@ -1,22 +1,29 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using StepChat.Contexts;
 using StepChat.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using System.Drawing;
 
 namespace StepChat.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        public IWebHostEnvironment WebHostEnvironment { get; }
+
         MessengerDataDbContext? _context;
         public int MyProperty { get; set; }
-        public HomeController(ILogger<HomeController> logger, MessengerDataDbContext context)
+        public HomeController(ILogger<HomeController> logger, MessengerDataDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _logger = logger;
             _context = context;
+            WebHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -28,10 +35,20 @@ namespace StepChat.Controllers
                 return View();
         }
 
-        public IActionResult Privacy()
+        public void UploadImage()
         {
-            return View();
+            var webRootPath = WebHostEnvironment.WebRootPath + "/images/stepwpicon.jpg";
+
+            ImagesModel images = new() { Image = System.IO.File.ReadAllBytes(webRootPath), ImageId = 1 };
+            _context.Images.Add(images);
+            _context.SaveChanges();
         }
+
+        public async Task<List<ChatsModel>> GetAllChats()
+        {
+            return await _context.Chats.ToListAsync();
+        }
+
 
         [HttpPost("/getPrivateKey")]
         public async Task<string?> GetKey(string? email)
@@ -41,7 +58,7 @@ namespace StepChat.Controllers
             var messages = await _context!.Messages.Where(x => x.ChatId == chat.Id).ToListAsync();
 
             var keys = await _context!.Keys.FirstOrDefaultAsync(x => x.KeyOwnerId == user!.PrivateKeysStorageId);
-
+            
             return keys.Key;
         }
 
