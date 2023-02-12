@@ -44,12 +44,6 @@ namespace StepChat.Controllers
             _context.SaveChanges();
         }
 
-        public async Task<List<ChatsModel>> GetAllChats()
-        {
-            return await _context.Chats.ToListAsync();
-        }
-
-
         [HttpPost("/getPrivateKey")]
         public async Task<string?> GetKey(string? email)
         {
