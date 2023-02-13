@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using NuGet.Packaging.Signing;
 using NuGet.Protocol;
 using StepChat.Contexts;
@@ -23,7 +24,6 @@ namespace StepChat.Hubs
             {
                 try
                 {
-                    KeysModel keysModel = new();
                     string? _tmp = null;
 
                     var userEmail = Context?.User?.Identity?.Name;
@@ -33,10 +33,7 @@ namespace StepChat.Hubs
                         {
                             var user = await _context!.Users.FirstOrDefaultAsync(x => x.Email == userEmail);
 
-                            keysModel.KeyOwnerId = user!.PrivateKeysStorageId;
-                            keysModel.Email = userId;
-                            keysModel.Key = privateKey;
-
+                            KeysModel keysModel = new KeysModel() { Email = userId, KeyOwnerId = user!.PrivateKeysStorageId, Key = privateKey };
                             ChatsModel chatsModel = new ChatsModel() { ChatId = _context.Chats.Count() == 0 ? 0 : _context.Chats.Max(x => x.ChatId + 1), Name = user.FullName, CreateChatUserId = user.Id };
                             ChatUserModel chatUserModel = new ChatUserModel() { ChatId = chatsModel.Id, UserId = user.Id };
 
@@ -83,34 +80,31 @@ namespace StepChat.Hubs
             }
         }
 
-        public async Task LoadMessages(string? userId)
+        public async Task LoadMessages(object? json)
         {
-            if (userId != null)
+            if (json != null)
             {
-                var userEmail = Context?.User?.Identity?.Name;
                 try
                 {
-                    var user = await _context!.Users.FirstOrDefaultAsync(x => x.Email == userEmail);
-                    var chat = await _context!.Chats.FirstOrDefaultAsync(x => x.CreateChatUserId == user!.Id);
-                    var messages = await _context!.Messages.Where(x => x.ChatId == chat.Id).ToListAsync();
+                    var userEmail = Context?.User?.Identity?.Name;
+                    dynamic data = JObject.Parse(json!.ToString());
 
-                    var keys = await _context!.Keys.FirstOrDefaultAsync(x => x.KeyOwnerId == user!.PrivateKeysStorageId);
+                    int chatId = data["chatId"];
+                    string key = data["key"];
+
+                    var messages = await _context!.Messages.Where(x => x.ChatId == chatId).ToListAsync();
 
                     foreach (var item in messages)
                     {
 
-                        MessagesContext? context = new MessagesContext() { Text = item.Text, PrivateKey = keys!.Key };
-                        await Clients.User(userEmail!).SendAsync("ReceiveMessage1", context);
+                        await Clients.User(userEmail!).SendAsync("ReceiveMessage", item.Text, key);
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-
             }
         }
-
-
     }
 }

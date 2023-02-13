@@ -27,7 +27,8 @@
 </head>
 
 @{
-   var chats = await _context.Chats.ToListAsync();
+    var chats = await _context.Chats.ToListAsync();
+    int rowNumber = 0;
 }
 
 <body>
@@ -48,7 +49,7 @@
             <div class="chat-list">
                 @foreach (var item in chats)
                 {
-                    <div id="user-cl" class="block">
+                    <div id="user-cl" class="block" data-email="osalaxetdinov@gmail.com" @* data-row=@rowNumber++*@>
                         <div class="image-box">
                             <div class="image-padding">
                                 <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId).Image)">
@@ -61,70 +62,70 @@
                             </div>
                             <div id="user-cl" class="message-container">
                                 <div class="message">
-                                    <p>Elvin.M: Где ваши домашки ребята?</p>
+                                    <p>@_context.Messages.Last().Text</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 }
-               
+
                 <div id="user-cl" class="block" data-email="osalaxetdinov@gmail.com">
-                    <div id="messageStart" class="image-box">
-                        <div class="image-padding">
-                            <img class="image" src="/images/blank-profile-picture.png">
-                        </div>
-                    </div>
-                    <div class="details">
-                        <div class="head-list">
-                            <div class="user-name">
-                                <h4>Орхан</h4>
-                            </div>
-                            <div class="message-time">
-                                <p class="time">02:27</p>
-                            </div>
-                        </div>
-                        <div class="message-container">
-                            <div class="message">
-                                <p>Где дизайн?</p>
-                            </div>
-                            <div class="new-message_container">
-                                <div class="new-message">1</div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="messageStart" class="image-box">
+                <div class="image-padding">
+                <img class="image" src="/images/blank-profile-picture.png">
+                </div>
+                </div>
+                <div class="details">
+                <div class="head-list">
+                <div class="user-name">
+                <h4>Орхан1</h4>
+                </div>
+                <div class="message-time">
+                <p class="time">02:27</p>
+                </div>
+                </div>
+                <div class="message-container">
+                <div class="message">
+                <p>Где дизайн?</p>
+                </div>
+                <div class="new-message_container">
+                <div class="new-message">1</div>
+                </div>
+                </div>
+                </div>
                 </div>
 
-                <div id="user-cl" class="block" data-email="muradlireceb@gmail.com">
-                    <div class="image-box">
-                        <div class="image-padding">
-                            <img class="image" src="/images/blank-profile-picture.png">
-                        </div>
-                    </div>
-                    <div class="details">
-                        <div class="head-list">
-                            <div class="user-name">
-                                <h4>Elvin Azimov</h4>
-                            </div>
-                            <div class="message-time">
-                                <p class="time">19:42</p>
-                            </div>
-                        </div>
-                        <div class="message-container">
-                            <div class="message">
-                                <div class="last-message-status_container">
-                                    <div class="last-message-status">
-                                        <svg viewBox="0 0 18 18" width="18" height="18" class="">
-                                            <path fill="#0ed145"
-                                                  d="m17.394 5.035-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-.427-.388a.381.381 0 0 0-.578.038l-.451.576a.497.497 0 0 0 .043.645l1.575 1.51a.38.38 0 0 0 .577-.039l7.483-9.602a.436.436 0 0 0-.076-.609zm-4.892 0-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-2.614-2.556a.435.435 0 0 0-.614.007l-.505.516a.435.435 0 0 0 .007.614l3.887 3.8a.38.38 0 0 0 .577-.039l7.483-9.602a.435.435 0 0 0-.075-.609z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p>Го в казаков?</p>
-                            </div>
-                        </div>
-                    </div>
+                @*<div id="user-cl" class="block" data-email="muradlireceb@gmail.com">
+                <div class="image-box">
+                <div class="image-padding">
+                <img class="image" src="/images/blank-profile-picture.png">
                 </div>
+                </div>
+                <div class="details">
+                <div class="head-list">
+                <div class="user-name">
+                <h4>Elvin Azimov</h4>
+                </div>
+                <div class="message-time">
+                <p class="time">19:42</p>
+                </div>
+                </div>
+                <div class="message-container">
+                <div class="message">
+                <div class="last-message-status_container">
+                <div class="last-message-status">
+                <svg viewBox="0 0 18 18" width="18" height="18" class="">
+                <path fill="#0ed145"
+                d="m17.394 5.035-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-.427-.388a.381.381 0 0 0-.578.038l-.451.576a.497.497 0 0 0 .043.645l1.575 1.51a.38.38 0 0 0 .577-.039l7.483-9.602a.436.436 0 0 0-.076-.609zm-4.892 0-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-2.614-2.556a.435.435 0 0 0-.614.007l-.505.516a.435.435 0 0 0 .007.614l3.887 3.8a.38.38 0 0 0 .577-.039l7.483-9.602a.435.435 0 0 0-.075-.609z">
+                </path>
+                </svg>
+                </div>
+                </div>
+                <p>Го в казаков?</p>
+                </div>
+                </div>
+                </div>
+                </div>*@
 
             </div>
 

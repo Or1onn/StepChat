@@ -13,7 +13,7 @@ public partial class ChatsModel
 
     public int ChatId { get; set; }
 
-    public int ImageId { get; set; }
+    public int ImageId { get; set; } = 0;
 
     public int CreateChatUserId { get; set; }
 }

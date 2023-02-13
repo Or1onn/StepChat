@@ -18,6 +18,7 @@ namespace StepChat.Controllers
         public IWebHostEnvironment WebHostEnvironment { get; }
 
         MessengerDataDbContext? _context;
+
         public int MyProperty { get; set; }
         public HomeController(ILogger<HomeController> logger, MessengerDataDbContext context, IWebHostEnvironment webHostEnvironment)
         {
@@ -45,15 +46,19 @@ namespace StepChat.Controllers
         }
 
         [HttpPost("/getPrivateKey")]
-        public async Task<string?> GetKey(string? email)
+        public async Task<IResult> GetKey(string? email)
         {
             var user = await _context!.Users.FirstOrDefaultAsync(x => x.Email == email);
             var chat = await _context!.Chats.FirstOrDefaultAsync(x => x.CreateChatUserId == user!.Id);
-            var messages = await _context!.Messages.Where(x => x.ChatId == chat.Id).ToListAsync();
-
             var keys = await _context!.Keys.FirstOrDefaultAsync(x => x.KeyOwnerId == user!.PrivateKeysStorageId);
-            
-            return keys.Key;
+
+            var response = new
+            {
+                chatId = chat.ChatId,
+                key = keys.Key,
+            };
+
+            return Results.Json(response);
         }
 
 

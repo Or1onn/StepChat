@@ -3,6 +3,7 @@
 let token;
 let userId;
 let privateKey;
+let response;
 
 function EncryptMessage(message) {
     var encrypted = CryptoJS.AES.encrypt(message, privateKey).toString();
@@ -15,8 +16,8 @@ function EncryptMessage(message) {
     return context;
 }
 
-function DecryptMessage(context) {
-    return CryptoJS.AES.decrypt(context.text, context.privateKey).toString(CryptoJS.enc.Utf8);
+function DecryptMessage(text, privateKey) {
+    return CryptoJS.AES.decrypt(text, privateKey).toString(CryptoJS.enc.Utf8);
 }
 
 
@@ -28,44 +29,27 @@ const hubConnection = new signalR.HubConnectionBuilder()
 fetch("/getToken")
     .then(data => token = data.text())
     .then(() => {
-        hubConnection.start()       // начинаем соединение с хабом
+        hubConnection.start()      
             .catch(err => console.error(err.toString()));
     }).catch(function (error) {
         console.log('request failed', error)
     });
 
+//hubConnection.invoke("StartMessaging", userId, privateKey)
+//    .catch(error => console.error(error));
 
 
-document.getElementById("messageStart").addEventListener("click", () => {
+$(".block").click(function () {
+    userId = this.getAttribute("data-email").toString();
+    $.post('/getPrivateKey', { email: userId }, async function (data) {
+        response = data.value;
+        if (response != undefined) {
+            hubConnection.invoke("LoadMessages", response)
+                .catch(error => console.error(error));
+        }
 
-    hubConnection.invoke("LoadMessages", userId)
-        .catch(error => console.error(error));
-
-    //hubConnection.invoke("StartMessaging", userId, privateKey)
-    //    .catch(error => console.error(error));
-});
-
-
-$(document).ready(function () {
-    $(".block").click(function () {
-        userId = this.getAttribute("data-email").toString();
-        $.post('/getPrivateKey', { email: userId }, function (data) {
-            privateKey = data
-        });
     });
 });
-
-// const divs = document.querySelectorAll("div");
-// divs.forEach(function (div) {
-//     div.addEventListener("click", function () {
-//         if (this.getAttribute("data-email") != null) {
-//             userId = this.getAttribute("data-email").toString();
-//             $.post('/getPrivateKey', { email: userId }, function (data) {
-//                 privateKey = data
-//             });
-//         }
-//     })
-// });
 
 document.getElementById("sendBtn").addEventListener("click", () => {
     const message = document.getElementById("message").value;
@@ -76,29 +60,12 @@ document.getElementById("sendBtn").addEventListener("click", () => {
         .catch(error => console.error(error));
 });
 
-hubConnection.on("ReceiveMessage1", (context) => {
-    let message = DecryptMessage(context);
+hubConnection.on("ReceiveMessage", (text, privateKey) => {
+    let message = DecryptMessage(text, privateKey);
 
     document.getElementById('messageBox').insertAdjacentHTML(
         'afterbegin',
         `<p>${message}?<br><span>12:15</span></p>`
     )
-
-});
-
-// получение сообщения от сервера
-hubConnection.on("ReceiveMessage", (text) => {
-    let message = DecryptMessage(text);
-
-    document.getElementById('messageBox').insertAdjacentHTML(
-        'afterbegin',
-        `<p>${message}?<br><span>12:15</span></p>`
-    )
-
-});
-
-
-hubConnection.on("SendPrivateKeys", (key) => {
-    let message = DecryptMessage(context);
 });
 
