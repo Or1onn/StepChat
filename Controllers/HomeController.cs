@@ -31,9 +31,9 @@ namespace StepChat.Controllers
         {
             return View();
         }
-        public IActionResult MainView()
+        public IActionResult MainView(int userId)
         {
-                return View();
+            return View(new UsersModel() { Id = userId });
         }
 
         public void UploadImage()
@@ -46,16 +46,28 @@ namespace StepChat.Controllers
         }
 
         [HttpPost("/getPrivateKey")]
-        public async Task<IResult> GetKey(string? email)
+        public async Task<IResult> GetKey(string? email, int chatId)
         {
-            var user = await _context!.Users.FirstOrDefaultAsync(x => x.Email == email);
-            var chat = await _context!.Chats.FirstOrDefaultAsync(x => x.CreateChatUserId == user!.Id);
-            var keys = await _context!.Keys.FirstOrDefaultAsync(x => x.KeyOwnerId == user!.PrivateKeysStorageId);
+            var user2 = await _context!.Users
+                       .Where(e => e.Email == email)
+                       .Select(e => e.Id)
+                       .FirstOrDefaultAsync();
+
+            //var _chatId = await _context!.ChatUsers
+            //           .Where(e => e.User1 == userId && e.User2 == user2)
+            //           .Select(e => e.Id)
+            //           .FirstOrDefaultAsync();
+
+
+            var key = await _context!.Keys
+                       .Where(x => x.ChatId == _chatId)
+                       .Select(x => x.Key)
+                       .FirstOrDefaultAsync();
 
             var response = new
             {
-                chatId = chat.ChatId,
-                key = keys.Key,
+                chatId = _chatId,
+                privateKey = key,
             };
 
             return Results.Json(response);

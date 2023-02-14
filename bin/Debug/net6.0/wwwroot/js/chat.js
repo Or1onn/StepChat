@@ -4,16 +4,11 @@ let token;
 let userId;
 let privateKey;
 let response;
-
+//var key2 = CryptoJS.lib.WordArray.random(32).toString();
 function EncryptMessage(message) {
     var encrypted = CryptoJS.AES.encrypt(message, privateKey).toString();
 
-    var context = {
-        Text: encrypted,
-        PrivateKey: privateKey
-    };
-
-    return context;
+    return encrypted;
 }
 
 function DecryptMessage(text, privateKey) {
@@ -29,15 +24,11 @@ const hubConnection = new signalR.HubConnectionBuilder()
 fetch("/getToken")
     .then(data => token = data.text())
     .then(() => {
-        hubConnection.start()       // начинаем соединение с хабом
+        hubConnection.start()
             .catch(err => console.error(err.toString()));
     }).catch(function (error) {
         console.log('request failed', error)
     });
-
-
-
-
 
 //hubConnection.invoke("StartMessaging", userId, privateKey)
 //    .catch(error => console.error(error));
@@ -48,8 +39,19 @@ $(".block").click(function () {
     $.post('/getPrivateKey', { email: userId }, async function (data) {
         response = data.value;
         if (response != undefined) {
-            hubConnection.invoke("LoadMessages", response)
-                .catch(error => console.error(error));
+            privateKey = CryptoJS.lib.WordArray.random(32).toString();
+            $.ajax({
+                type: "GET",
+                url: $("/getUserId").attr("href"),
+                success: function (result) {
+                    var a = result;
+                    hubConnection.invoke("StartMessaging", userId, privateKey, result)
+                        .catch(error => console.error(error));
+                    // handle the result of the Razor page function here
+                }
+            });
+            //hubConnection.invoke("LoadMessages", response, $('#userId').val(value))
+            //    .catch(error => console.error(error));
         }
 
     });
@@ -69,7 +71,7 @@ hubConnection.on("ReceiveMessage", (text, privateKey) => {
 
     document.getElementById('messageBox').insertAdjacentHTML(
         'afterbegin',
-        `<p>${message}?<br><span>12:15</span></p>`
+        `<p>${message}<br><span>12:15</span></p>`
     )
 });
 

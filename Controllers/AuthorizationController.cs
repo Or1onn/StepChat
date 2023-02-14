@@ -67,7 +67,7 @@ namespace StepChat.Controllers
                 var audience = _configService?.GetValue("Jwt:Audience");
                 var key = _configService?.GetValue("Jwt:Key");
 
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email!) };
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email!), new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()) };
                 var jwt = new JwtSecurityToken(
                 issuer: issuer,
                 audience: audience,
@@ -78,7 +78,7 @@ namespace StepChat.Controllers
 
                 TempData["Token"] = encodedJwt;
 
-                return RedirectToAction("MainView", "Home");
+                return RedirectToAction("MainView", "Home", new { userId = user.Id });
             }
             return NotFound();
         }

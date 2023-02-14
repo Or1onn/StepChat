@@ -1,6 +1,6 @@
 ﻿@using Microsoft.EntityFrameworkCore;
 @using StepChat.Contexts;
-@model StepChat.Models.MessagesModel
+@model StepChat.Models.UsersModel
 @inject MessengerDataDbContext _context
 
 @{
@@ -16,19 +16,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/main_style.css">
 
-    @*<script defer src="~/lib/signalr/dist/browser/signalr.min.js"></script>*@
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
-    <script defer src="~/lib/jquery/dist/jquery.min.js"></script>
     <script defer src="~/lib/crypto-js/crypto-js.min.js"></script>
+    <script defer src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script defer src="~/lib/jquery/dist/jquery.min.js"></script>
     <script defer src="~/js/data_base.js"></script>
     <script defer src="~/js/chat.js"></script>
 
     <title>Step Chat</title>
 </head>
 
+
+
+
 @{
-    var chats = await _context.Chats.ToListAsync();
-    int rowNumber = 0;
+
+    int userId = this.Model.Id;
+
+    List<List<ChatsModel>> chats = new();
+    //int rowNumber = 0;
+    //await _context.ChatUsers.Where(x => x.User1 == userId || x.User2 == userId).ToListAsync();
+    var chatsId = await _context!.ChatUsers
+                    .Where(x => x.User1 == userId || x.User2 == userId)
+                    .Select(e => e.ChatId)
+                    .ToListAsync();
+
+    foreach (var item in chatsId)
+    {
+        chats.Append(await _context.Chats.Where(x => x.ChatId == item && x.CreateChatUserId == userId).ToListAsync());
+    }
+
+}
+
+@functions {
+    [HttpGet("/getUserId")]
+    int getUserId()
+    {
+        return this.Model.Id;
+    }
 }
 
 <body>
@@ -49,50 +73,54 @@
             <div class="chat-list">
                 @foreach (var item in chats)
                 {
-                    <div id="user-cl" class="block" data-email="osalaxetdinov@gmail.com" @* data-row=@rowNumber++*@>
-                        <div class="image-box">
-                            <div class="image-padding">
-                                <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId).Image)">
+                    foreach (var item2 in item)
+                    {
+                        <div id="user-cl" class="block" data-email="osalaxetdinov@gmail.com" data-chatId=@item2.ChatId @* data-row=@rowNumber++*@>
+                            <div class="image-box">
+                                <div class="image-padding">
+                                    <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item2.ImageId).Image)">
+                                </div>
                             </div>
-                        </div>
-                        <div id="user-cl" class="details">
-                            <div class="head-list">
-                                <h4>@item.Name</h4>
-                                <p class="time">@item.Time.Value.ToString(@"hh\:mm")</p>
-                            </div>
-                            <div id="user-cl" class="message-container">
-                                <div class="message">
-                                    <p>@_context.Messages.Last().Text</p>
+                            <div id="user-cl" class="details">
+                                <div class="head-list">
+                                    <h4>@item2.Name</h4>
+                                    <p class="time">@item2.Time.Value.ToString(@"hh\:mm")</p>
+                                </div>
+                                <div id="user-cl" class="message-container">
+                                    <div class="message">
+                                        <p>Го в казаков?</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 }
 
+
                 <div id="user-cl" class="block" data-email="osalaxetdinov@gmail.com">
-                <div id="messageStart" class="image-box">
-                <div class="image-padding">
-                <img class="image" src="/images/blank-profile-picture.png">
-                </div>
-                </div>
-                <div class="details">
-                <div class="head-list">
-                <div class="user-name">
-                <h4>Орхан1</h4>
-                </div>
-                <div class="message-time">
-                <p class="time">02:27</p>
-                </div>
-                </div>
-                <div class="message-container">
-                <div class="message">
-                <p>Где дизайн?</p>
-                </div>
-                <div class="new-message_container">
-                <div class="new-message">1</div>
-                </div>
-                </div>
-                </div>
+                    <div id="messageStart" class="image-box">
+                        <div class="image-padding">
+                            <img class="image" src="/images/blank-profile-picture.png">
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="head-list">
+                            <div class="user-name">
+                                <h4>Орхан1</h4>
+                            </div>
+                            <div class="message-time">
+                                <p class="time">02:27</p>
+                            </div>
+                        </div>
+                        <div class="message-container">
+                            <div class="message">
+                                <p>Где дизайн?</p>
+                            </div>
+                            <div class="new-message_container">
+                                <div class="new-message">1</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 @*<div id="user-cl" class="block" data-email="muradlireceb@gmail.com">

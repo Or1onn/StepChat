@@ -9,5 +9,6 @@ public partial class ChatUserModel
 
     public int ChatId { get; set; }
 
-    public int UserId { get; set; }
+    public int User1 { get; set; }
+    public int User2 { get; set; }
 }

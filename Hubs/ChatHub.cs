@@ -18,42 +18,24 @@ namespace StepChat.Hubs
             _context = context;
         }
 
-        public async Task StartMessaging(string? userId, string? privateKey)
+        public async Task StartMessaging(string? email, string? privateKey, int userId)
         {
-            if (userId != null && privateKey != null)
+            if (email != null && privateKey != null)
             {
                 try
                 {
-                    string? _tmp = null;
+                    var user = await _context!.Users.FindAsync(userId);
+                    var user2 = await _context!.Users.FirstOrDefaultAsync(x => x.Email == email);
 
-                    var userEmail = Context?.User?.Identity?.Name;
-                    if (userEmail != null)
-                    {
-                        for (int i = 0; i < 2; i++)
-                        {
-                            var user = await _context!.Users.FirstOrDefaultAsync(x => x.Email == userEmail);
+                    ChatsModel chatsModel = new ChatsModel() { ChatId = _context.Chats.Count() == 0 ? 0 : _context.Chats.Max(x => x.ChatId + 1), Name = user.FullName, Time = DateTime.Now.TimeOfDay };
+                    KeysModel keysModel = new KeysModel() { ChatId = chatsModel.ChatId, Key = privateKey };
+                    ChatUserModel chatUserModel = new ChatUserModel() { ChatId = chatsModel.Id, User1 = user.Id, User2 = user2.Id };
 
-                            KeysModel keysModel = new KeysModel() { Email = userId, KeyOwnerId = user!.PrivateKeysStorageId, Key = privateKey };
-                            ChatsModel chatsModel = new ChatsModel() { ChatId = _context.Chats.Count() == 0 ? 0 : _context.Chats.Max(x => x.ChatId + 1), Name = user.FullName, CreateChatUserId = user.Id };
-                            ChatUserModel chatUserModel = new ChatUserModel() { ChatId = chatsModel.Id, UserId = user.Id };
+                    await _context.Chats.AddAsync(chatsModel);
+                    await _context.Keys.AddAsync(keysModel);
+                    await _context.ChatUsers.AddAsync(chatUserModel);
 
-                            await _context.Keys.AddAsync(keysModel);
-                            await _context.Chats.AddAsync(chatsModel);
-                            await _context.ChatUsers.AddAsync(chatUserModel);
-
-                            await _context.SaveChangesAsync();
-
-                            if (String.IsNullOrEmpty(_tmp))
-                            {
-                                _tmp = userEmail;
-                                userEmail = userId;
-                                userId = _tmp;
-
-
-                                keysModel = new();
-                            }
-                        }
-                    }
+                    await _context.SaveChangesAsync();
                 }
                 catch (Exception ex)
                 {
@@ -62,21 +44,26 @@ namespace StepChat.Hubs
             }
 
         }
-        public async Task SendMessage(string? text, string? userId)
+        public async Task SendMessage(string? text, string? email, int Id)
         {
-            if (userId != null && text != null)
+            if (email != null && text != null)
             {
-                var userEmail = Context?.User?.Identity?.Name;
+                var user2 = await _context!.Users
+                           .Where(e => e.Email == email)
+                           .Select(e => e.Id)
+                           .FirstOrDefaultAsync();
 
-                var user = await _context!.Users.FirstOrDefaultAsync(x => x.Email == userEmail);
-                var chat = await _context!.Chats.FirstOrDefaultAsync(x => x.CreateChatUserId == user!.Id);
+                var chatId = await _context!.ChatUsers
+                           .Where(x => x.User1 == Id && x.User2 == user2)
+                           .Select(e => e.ChatId)
+                           .FirstOrDefaultAsync();
 
-                MessagesModel messagesModel = new MessagesModel() { UserId = user!.Id, ChatId = chat!.Id, Text = text, CreateTime = DateTime.Now };
+                MessagesModel messagesModel = new MessagesModel() { UserId = Id, ChatId = chatId, Text = text, CreateTime = DateTime.Now };
 
                 await _context.AddAsync(messagesModel);
                 await _context.SaveChangesAsync();
 
-                await Clients.User(userId!).SendAsync("ReceiveMessage", text);
+                await Clients.User(email!).SendAsync("ReceiveMessage", text);
             }
         }
 
@@ -90,7 +77,7 @@ namespace StepChat.Hubs
                     dynamic data = JObject.Parse(json!.ToString());
 
                     int chatId = data["chatId"];
-                    string key = data["key"];
+                    string key = data["privateKey"];
 
                     var messages = await _context!.Messages.Where(x => x.ChatId == chatId).ToListAsync();
 

@@ -7,9 +7,7 @@ public partial class KeysModel
 {
     public int Id { get; set; }
 
-    public int KeyOwnerId { get; set; }
-
-    public string Email { get; set; } = null!;
+    public int ChatId { get; set; }
 
     public string Key { get; set; } = null!;
 }

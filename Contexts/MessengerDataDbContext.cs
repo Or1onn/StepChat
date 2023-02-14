@@ -81,7 +81,6 @@ public partial class MessengerDataDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Keys__3214EC07E98376CB");
 
-            entity.Property(e => e.Email).IsUnicode(false);
             entity.Property(e => e.Key)
                 .IsUnicode(false)
                 .HasColumnName("Key");

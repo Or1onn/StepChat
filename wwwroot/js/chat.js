@@ -2,18 +2,14 @@
 
 let token;
 let userId;
+let chatId;
 let privateKey;
 let response;
-
+//var key2 = CryptoJS.lib.WordArray.random(32).toString();
 function EncryptMessage(message) {
     var encrypted = CryptoJS.AES.encrypt(message, privateKey).toString();
 
-    var context = {
-        Text: encrypted,
-        PrivateKey: privateKey
-    };
-
-    return context;
+    return encrypted;
 }
 
 function DecryptMessage(text, privateKey) {
@@ -29,7 +25,7 @@ const hubConnection = new signalR.HubConnectionBuilder()
 fetch("/getToken")
     .then(data => token = data.text())
     .then(() => {
-        hubConnection.start()      
+        hubConnection.start()
             .catch(err => console.error(err.toString()));
     }).catch(function (error) {
         console.log('request failed', error)
@@ -41,11 +37,16 @@ fetch("/getToken")
 
 $(".block").click(function () {
     userId = this.getAttribute("data-email").toString();
+    chatId = this.getAttribute("data-chatId").toString();
     $.post('/getPrivateKey', { email: userId }, async function (data) {
         response = data.value;
         if (response != undefined) {
-            hubConnection.invoke("LoadMessages", response)
+            privateKey = CryptoJS.lib.WordArray.random(32).toString();
+
+            hubConnection.invoke("StartMessaging", userId, privateKey)
                 .catch(error => console.error(error));
+            //hubConnection.invoke("LoadMessages", response, $('#userId').val(value))
+            //    .catch(error => console.error(error));
         }
 
     });
@@ -65,7 +66,7 @@ hubConnection.on("ReceiveMessage", (text, privateKey) => {
 
     document.getElementById('messageBox').insertAdjacentHTML(
         'afterbegin',
-        `<p>${message}?<br><span>12:15</span></p>`
+        `<p>${message}<br><span>12:15</span></p>`
     )
 });
 
