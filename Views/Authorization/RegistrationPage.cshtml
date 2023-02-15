@@ -9,9 +9,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/register.css">
+    <link rel="stylesheet" href="~/css/main_style.css">
+    <script defer src="~/js/login.js"></script>
     <title>View</title>
 </head>
-<body>
+@*<body>
 
     <h4>UsersModel</h4>
     <hr />
@@ -65,5 +68,69 @@
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     }
+</body>*@
+
+
+<body>
+    <div class="container">
+        <div class="register-panel">
+            <!-- <div class="error-message">
+                <div class="error-container">
+                    <div class="error-icons">
+                        <img src="error.svg" width="70" height="70" alt="">
+                    </div>
+                </div>
+            </div> -->
+            <img src="/icons/step_logo.svg" alt="" class="step-logo">
+            <div class="register-label_container">
+                <label class="register-label">Sign Up</label>
+            </div>
+            <form asp-controller="Authorization" asp-action="Create" method="post">
+                <div class="group">
+                    <div class="input-container">
+                        <input name="Name" required type="text" class="input">
+                        <label class="input-label">Name</label>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="input-container">
+                        <input name="Surname" required type="text" class="input">
+                        <label class="input-label">Surname</label>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="input-container">
+                        <input name="Patronimic" required type="text" class="input">
+                        <label class="input-label">Patronimic</label>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="input-container">
+                        <input asp-for="PhoneNumber" required type="number" class="input">
+                        <label asp-for="Password" class="input-label">Phone Number</label>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="input-container">
+                        <input asp-for="Email" required type="text" class="input">
+                        <div class="border"></div>
+                        <label asp-for="Password" class="input-label">Email</label>
+                        <div class="input-domain">
+                            <label class="input-domain-label">@@itstep.edu.az</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="input-container">
+                        <input asp-for="Password" id="Password" required type="password" class="input">
+                        <label asp-for="Password" class="input-label">Password</label>
+                        <img id="eye" src="/icons/show_pass.svg" alt="show password" class="show-pass">
+                    </div>
+                </div>
+                <input id="regBtn" type="submit" value="Sign Up" class="register-submit">
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>

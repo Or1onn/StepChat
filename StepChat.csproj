@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\css\style.css" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="wwwroot\js\chat.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

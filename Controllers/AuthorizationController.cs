@@ -67,7 +67,7 @@ namespace StepChat.Controllers
                 var audience = _configService?.GetValue("Jwt:Audience");
                 var key = _configService?.GetValue("Jwt:Key");
 
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email!), new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()) };
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email!) };
                 var jwt = new JwtSecurityToken(
                 issuer: issuer,
                 audience: audience,
@@ -101,12 +101,13 @@ namespace StepChat.Controllers
         // POST: LoginController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(UsersModel user)
+        public async Task<ActionResult> Create(UsersModel? user, string? Name, string? Surname, string? Patronimic)
         {
             try
             {
                 if (user != null)
                 {
+                    user.FullName = Name + ' ' + Surname + ' ' + Patronimic;
                     PasswordHasher? hasher = new PasswordHasher();
                     var callbackUrl = Url.Action(
                         "ConfirmEmail",
@@ -124,7 +125,7 @@ namespace StepChat.Controllers
 
                     EmailSender _emailSender = new();
 
-                    await _emailSender.SendEmailAsync(user.Email, $"<a href='{callbackUrl}'>Verify<a>");
+                    await _emailSender.SendEmailAsync(user.Email + "@itstep.edu.az", $"<a href='{callbackUrl}'>Verify<a>");
 
                     return RedirectToAction("EmailConfirmationPage", "Authorization");
                 }

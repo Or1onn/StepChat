@@ -41,36 +41,19 @@ namespace StepChat.Controllers
             var webRootPath = WebHostEnvironment.WebRootPath + "/images/stepwpicon.jpg";
 
             ImagesModel images = new() { Image = System.IO.File.ReadAllBytes(webRootPath), ImageId = 1 };
-            _context.Images.Add(images);
-            _context.SaveChanges();
+            _context!.Images.Add(images);
+            _context!.SaveChanges();
         }
 
         [HttpPost("/getPrivateKey")]
-        public async Task<IResult> GetKey(string? email, int chatId)
+        public async Task<string?> GetKey(int chatId)
         {
-            var user2 = await _context!.Users
-                       .Where(e => e.Email == email)
-                       .Select(e => e.Id)
-                       .FirstOrDefaultAsync();
-
-            //var _chatId = await _context!.ChatUsers
-            //           .Where(e => e.User1 == userId && e.User2 == user2)
-            //           .Select(e => e.Id)
-            //           .FirstOrDefaultAsync();
-
-
             var key = await _context!.Keys
-                       .Where(x => x.ChatId == _chatId)
+                       .Where(x => x.ChatId == chatId)
                        .Select(x => x.Key)
                        .FirstOrDefaultAsync();
 
-            var response = new
-            {
-                chatId = _chatId,
-                privateKey = key,
-            };
-
-            return Results.Json(response);
+            return key;
         }
 
 
