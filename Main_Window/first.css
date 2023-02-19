@@ -392,6 +392,7 @@ body {
   position: relative;
   display: flex;
   margin-right: 25px;
+  cursor: pointer;
 }
 
 .smile img {
@@ -408,6 +409,7 @@ body {
   position: relative;
   display: flex;
   margin-left: 15px;
+  cursor: pointer;
 }
 
 .paper-clip img {
@@ -424,6 +426,7 @@ body {
   position: relative;
   display: flex;
   margin-right: 15px;
+  cursor: pointer;
 }
 
 .send img {
@@ -441,6 +444,7 @@ body {
   display: flex;
   flex-direction: column-reverse;
   width: 100%;
+  overflow: overlay;
   height: 100%;
 }
 
@@ -457,14 +461,18 @@ body {
   display: flex;
   position: relative;
   bottom: 10px;
+  margin-top: 5px;
   justify-content: flex-end;
+  animation: modal 1s alternate ease;
 }
 
 .chat-message-container-frnd {
   width: 100%;
   display: flex;
   position: relative;
+  margin-top: 5px;
   bottom: 10px;
+  animation: modal 1s alternate ease;
 }
 
 .chat-message-your {
