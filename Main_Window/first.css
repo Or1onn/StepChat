@@ -392,7 +392,7 @@ body {
 
 .smile img:hover {
   background-color: #154883;
-  border-radius: 20%;
+  border-radius: 50%;
   color: white;
 }
 
@@ -408,7 +408,7 @@ body {
 
 .paper-clip img:hover {
   background-color: #154883;
-  border-radius: 20%;
+  border-radius: 50%;
   color: white;
 }
 
@@ -424,7 +424,7 @@ body {
 
 .send img:hover {
   background-color: #154883;
-  border-radius: 20%;
+  border-radius: 50%;
   color: white;
 }
 
@@ -456,18 +456,20 @@ body {
   width: 100%;
   display: flex;
   position: relative;
-  flex-direction: row;
   bottom: 10px;
 }
 
 .chat-message-your {
-  min-height: 40px;
+  background-color: #00a884;
+  min-width: 151px;
+  max-width: 481px;
   position: relative;
   padding: 3px;
   display: flex;
   border-radius: 5px;
-  background-color: #00a884;
   border-top-right-radius: 0px;
+  min-height: 40px;
+  justify-content: space-between;
 }
 
 .mySvg {
@@ -479,19 +481,19 @@ body {
   max-width: 481px;
   position: relative;
   padding: 3px;
-  left: 15px;
-  /* justify-content: space-between; */
   display: flex;
   border-radius: 5px;
   border-top-left-radius: 0px;
-  height: 40px;
+  min-height: 40px;
   background-color: #3b4a54;
+  justify-content: space-between;
 }
 
 .chat-frnd-message-time {
-  color: white;
+  color: #c1c1c1;
   display: flex;
   flex-direction: column-reverse;
+  margin-right: 2px;
 }
 
 .chat-your-message-time {
@@ -506,10 +508,10 @@ body {
   align-items: center;
   display: flex;
   position: relative;
-  right: 10%;
   flex-wrap: nowrap;
   height: 100%;
   word-break: break-all;
+  margin-left: 5px;
 }
 
 .chatting-your-message-text {
@@ -525,9 +527,7 @@ body {
 .frnd-message-kr {
   display: flex;
   position: relative;
-  right: 10%;
-  width: 11%;
-  bottom: 4px;
+  width: 16px;
 }
 
 .chatting-frnd-message span {
@@ -577,7 +577,7 @@ body {
 .message-kr {
   display: flex;
   position: relative;
-  width: 1%;
+  width: 16px;
 }
 
 .convo-search {
@@ -588,7 +588,7 @@ body {
 
 .convo-search:hover {
   background-color: #154883;
-  border-radius: 20%;
+  border-radius: 50%;
   color: white;
 }
 
@@ -626,7 +626,8 @@ body {
 
 .admin-panel-btn img:hover {
   background-color: #154883;
-  border-radius: 20%;
+  /* Green */
+  border-radius: 50%;
   color: white;
 }
 
@@ -708,7 +709,7 @@ body {
 
 .new-chat-btn img:hover {
   background-color: #154883;
-  border-radius: 20%;
+  border-radius: 50%;
   color: white;
 }
 
@@ -817,7 +818,7 @@ body {
 
 .search-btn img:hover {
   background-color: #154883;
-  border-radius: 20%;
+  border-radius: 50%;
   color: white;
 }
 
