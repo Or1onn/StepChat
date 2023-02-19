@@ -56,13 +56,13 @@ namespace StepChat
 
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<MessengerDataDbContext>();
+
             builder.Services.AddTransient<ITokenService, TokenService>();
             builder.Services.AddTransient<IConfigService>(param => new ConfigService("appsettings.json"));
 
             builder.Services.AddSingleton<IUserIdProvider, UserIdProvider>();
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-            builder.Services.AddSingleton<MessengerDataDbContext>();
             builder.Services.AddSingleton<EmailSender>();
 
             builder.Services.AddAuthorization();

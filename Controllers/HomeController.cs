@@ -15,9 +15,9 @@ namespace StepChat.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public IWebHostEnvironment WebHostEnvironment { get; }
+        private readonly MessengerDataDbContext _context;
+        private IWebHostEnvironment WebHostEnvironment { get; }
 
-        MessengerDataDbContext? _context;
 
         public int MyProperty { get; set; }
         public HomeController(ILogger<HomeController> logger, MessengerDataDbContext context, IWebHostEnvironment webHostEnvironment)

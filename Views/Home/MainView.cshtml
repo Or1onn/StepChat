@@ -30,7 +30,6 @@
 </head>
 
 @{
-
     int userId = this.Model.Id;
     List<List<ChatsModel>> chats = new();
 
@@ -66,42 +65,10 @@
             return user.Email;
         }
     }
-    //public string Decrypt(string? encryptedText, string? key)
+
+    //object CreateNewChat()
     //{
-    //    RijndaelManaged? myRijndael = new RijndaelManaged();
-
-    //    byte[] encryptedBytes = Convert.FromBase64String(encryptedText);
-    //    var decryptor = myRijndael.CreateDecryptor(myRijndael.Key);
-    //    byte[] originalBytes = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
-
-    //    return Encoding.UTF8.GetString(originalBytes);
-    //}
-
-    //async Task<IResult?> getLastMessage(int chatId)
-    //{
-    //    string? text = _context.Messages
-    //                   .OrderBy(e => e.Id)
-    //                   .Where(e => e.ChatId == chatId)
-    //                   .Select(e => e.Text)
-    //                   .LastOrDefault();
-    //    string? key = _context.Keys
-    //                    .Where(e => e.ChatId == chatId)
-    //                    .Select(e => e.Key)
-    //                    .FirstOrDefault();
-
-    //    //string? text = _context.Messages.OrderBy(x => x.Id).LastOrDefault(x => x.ChatId == chatId).Text;
-    //    if (!String.IsNullOrEmpty(text))
-    //    {
-    //        Decrypt(text, key);
-    //        var response = new
-    //        {
-    //            message = text,
-    //            privateKey = key
-    //        };
-    //        return Results.Json(response);
-    //    }
-    //    else
-    //        return null;
+    //    //ViewData["newElement"] = ;
     //}
 }
 
@@ -110,11 +77,6 @@
     <div class="container">
         <div class="search-box" id="search-box">
             <div class="header">
-                @*<div class="burger-menu">
-                    <button type="button" class="burger-menu-btn" onclick="burger_menu()">
-                        <img src="/icons/menu-2.svg">
-                    </button>
-                </div>*@
                 <div class="search-chat">
                     <input type="text" placeholder="Search">
                 </div>
@@ -124,7 +86,7 @@
                     </button>
                 </div>
             </div>
-            <div class="chat-list">
+            <div id="chat-list" class="chat-list">
                 @foreach (var item in chats)
                 {
                     foreach (var item2 in item)
@@ -173,60 +135,30 @@
         </div>
 
         <div id="chat-box" class="chat-box">
-            <!-- <img class="step-icon" src="logos.svg" width="300" height="310"> -->
             <div id="convo" class="convo">
                 <div class="convo-head">
                     <div class="convo-user">
-                        <div class="image-box">
+                        <div class="convo-image-box">
                             <div class="image-padding">
-                                <img class="image" src="/images/blank-profile-picture.png">
+                                <img id="chat-image" class="image" src="~/images/blank-profile-picture.png">
                             </div>
                         </div>
-                        <h4>Орхан</h4>
+                        <h4 id="chat-name"></h4>
                     </div>
                     <div class="convo-search-input" id="convo-search-input">
                         <input type="text" placeholder="Search">
                         <button type="button" class="search-close" onclick="search_close()">
-                            <img src="/icons/x.svg">
+                            <img src="~/icons/x.svg">
                         </button>
                     </div>
                     <div class="convo-search" id="convo-search">
                         <button class="search-btn" onclick="search_input()">
-                            <img src="/icons/search.svg">
+                            <img src="~/icons/search.svg">
                         </button>
                     </div>
                 </div>
                 <div class="convo-main">
-                    <div id="messageList" class="chatting">
-                        <div class="chat-message-container-your">
-                            <div class="chat-message-your">
-                                <div class="chatting-your-message-text">
-                                    Готов
-                                </div>
-                                <span class="chat-your-message-time">12:15</span>
-                                <div class="message-kr">
-                                    <svg viewBox="0 0.65 8 13" height="30" width="30" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13" xml:space="preserve">
-                                    <path fill="#00a884" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
-                  </svg>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="chat-message-container-frnd">
-                            <div class="chat-message-frnd">
-                                <div class="frnd-message-kr">
-                                    <svg viewBox="0 0.3 8 13" height="25" width="25" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" xml:space="preserve">
-                                    <path fill="#3b4a54" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z"></path>
-                  </svg>
-                                </div>
-                                <div class="chatting-frnd-message-text">
-                                    Где дизайн?
-                                </div>
-                                <span class="chat-frnd-message-time">12:15</span>
-                            </div>
-                        </div>
-
-                    </div>
+                    <div id="messageList" class="chatting"></div>
                 </div>
                 <div class="convo-input">
                     <div class="paper-clip">
@@ -253,7 +185,7 @@
                 <div class="select-chat-user">
                     @foreach (var item in _context.Users)
                     {
-                        <div class="new-chat-user" data-email=@item.Email>
+                        <div class="new-chat-user" data-email=@item.Email @*onclick=@CreateNewChat()*@>
                             <div class="image-box">
                                 <div class="image-padding">
                                     <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId).Image)">
@@ -270,31 +202,31 @@
                 </div>
             </form>
         </div>
-@*
+        @*
         <div class="new-chat-popup" id="new-chat-popup">
-            <form class="new-chat-popup-container">
-                <div class="search-new-chat">
-                    <input type="text" placeholder="Search">
-                </div>
-                <div class="select-chat-user">
-                    @foreach (var item in _context.Users)
-                    {
-                        <div class="new-chat-user" data-email=@item.Email>
-                            <div class="image-box">
-                                <div class="image-padding">
-                                    <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId).Image)">
-                                </div>
-                            </div>
-                            <h4>@item.FullName</h4>
-                        </div>
-                    }
-                </div>
-                <div class="new-chat-close-btn">
-                    <button type="button" class="new-chat-close" onclick="new_chat_close()">
-                        <img src="/icons/x.svg">
-                    </button>
-                </div>
-            </form>
+        <form class="new-chat-popup-container">
+        <div class="search-new-chat">
+        <input type="text" placeholder="Search">
+        </div>
+        <div class="select-chat-user">
+        @foreach (var item in _context.Users)
+        {
+        <div class="new-chat-user" data-email=@item.Email>
+        <div class="image-box">
+        <div class="image-padding">
+        <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId).Image)">
+        </div>
+        </div>
+        <h4>@item.FullName</h4>
+        </div>
+        }
+        </div>
+        <div class="new-chat-close-btn">
+        <button type="button" class="new-chat-close" onclick="new_chat_close()">
+        <img src="/icons/x.svg">
+        </button>
+        </div>
+        </form>
         </div>*@
 
         <div class="admin-popup" id="admin-popup">
@@ -346,4 +278,3 @@
     }
 }
 </html>
-

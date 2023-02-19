@@ -26,8 +26,8 @@ namespace StepChat.Controllers
     {
         private readonly IConfigService _configService;
         private readonly ITokenService _tokenService;
-        MessengerDataDbContext _context;
-        EmailSender _sender;
+        private readonly MessengerDataDbContext _context;
+        private readonly EmailSender _sender;
 
         public AuthorizationController(ITokenService tokenService, IConfigService configService, MessengerDataDbContext context, EmailSender sender)
         {
@@ -190,7 +190,7 @@ namespace StepChat.Controllers
 
                     await _context.SaveChangesAsync();
 
-                    return View("LoginPage");
+                    return RedirectToAction("LoginPage", "Authorization");
                 }
                 else
                 {
