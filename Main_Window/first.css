@@ -108,6 +108,14 @@ body {
 .image-box {
   display: flex;
   border-radius: 50%;
+  width: 23%;
+  cursor: pointer;
+  align-items: center;
+}
+
+.convo-image-box {
+  display: flex;
+  border-radius: 50%;
   cursor: pointer;
   align-items: center;
 }
@@ -387,12 +395,12 @@ body {
 }
 
 .smile img {
-  transition-duration: 1s;
+  transition-duration: 0.7s;
 }
 
 .smile img:hover {
   background-color: #154883;
-  border-radius: 50%;
+  border-radius: 20%;
   color: white;
 }
 
@@ -403,12 +411,12 @@ body {
 }
 
 .paper-clip img {
-  transition-duration: 1s;
+  transition-duration: 0.7s;
 }
 
 .paper-clip img:hover {
   background-color: #154883;
-  border-radius: 50%;
+  border-radius: 20%;
   color: white;
 }
 
@@ -419,12 +427,12 @@ body {
 }
 
 .send img {
-  transition-duration: 1s;
+  transition-duration: 0.7s;
 }
 
 .send img:hover {
   background-color: #154883;
-  border-radius: 50%;
+  border-radius: 20%;
   color: white;
 }
 
@@ -497,7 +505,7 @@ body {
 }
 
 .chat-your-message-time {
-  color: white;
+  color: #c1c1c1;
   display: flex;
   margin-left: 5px;
   flex-direction: column-reverse;
@@ -520,6 +528,7 @@ body {
   display: flex;
   position: relative;
   left: 5%;
+  word-break: break-all;
   flex-wrap: nowrap;
   height: 100%;
 }
@@ -588,7 +597,7 @@ body {
 
 .convo-search:hover {
   background-color: #154883;
-  border-radius: 50%;
+  border-radius: 20%;
   color: white;
 }
 
@@ -621,23 +630,22 @@ body {
 }
 
 .admin-panel-btn img {
-  transition-duration: 1s;
+  transition-duration: 0.7s;
 }
 
 .admin-panel-btn img:hover {
   background-color: #154883;
-  /* Green */
-  border-radius: 50%;
+  border-radius: 20%;
   color: white;
 }
 
 .admin-popup {
   display: none;
-  height: 75%;
+  height: 25%;
   width: 25%;
   background: #13315c;
   position: absolute;
-  top: 10%;
+  top: 30%;
   left: 45%;
   filter: drop-shadow(2px 4px 6px black);
   animation: modal 1s alternate ease;
@@ -697,44 +705,45 @@ body {
 }
 
 .new-chat-close-btn {
-  height: 4%;
-  width: 100%;
-  display: flex;
-  justify-content: end;
+  height: 5%;
+    width: 7%;
+    display: flex;
+    justify-content: center;
 }
 
 .new-chat-btn img {
-  transition-duration: 1s;
+  transition-duration: 0.7s;
 }
 
 .new-chat-btn img:hover {
   background-color: #154883;
-  border-radius: 50%;
+  border-radius: 20%;
   color: white;
 }
 
 .new-chat-user {
   display: flex;
-  height: 14%;
-  align-items: center;
+    height: 20%;
+    position: relative;
+    align-items: center;
 }
 
 .new-chat-user h4 {
   font-style: normal;
-  font-weight: 60;
-  margin-bottom: 15%;
-  font-size: 1rem;
-  color: #e9edef;
+    font-weight: 60;
+    margin-bottom: 20%;
+    font-size: 1rem;
+    color: #e9edef;
 }
 
 .new-chat-user h5 {
   font-style: normal;
-  font-weight: 60;
-  margin-bottom: 1%;
-  font-size: 1rem;
-  right: 13%;
-  position: relative;
-  color: #e9edef;
+    font-weight: 60;
+    font-size: 1rem;
+    right: 43px;
+    top: 10%;
+    position: relative;
+    color: #e9edef;
 }
 
 .new-chat-user p {
@@ -756,7 +765,7 @@ body {
 
 .search-new-chat input {
   margin-left: 12px;
-  padding: 6px 112px 10px 10px;
+  padding: 6px 60px 10px 10px;
   background-color: #0b2545;
   width: -webkit-fill-available;
   color: white;
@@ -813,12 +822,12 @@ body {
 }
 
 .search-btn img {
-  transition-duration: 1s;
+  transition-duration: 0.7s;
 }
 
 .search-btn img:hover {
   background-color: #154883;
-  border-radius: 50%;
+  border-radius: 20%;
   color: white;
 }
 
@@ -879,6 +888,36 @@ body {
   cursor: pointer;
 }
 
+.group-create-btn:hover {
+  background-color: #154883;
+  border-radius: 20%;
+  color: white;
+}
+
+.user-add-btn:hover {
+  background-color: #154883;
+  border-radius: 20%;
+  color: white;
+}
+
+.user-delete-btn:hover {
+  background-color: #154883;
+  border-radius: 20%;
+  color: white;
+}
+
+.group-create-btn {
+  transition-duration: 0.7s;
+}
+
+.user-add-btn {
+  transition-duration: 0.7s;
+}
+
+.user-delete-btn {
+  transition-duration: 0.7s;
+}
+
 .group-user {
   display: flex;
   height: 100%;
@@ -917,5 +956,60 @@ body {
 }
 
 .group-create-submit-btn p {
-  color: white;
+  color: #c1c1c1;
+}
+
+.user-add-submit {
+  display: none;
+  align-self: end;
+  position: relative;
+  background-color: transparent;
+  border: 0;
+  left: 25%;
+  justify-content: center;
+  height: 13%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.user-add-submit-btn {
+  background-color: #13315c;
+  border: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.user-add-submit-btn p {
+  color: #c1c1c1;
+}
+
+.user-delete-submit {
+  display: none;
+  align-self: end;
+  position: relative;
+  background-color: transparent;
+  border: 0;
+  left: 25%;
+  justify-content: center;
+  height: 13%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.user-delete-submit-btn {
+  background-color: #13315c;
+  border: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.user-delete-submit-btn p {
+  color: #c1c1c1;
+}
+
+.user-info {
+  display: flex;
+    height: 100%;
+    align-items: center;
+    position: relative;
 }

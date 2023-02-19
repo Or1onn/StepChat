@@ -131,7 +131,7 @@
       <div id="convo" class="convo">
         <div class="convo-head">
           <div class="convo-user">
-            <div class="image-box">
+            <div class="convo-image-box">
               <div class="image-padding">
                 <img class="image" src="icons/blank-profile-picture.png">
               </div>
@@ -235,8 +235,10 @@
                 <img class="image" src="icons/blank-profile-picture.png">
               </div>
             </div>
-            <h4>Орхан</h4>
-            <h5>salaxetdinovorxan@gmail.com</h5>
+            <div class="user-info">
+              <h4>Орхан</h4>
+              <h5>salaxetdinovorxan@gmail.com</h5>
+            </div>
           </div>
         </div>
         <div class="new-chat-close-btn">
@@ -253,17 +255,17 @@
           <button class="group-create-btn" type="button" onclick="group_create()">
             <img src="icons/users.svg">
           </button>
-          <button class="user-add-btn" type="button" onclick="group_create()">
+          <button class="user-add-btn" type="button" onclick="user_add()">
             <img src="icons/user-plus.svg">
           </button>
-          <button class="user-delete-btn" type="button" onclick="group_create()">
+          <button class="user-delete-btn" type="button" onclick="user_delete()">
             <img src="icons/user-minus.svg">
           </button>
         </div>
         <div class="select-user" id="select-user">
           <div class="select-group-user">
             <div class="group-user">
-              <div class="image-box">
+              <div class="convo-image-box">
                 <div class="image-padding">
                   <img class="image" src="icons/blank-profile-picture.png">
                 </div>
@@ -274,6 +276,16 @@
               <input type="checkbox">
             </div>
           </div>
+        </div>
+        <div class="user-add-submit" id="user-add-submit">
+          <button class="user-add-submit-btn" type="submit">
+            <p>Add Users</p>
+          </button>
+        </div>
+        <div class="user-delete-submit" id="user-delete-submit">
+          <button class="user-delete-submit-btn" type="submit">
+            <p>Delete Users</p>
+          </button>
         </div>
         <div class="group-create-submit" id="group-create-submit">
           <button class="group-create-submit-btn" type="submit">

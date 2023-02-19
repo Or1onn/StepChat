@@ -19,17 +19,10 @@ function new_chat_close() {
     document.getElementById("new-chat-popup").style.display = "none";
 }
 
-function user_add() {
-    document.getElementById("user-popup").style.display = "block";
-}
-  
 function user_close() {
     document.getElementById("user-popup").style.display = "none";
 }
 
-function user_delete() {
-    document.getElementById("user-popup").style.display = "block";
-}
 
 function search_input() {
     document.getElementById("convo-search-input").style.display = "flex";
@@ -42,7 +35,32 @@ function search_close() {
 }
 
 function group_create() {
+    document.getElementById("admin-popup").style.height = "60%";
+    document.getElementById("admin-popup").style.top = "10%";
     document.getElementById("select-user").style.display = "flex";
     document.getElementById("group-create-submit").style.display = "flex";
+    document.getElementById("user-delete-submit").style.display = "none";
+    document.getElementById("user-add-submit").style.display = "none";
     document.getElementById("group-buttons").style.display = "none";
 }
+
+function user_delete() {
+    document.getElementById("admin-popup").style.height = "60%";
+    document.getElementById("admin-popup").style.top = "10%";
+    document.getElementById("select-user").style.display = "flex";
+    document.getElementById("group-create-submit").style.display = "none";
+    document.getElementById("user-add-submit").style.display = "none";
+    document.getElementById("user-delete-submit").style.display = "flex";
+    document.getElementById("group-buttons").style.display = "none";
+}
+
+function user_add() {
+    document.getElementById("admin-popup").style.height = "60%";
+    document.getElementById("admin-popup").style.top = "10%";
+    document.getElementById("select-user").style.display = "flex";
+    document.getElementById("group-create-submit").style.display = "none";
+    document.getElementById("user-add-submit").style.display = "flex";
+    document.getElementById("user-delete-submit").style.display = "none";
+    document.getElementById("group-buttons").style.display = "none";
+}
+  
