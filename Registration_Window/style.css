@@ -35,7 +35,7 @@ form {
     flex-direction: column;
     border-radius: 16px;
     background-color: #ffff;
-    padding: 0px 35px;
+    padding: 25px 35px 25px 35px;
     border: none;
     box-shadow: 0 0 40px rgb(8 7 16 / 60%);
 }
@@ -209,4 +209,9 @@ hr {
     display: inline-block;
     transition: background-color 0.3s;
     background-color: rgba(0, 16, 61, 0.12);
+}
+
+.input-container input::-webkit-outer-spin-button,
+.input-container input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
