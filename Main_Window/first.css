@@ -1050,9 +1050,10 @@ body {
 .group-submit-image {
   display: flex;
     position: relative;
-    width: 15%;
+    width: 100%;
+    justify-content: center;
     height: 55%;
-    left: 20%;
+    left: 5%;
 }
 
 .group-edit-submit {
