@@ -38,7 +38,8 @@ function group_create() {
     document.getElementById("admin-popup").style.height = "60%";
     document.getElementById("admin-popup").style.top = "10%";
     document.getElementById("select-user").style.display = "flex";
-    document.getElementById("group-create-submit").style.display = "flex";
+    document.getElementById("group-create-submit").style.display = "none";
+    document.getElementById("group-edit-submit").style.display = "flex";
     document.getElementById("user-delete-submit").style.display = "none";
     document.getElementById("user-add-submit").style.display = "none";
     document.getElementById("group-buttons").style.display = "none";
@@ -49,6 +50,7 @@ function user_delete() {
     document.getElementById("admin-popup").style.top = "10%";
     document.getElementById("select-user").style.display = "flex";
     document.getElementById("group-create-submit").style.display = "none";
+    document.getElementById("group-edit-submit").style.display = "none";
     document.getElementById("user-add-submit").style.display = "none";
     document.getElementById("user-delete-submit").style.display = "flex";
     document.getElementById("group-buttons").style.display = "none";
@@ -59,8 +61,20 @@ function user_add() {
     document.getElementById("admin-popup").style.top = "10%";
     document.getElementById("select-user").style.display = "flex";
     document.getElementById("group-create-submit").style.display = "none";
+    document.getElementById("group-edit-submit").style.display = "none";
     document.getElementById("user-add-submit").style.display = "flex";
     document.getElementById("user-delete-submit").style.display = "none";
     document.getElementById("group-buttons").style.display = "none";
 }
-  
+
+function group_edit() {
+    document.getElementById("admin-popup").style.height = "60%";
+    document.getElementById("admin-popup").style.top = "10%";
+    document.getElementById("group-input").style.display = "block";
+    document.getElementById("select-user").style.display = "none";
+    document.getElementById("group-edit-submit").style.display = "none";
+    document.getElementById("user-add-submit").style.display = "none";
+    document.getElementById("group-create-submit").style.display = "flex";
+    document.getElementById("user-delete-submit").style.display = "none";
+    document.getElementById("group-buttons").style.display = "none";
+}
