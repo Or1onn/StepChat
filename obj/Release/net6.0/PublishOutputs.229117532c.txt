@@ -2,7 +2,6 @@ C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\Pub
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\PubTmp\Out\appsettings.json
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\PubTmp\Out\libman.json
-C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\PubTmp\Out\wwwroot\css\style.css
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\PubTmp\Out\StepChat.dll
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\PubTmp\Out\StepChat.runtimeconfig.json
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\PubTmp\Out\StepChat.pdb

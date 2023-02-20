@@ -9,6 +9,7 @@ using StepChat.Contexts;
 using StepChat.Models;
 using System.Security.Cryptography;
 using System.Security.Policy;
+using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace StepChat.Hubs
@@ -27,10 +28,19 @@ namespace StepChat.Hubs
             {
                 try
                 {
-                    var user = await _context!.Users.FindAsync(userId);
-                    var user2 = await _context!.Users.FirstOrDefaultAsync(x => x.Email == email);
+                    var user = await _context.Users.FindAsync(userId);
+                    var user2 = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
 
-                    ChatsModel chatsModel = new ChatsModel() { ChatId = _context.Chats.Count() == 0 ? 0 : _context.Chats.Max(x => x.ChatId + 1), Name = user2.FullName, ImageId = user2.ImageId, Time = DateTime.Now.TimeOfDay };
+                    ChatsModel chatsModel = new ChatsModel()
+                    {
+                        ChatId = _context.Chats.Count() == 0 ? 0 : _context.Chats.Max(x => x.ChatId + 1),
+                        User1Name = user.FullName,
+                        User2Name = user2.FullName,
+                        User1ImageId = user.ImageId,
+                        User2ImageId = user2.ImageId,
+                        CreateChatUserId = user.Id,
+                        Time = DateTime.Now.TimeOfDay
+                    };
                     KeysModel keysModel = new KeysModel() { ChatId = chatsModel.ChatId, Key = privateKey };
                     ChatUserModel chatUserModel = new ChatUserModel() { ChatId = chatsModel.ChatId, User1 = user!.Id, User2 = user2.Id };
                     var Image = await _context.Images
@@ -52,31 +62,45 @@ namespace StepChat.Hubs
             }
 
         }
+
         public async Task SendMessage(string? text, string? email, int Id)
         {
             if (email != null && text != null)
             {
                 try
                 {
-                    var user2 = await _context!.Users.FirstOrDefaultAsync(x => x.Email == email);
-                               
-                    var chatId = await _context!.ChatUsers
-                               .Where(x => x.User1 == Id && x.User2 == user2.Id || x.User2 == Id && x.User1 == user2.Id)
-                               .Select(e => e.ChatId)
+                    var user2 = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+
+                    var ImageId = await _context.Users
+                               .Where(x => x.Id == Id)
+                               .Select(x => x.ImageId)
                                .FirstOrDefaultAsync();
 
-                    var image = await _context!.Images
-                               .Where(x => x.ImageId == user2.ImageId)
-                               .Select(e => e.Image)
+                    var chatId = await _context.ChatUsers
+                               .Where(x => x.User1 == Id && x.User2 == user2.Id || x.User2 == Id && x.User1 == user2.Id)
+                               .Select(x => x.ChatId)
+                               .FirstOrDefaultAsync();
+
+                    var chatName = await _context.Users
+                               .Where(x => x.Id == Id)
+                               .Select(x => x.FullName)
+                               .FirstOrDefaultAsync();
+
+                    var image = await _context.Images
+                               .Where(x => x.ImageId == ImageId)
+                               .Select(x => x.Image)
                                .FirstOrDefaultAsync();
 
                     MessagesModel messagesModel = new MessagesModel() { UserId = Id, ChatId = chatId, Text = text, CreateTime = DateTime.Now };
 
-
                     await _context.AddAsync(messagesModel);
                     await _context.SaveChangesAsync();
 
-                    await Clients.User(email!).SendAsync("ReceiveMessage", text, messagesModel.UserId.ToString(), chatId, user2.FullName, image, user2.Email);
+                    MessagesStatusModel messagesStatusModel = new MessagesStatusModel() { Id = messagesModel.Id, UserId = Id, IsRead = false };
+                    await _context.AddAsync(messagesStatusModel);
+                    await _context.SaveChangesAsync();
+
+                    await Clients.User(email!).SendAsync("ReceiveMessage", text, messagesModel.UserId.ToString(), chatId, chatName, image, Context?.User?.Identity?.Name);
                 }
                 catch (Exception)
                 {
@@ -90,7 +114,7 @@ namespace StepChat.Hubs
         {
             try
             {
-                var messages = await _context!.Messages.Where(x => x.ChatId == chatId).ToListAsync();
+                var messages = await _context.Messages.Where(x => x.ChatId == chatId).ToListAsync();
 
                 await Clients.Caller.SendAsync("ReceiveMessage", messages, "0", chatId);
             }

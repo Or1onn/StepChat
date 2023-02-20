@@ -103,6 +103,7 @@ body {
     position: relative;
     right: 2%;
     pointer-events: all;
+    cursor: pointer;
 }
 
 .image-box {
@@ -200,7 +201,7 @@ body {
 
 .new-message_container {
     height: 100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     min-width: 1.9rem;
@@ -379,13 +380,17 @@ body {
 
     .chat-input input {
         margin-left: 15px;
-        padding: 10px 74% 10px 20px;
+        padding: 10px 20px 10px 20px;
         background-color: #0b2545;
         border-radius: 6px;
         border: none;
         color: white;
-        width: 20%;
+        width: 90%;
     }
+
+.file-input {
+    display: none;
+}
 
 .smile {
     position: relative;
@@ -1028,3 +1033,10 @@ body {
     margin: auto;
 }
 
+
+.user-info {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    position: relative;
+}

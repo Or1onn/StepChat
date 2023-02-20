@@ -9,6 +9,9 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System.Drawing;
+using System.Text.Json;
+using System.Text;
+using StepChat.Hubs;
 
 namespace StepChat.Controllers
 {

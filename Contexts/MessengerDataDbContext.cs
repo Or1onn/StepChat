@@ -23,6 +23,8 @@ public partial class MessengerDataDbContext : DbContext
 
     public virtual DbSet<GroupsModel> Groups { get; set; }
 
+    public virtual DbSet<FilesModel> Files { get; set; }
+
     public virtual DbSet<ImagesModel> Images { get; set; }
 
     public virtual DbSet<KeysModel> Keys { get; set; }
@@ -68,6 +70,14 @@ public partial class MessengerDataDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__Groups__3214EC07214EBC37");
 
             entity.Property(e => e.Name).IsUnicode(false);
+        });
+
+        modelBuilder.Entity<FilesModel>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Files__3214EC07B2B6D0D4");
+
+            entity.Property(e => e.Extension).IsUnicode(false);
+            entity.Property(e => e.File).HasColumnName("File");
         });
 
         modelBuilder.Entity<ImagesModel>(entity =>
