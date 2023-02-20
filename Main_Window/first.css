@@ -56,7 +56,7 @@ body {
 
 .search-chat {
   position: relative;
-  width: 85%;
+  width: 100%;
   display: flex;
   height: 30px;
   align-items: center;
@@ -64,9 +64,9 @@ body {
 
 .search-chat input {
   margin-left: 9px;
-  padding: 6px 90px 10px 10px;
+  padding: 6px 0px 10px 10px;
   background-color: #0b2545;
-  width: 63%;
+  width: 90%;
   color: white;
   border-radius: 6px;
   border: none;
@@ -380,12 +380,12 @@ body {
 
 .chat-input input {
   margin-left: 15px;
-  padding: 10px 74% 10px 20px;
+  padding: 10px 0px 10px 20px;
   background-color: #0b2545;
   border-radius: 6px;
   border: none;
   color: white;
-  width: 20%;
+  width: 94%;
 }
 
 .smile {
@@ -1078,4 +1078,31 @@ body {
 
 .group-edit-submit-btn p {
   color: #c1c1c1;
+}
+
+@media screen and (max-width: 800px) {
+  .search-box {
+    width: 100%;
+  }
+  .chat-box {
+    display: none;
+  }
+  .settings-admin {
+    display: none;
+  }
+  .image-box {
+    width: 15%;
+  }
+  .new-chat-popup {
+    width: 80%;
+    left: 10%;
+  }
+  .user-info {
+    left: 7%;
+    width: 75%;
+  }
+  .details {
+    left: 3%;
+    width: 83%;
+  }
 }
