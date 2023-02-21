@@ -205,7 +205,7 @@
                     <input type="text" placeholder="Search">
                 </div>
                 <div class="select-chat-user">
-                    @foreach (var item in _context.Users)
+                    @foreach (var item in _context.Users.Where(x => x.Id != userId))
                     {
                         <div class="new-chat-user" data-email=@item.Email>
                             <div class="image-box">

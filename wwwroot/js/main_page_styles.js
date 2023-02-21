@@ -12,7 +12,7 @@ function admin_close() {
 
 function new_chat() {
     document.getElementById("new-chat-popup").style.top = "5%";
-    document.getElementById("new-chat-popup").style.display = "block";
+    document.getElementById("new-chat-popup").style.display = "inline-table";
 }
 
 function new_chat_close() {

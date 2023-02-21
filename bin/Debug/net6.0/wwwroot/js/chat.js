@@ -37,19 +37,29 @@ fetch("/getToken")
 id = document.getElementById("userId").value;
 
 
-$(document).on("click", ".block", function () {
+async function openChat(_this) {
+    if (_this.querySelector(".new-message_container").style.display == "flex") {
+        _this.querySelector(".new-message_container").style.display = "none";
+        _this.querySelector(".new-message").textContent = "";
+    }
+
+    document.getElementById("chat-name").textContent = _this.getElementsByTagName('h4')[0].textContent;
+    document.getElementById("chat-image").src = _this.getElementsByTagName('img')[0].src;
+    document.getElementById("messageList").innerHTML = "";
+
+    userId = _this.getAttribute("data-email").toString();
+    chatId = _this.getAttribute("data-chatId").toString();
+}
+
+
+$(document).on("click", ".block", async function () {
     if (startBoxStyle.display != "none") {
         startBoxStyle.display = "none";
         document.getElementById("chat-box").style.display = "flex";
     }
+    await openChat(this);
 
-    document.getElementById("chat-name").textContent = this.getElementsByTagName('h4')[0].textContent;
-    document.getElementById("chat-image").src = this.getElementsByTagName('img')[0].src;
-    document.getElementById("messageList").innerHTML = "";
-
-    userId = this.getAttribute("data-email").toString();
-    chatId = this.getAttribute("data-chatId").toString();
-    $.post('/getPrivateKey', { chatId: chatId }, async function (response) {
+    $.post('/getPrivateKey', { chatId: chatId }, function (response) {
         if (response != undefined) {
             privateKey = response;
             hubConnection.invoke("LoadMessages", privateKey, Number(chatId))
@@ -59,8 +69,18 @@ $(document).on("click", ".block", function () {
 });
 
 
-$(".new-chat-user").click(function () {
+$(".new-chat-user").click(async function () {
     userId = this.getAttribute("data-email").toString();
+
+    const elements = document.getElementsByClassName('block');
+    
+    for (let i = 0; i < elements.length; i++) {
+        if (userId == elements[i].getAttribute("data-email")) {
+            await openChat(elements[i]);
+            return;
+        }
+    }
+
     privateKey = CryptoJS.lib.WordArray.random(32).toString();
     new_chat_close();
     startBoxStyle.display = "none";
@@ -79,7 +99,6 @@ document.getElementById("message").addEventListener('keyup', async function (eve
 });
 
 async function sendMessage() {
-
     const message = document.getElementById("message").value;
     let date = new Date();
     document.getElementById('messageList').insertAdjacentHTML(
@@ -108,7 +127,9 @@ async function sendMessage() {
 
 
 document.getElementById("sendBtn").addEventListener("click", async () => {
-    await sendMessage();
+    if (document.getElementById("message").value != "") {
+        await sendMessage();
+    }
 });
 
 
@@ -252,10 +273,17 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
                     const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
 
                     divElement.querySelector(".new-message_container").style.display = "flex";
-                    var a = divElement.querySelector("#message-preview");
 
-                    divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                    if (divElement.querySelector("#message-preview").textContent != null) {
+                        divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                    }
+                    else {
+                        divElement.querySelector("#message-preview").textContent = "";
+                        divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                    }
+
                     const messageCount = divElement.querySelector(".new-message").textContent;
+
                     if (messageCount == "") {
                         divElement.querySelector(".new-message").textContent = "1";
                     }
@@ -295,7 +323,9 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
                             </div>
                         </div>`)
 
-                document.getElementById("new_message").style.display = "flex";
+                const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
+                divElement.querySelector(".new-message_container").style.display = "flex";
+
             }
         });
     }
