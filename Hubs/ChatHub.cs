@@ -123,5 +123,20 @@ namespace StepChat.Hubs
                 Console.WriteLine(ex.Message);
             }
         }
+
+        public async Task SendMessageGroup(string groupName, string message)
+        {
+            await Clients.Group(groupName).SendAsync("ReceiveMessage", message);
+        }
+
+        public async Task AddToGroup(string groupName)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+        }
+
+        public async Task RemoveFromGroup(string groupName)
+        {
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+        }
     }
 }

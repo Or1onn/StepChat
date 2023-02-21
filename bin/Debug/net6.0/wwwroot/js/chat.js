@@ -73,7 +73,7 @@ $(".new-chat-user").click(async function () {
     userId = this.getAttribute("data-email").toString();
 
     const elements = document.getElementsByClassName('block');
-    
+
     for (let i = 0; i < elements.length; i++) {
         if (userId == elements[i].getAttribute("data-email")) {
             await openChat(elements[i]);
@@ -330,3 +330,13 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
         });
     }
 });
+
+
+connection.on("ReceiveMessageGroup", (message) => {
+});
+
+//connection.invoke("AddToGroup", groupName);
+
+function sendMessage(message) {
+    connection.invoke("SendMessage", groupName, message);
+}
