@@ -245,18 +245,25 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
             }
         }
         else {
-            const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
+            $.post('/getPrivateKey', { chatId: checkChatId }, function (response) {
+                if (response != undefined) {
+                    privateKey = response;
 
-            var innerDiv = divElement.querySelector(".new-message_container");
-            divElement.querySelector(".new-message_container").style.display = "flex";
+                    const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
 
-            const messageCount = divElement.querySelector(".new-message").textContent;
-            if (messageCount == "") {
-                divElement.querySelector(".new-message").textContent = "1";
-            }
-            else {
-                divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
-            }
+                    divElement.querySelector(".new-message_container").style.display = "flex";
+                    var a = divElement.querySelector("#message-preview");
+
+                    divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                    const messageCount = divElement.querySelector(".new-message").textContent;
+                    if (messageCount == "") {
+                        divElement.querySelector(".new-message").textContent = "1";
+                    }
+                    else {
+                        divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
+                    }
+                }
+            });
         }
     }
     else {
