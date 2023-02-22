@@ -22,7 +22,7 @@ namespace StepChat.Hubs
             _context = context;
         }
 
-        public async Task StartMessaging(string? email, string? privateKey, int userId)
+        public async Task StartMessaging(string email, string privateKey, int userId)
         {
             if (email != null && privateKey != null)
             {
@@ -63,7 +63,7 @@ namespace StepChat.Hubs
 
         }
 
-        public async Task SendMessage(string? text, string? email, int Id)
+        public async Task SendMessage(string text, string email, int Id)
         {
             if (email != null && text != null)
             {
@@ -104,13 +104,12 @@ namespace StepChat.Hubs
                 }
                 catch (Exception)
                 {
-
-                    throw;
+                    throw new ArgumentException();
                 }
             }
         }
 
-        public async Task LoadMessages(string? privateKey, int chatId)
+        public async Task LoadMessages(int chatId)
         {
             try
             {
@@ -124,19 +123,19 @@ namespace StepChat.Hubs
             }
         }
 
-        public async Task SendMessageGroup(string groupName, string message)
-        {
-            await Clients.Group(groupName).SendAsync("ReceiveMessage", message);
-        }
+        //public async Task SendMessageGroup(string groupName, string message)
+        //{
+        //    await Clients.Group(groupName).SendAsync("ReceiveMessage", message);
+        //}
 
-        public async Task AddToGroup(string groupName)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-        }
+        //public async Task AddToGroup(string groupName)
+        //{
+        //    await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+        //}
 
-        public async Task RemoveFromGroup(string groupName)
-        {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
-        }
+        //public async Task RemoveFromGroup(string groupName)
+        //{
+        //    await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+        //}
     }
 }

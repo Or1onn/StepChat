@@ -8,6 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\upload_file.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\upload_file.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="wwwroot\js\chat.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -29,6 +37,10 @@
 
   <ItemGroup>
     <Folder Include="Contexts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\upload_file.js" />
   </ItemGroup>
 
 </Project>

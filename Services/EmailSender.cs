@@ -4,12 +4,22 @@ using System.Net.Mail;
 using System.Net;
 using System.Security.Claims;
 using Azure.Core;
+using System.Configuration;
+using StepChat.Classes.Configuration;
 
 namespace StepChat.Services
 {
     public class EmailSender
     {
-        public async Task SendEmailAsync(string? receiver, string? htmlMessage)
+        private readonly IConfigService _configService;
+
+        public EmailSender(IConfigService configService)
+        {
+            _configService = configService;
+        }
+
+
+        public async Task SendEmailAsync(string receiver, string htmlMessage)
         {
             if (receiver != null)
             {
@@ -25,12 +35,7 @@ namespace StepChat.Services
                 smtp.EnableSsl = true;
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential(from.Address, "bxbuntohuuwnvyyj");
-
-                int length = 6;
-                var random = new Random();
-                var result = string.Join("", Enumerable.Range(0, length).Select(i => i % 2 == 0 ? (char)('A' + random.Next(26)) + "" : random.Next(1, 10) + ""));
-
+                smtp.Credentials = new NetworkCredential(from.Address, _configService?.GetValue("Email:Token"));
                 mm2.Body = htmlMessage;
                 mm2.IsBodyHtml = true;
 

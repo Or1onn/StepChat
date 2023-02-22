@@ -24,6 +24,7 @@
     <script defer src="~/lib/jquery/dist/jquery.min.js"></script>
     <script defer src="~/js/chat.js"></script>
     <script defer src="~/js/main_page_styles.js"></script>
+    <script defer src="~/js/upload_file.js"></script>
     @*<script defer src="~/js/data_base.js"></script>*@
 
     <title>Step Chat</title>
@@ -180,12 +181,17 @@
                     <div id="messageList" class="chatting"></div>
                 </div>
                 <div class="convo-input">
-                    <div class="paper-clip">
-                        <label style="cursor: pointer;" for="file-input">
-                            <img src="/icons/circle-plus.svg">
-                        </label>
-                        <input id="file-input" class="file-input" type="file" />
-                    </div>
+                    <form id="fileForm" enctype="multipart/form-data">
+                        <div id="file-upload" class="file-upload">
+                            <button type="submit" id="sendFile"></button>
+                        </div>
+                        <div class="paper-clip">
+                            <label style="cursor: pointer;" for="file-input">
+                                <img src="/icons/circle-plus.svg">
+                            </label>
+                            <input name="fileUpload" id="file-input" class="file-input" type="file" />
+                        </div>
+                    </form>
                     <div class="chat-input">
                         <input id="message" type="Text" placeholder="Type...">
                     </div>
@@ -334,10 +340,10 @@
                     </button>
                 </div>
                 <div class="group-edit-submit" id="group-edit-submit">
-          <button class="group-edit-submit-btn" type="button" onclick="group_edit()">
-            <p>Edit Group</p>
-          </button>
-        </div>
+                    <button class="group-edit-submit-btn" type="button" onclick="group_edit()">
+                        <p>Edit Group</p>
+                    </button>
+                </div>
                 <div class="admin-close-btn">
                     <button type="button" class="admin-close" onclick="admin_close()">
                         <img src="/icons/x.svg">

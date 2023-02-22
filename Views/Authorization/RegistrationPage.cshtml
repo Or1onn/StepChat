@@ -14,74 +14,17 @@
     <script defer src="~/js/login.js"></script>
     <title>View</title>
 </head>
-@*<body>
-
-    <h4>UsersModel</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-controller="Authorization" asp-action="Create" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FullName" class="control-label"></label>
-                    <input asp-for="FullName" class="form-control" />
-                    <span asp-validation-for="FullName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="PhoneNumber" class="control-label"></label>
-                    <input asp-for="PhoneNumber" class="form-control" />
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ImageId" class="control-label"></label>
-                    <input asp-for="ImageId" class="form-control" />
-                    <span asp-validation-for="ImageId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Role" class="control-label"></label>
-                    <input asp-for="Role" class="form-control" />
-                    <span asp-validation-for="Role" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
-
-    @section Scripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
-    }
-</body>*@
-
-
 <body>
     <div class="container">
         <div class="register-panel">
             <!-- <div class="error-message">
                 <div class="error-container">
-                    <div class="error-icons">
+                    <div class="error-icon">
                         <img src="error.svg" width="70" height="70" alt="">
                     </div>
                 </div>
             </div> -->
-            <img src="/icons/step_logo.svg" alt="" class="step-logo">
+            <img src="~/icons/step_logo.svg" alt="" class="step-logo">
             <div class="register-label_container">
                 <label class="register-label">Sign Up</label>
             </div>
@@ -104,10 +47,10 @@
                         <label class="input-label">Patronimic</label>
                     </div>
                 </div>
-                <div class="group">
-                    <div class="input-container">
-                        <input asp-for="PhoneNumber" required type="number" class="input">
-                        <label asp-for="Password" class="input-label">Phone Number</label>
+                 <div class="group">
+                   <div class="input-container">
+                        <input id="phoneInput" asp-for="PhoneNumber" required type="number" type="number" class="input">
+                        <label class="input-label">Phone Number</label>
                     </div>
                 </div>
                 <div class="group">
@@ -122,7 +65,7 @@
                 </div>
                 <div class="group">
                     <div class="input-container">
-                        <input asp-for="Password" id="Password" required type="password" class="input">
+                        <input asp-for="Password" id="password" required type="password" class="input">
                         <label asp-for="Password" class="input-label">Password</label>
                         <img id="eye" src="/icons/show_pass.svg" alt="show password" class="show-pass">
                     </div>

@@ -10,14 +10,14 @@ namespace StepChat.Classes.Auth
 {
     public class TokenService : ITokenService
     {
-        private readonly IHttpContextAccessor? _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public TokenService(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public string BuildToken(string? key, string? issuer, UsersModel? user, double expiration = 60)
+        public string BuildToken(string key, string issuer, UsersModel user, double expiration = 60)
         {
             var claims = new[]
             {
@@ -58,20 +58,6 @@ namespace StepChat.Classes.Auth
                 return false;
             }
             return true;
-        }
-
-        private string GetCurrentAsync()
-        {
-            var authorizationHeader = _httpContextAccessor!.HttpContext!.Request.Headers["authorization"];
-
-            return authorizationHeader == StringValues.Empty
-                ? string.Empty
-                : authorizationHeader!.Single()!.Split(" ").Last();
-        }
-
-        private static string GetKey(string token)
-        {
-            return $"tokens:{token}:deactivated";
         }
     }
 }

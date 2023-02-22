@@ -332,11 +332,11 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
 });
 
 
-connection.on("ReceiveMessageGroup", (message) => {
-});
+//connection.on("ReceiveMessageGroup", (message) => {
+//});
 
-//connection.invoke("AddToGroup", groupName);
+////connection.invoke("AddToGroup", groupName);
 
-function sendMessage(message) {
-    connection.invoke("SendMessage", groupName, message);
-}
+//function sendMessage(message) {
+//    connection.invoke("SendMessage", groupName, message);
+//}

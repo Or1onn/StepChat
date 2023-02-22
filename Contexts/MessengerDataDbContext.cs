@@ -39,13 +39,6 @@ public partial class MessengerDataDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var builder = new ConfigurationBuilder();
-        builder.SetBasePath(Directory.GetCurrentDirectory());
-        builder.AddJsonFile("appsettings.json");
-        var config = builder.Build();
-        string? connectionString = config.GetConnectionString("DefaultConnection");
-
-        optionsBuilder.UseSqlServer(connectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -76,7 +69,6 @@ public partial class MessengerDataDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Files__3214EC07B2B6D0D4");
 
-            entity.Property(e => e.Extension).IsUnicode(false);
             entity.Property(e => e.File).HasColumnName("File");
         });
 

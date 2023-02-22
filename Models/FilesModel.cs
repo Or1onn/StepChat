@@ -12,6 +12,4 @@ public partial class FilesModel
     public byte[] File { get; set; } = null!;
 
     public string Name { get; set; } = null!;
-
-    public string Extension { get; set; } = null!;
 }

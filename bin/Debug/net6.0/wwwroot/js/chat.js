@@ -62,7 +62,7 @@ $(document).on("click", ".block", async function () {
     $.post('/getPrivateKey', { chatId: chatId }, function (response) {
         if (response != undefined) {
             privateKey = response;
-            hubConnection.invoke("LoadMessages", privateKey, Number(chatId))
+            hubConnection.invoke("LoadMessages", Number(chatId))
                 .catch(error => console.error(error));
         }
     });
@@ -332,11 +332,11 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
 });
 
 
-connection.on("ReceiveMessageGroup", (message) => {
-});
+//connection.on("ReceiveMessageGroup", (message) => {
+//});
 
-//connection.invoke("AddToGroup", groupName);
+////connection.invoke("AddToGroup", groupName);
 
-function sendMessage(message) {
-    connection.invoke("SendMessage", groupName, message);
-}
+//function sendMessage(message) {
+//    connection.invoke("SendMessage", groupName, message);
+//}

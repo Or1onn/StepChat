@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Authentication.OAuth;
 using System.Net;
 using System;
 using StepChat.Services;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 
 //                              :-= +*****************************************+=
@@ -56,7 +58,10 @@ namespace StepChat
 
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<MessengerDataDbContext>();
+            //builder.Services.AddDbContext<MessengerDataDbContext>();
+
+            builder.Services.AddDbContext<MessengerDataDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddTransient<ITokenService, TokenService>();
             builder.Services.AddTransient<IConfigService>(param => new ConfigService("appsettings.json"));

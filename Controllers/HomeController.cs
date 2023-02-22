@@ -39,19 +39,35 @@ namespace StepChat.Controllers
             return View(new UsersModel() { Id = userId });
         }
 
-        public void UploadImage()
+        [HttpPost("/uploadFile")]
+        public async Task UploadImage(IFormFile fileUpload)
+        {
+            if (fileUpload != null && fileUpload.Length > 0)
+            {
+                var fileContent = new byte[fileUpload.Length];
+                using (var stream = fileUpload.OpenReadStream())
+                {
+                    await stream.ReadAsync(fileContent, 0, (int)fileUpload.Length);
+                }
+
+                await _context.Files.AddAsync(new FilesModel() { File = fileContent, Name = fileUpload.FileName });
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public void UploadFile()
         {
             var webRootPath = WebHostEnvironment.WebRootPath + "/images/stepwpicon.jpg";
 
             ImagesModel images = new() { Image = System.IO.File.ReadAllBytes(webRootPath), ImageId = 1 };
-            _context!.Images.Add(images);
-            _context!.SaveChanges();
+            _context.Images.Add(images);
+            _context.SaveChanges();
         }
 
         [HttpPost("/getPrivateKey")]
         public async Task<string?> GetKey(int chatId)
         {
-            var key = await _context!.Keys
+            var key = await _context.Keys
                        .Where(x => x.ChatId == chatId)
                        .Select(x => x.Key)
                        .FirstOrDefaultAsync();
