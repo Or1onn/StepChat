@@ -158,11 +158,18 @@
                   Готов
                 </div>
                 <span class="chat-your-message-time">12:15</span>
+                <div class="your-message-status">
+                  <svg viewBox="0 0 18 18" width="18" height="18" class="">
+                    <path fill="#0ed145"
+                      d="m17.394 5.035-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-.427-.388a.381.381 0 0 0-.578.038l-.451.576a.497.497 0 0 0 .043.645l1.575 1.51a.38.38 0 0 0 .577-.039l7.483-9.602a.436.436 0 0 0-.076-.609zm-4.892 0-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-2.614-2.556a.435.435 0 0 0-.614.007l-.505.516a.435.435 0 0 0 .007.614l3.887 3.8a.38.38 0 0 0 .577-.039l7.483-9.602a.435.435 0 0 0-.075-.609z">
+                    </path>
+                  </svg>
+                </div>
               </div>
               <div class="message-kr">
                 <svg viewBox="1 1 8 13" preserveAspectRatio="xMinYMin meet" height="20" width="20" class=""
                   version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13" xml:space="preserve">
-                  <path fill="#00a884" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
+                  <path fill="#00a199" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
                 </svg>
               </div>
             </div>
@@ -213,7 +220,9 @@
             <input type="Text" placeholder="Type...">
           </div>
           <div class="smile">
-            <img src="icons/mood-smile.svg">
+            <button class="emoji-popup-btn" type="button" onclick="emoji_popup()">
+              <img src="icons/mood-smile.svg">
+            </button>
           </div>
           <div class="send">
             <img src="icons/arrow-forward-up.svg">
@@ -244,6 +253,18 @@
           <button type="button" class="new-chat-close" onclick="new_chat_close()">
             <img src="icons/x.svg">
           </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="emoji-popup" id="emoji-popup">
+      <form class="emoji-popup-container">
+        <div class="emoji-close-btn">
+          <button type="button" class="emoji-close" onclick="emoji_close()">
+            <img src="icons/x.svg">
+          </button>
+        </div>
+        <div class="emoji-container">
         </div>
       </form>
     </div>

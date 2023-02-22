@@ -19,6 +19,16 @@ function new_chat_close() {
     document.getElementById("new-chat-popup").style.display = "none";
 }
 
+function emoji_popup() {
+    document.getElementById("emoji-popup").style.top = "62%";
+    document.getElementById("emoji-popup").style.display = "flex";
+}
+
+function emoji_close() {
+    document.getElementById("emoji-popup").style.display = "none";
+}
+
+
 function user_close() {
     document.getElementById("user-popup").style.display = "none";
 }
