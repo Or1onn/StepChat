@@ -157,6 +157,9 @@
                 <div class="chatting-your-message-text">
                   Готов
                 </div>
+                <!-- <div class="your-message-file">
+                  File Name
+                </div> -->
                 <span class="chat-your-message-time">12:15</span>
                 <div class="your-message-status">
                   <svg viewBox="0 0 18 18" width="18" height="18" class="">
@@ -187,6 +190,12 @@
                 </div>
                 <span class="chat-frnd-message-time">12:15</span>
               </div>
+              <!-- <div class="chat-message-frnd">
+                <div class="frnd-message-file">
+                  File name
+                </div>
+                <span class="chat-frnd-message-time">12:15</span>
+              </div> -->
             </div>
             <!-- <div class="chatting-frnd-message">
               <p>
@@ -214,7 +223,9 @@
         </div>
         <div class="convo-input">
           <div class="paper-clip">
-            <img src="icons/circle-plus.svg">
+            <button class="paper-clip-btn" type="button" onclick="paper_clip_popup()">
+              <img src="icons/circle-plus.svg">
+            </button>
           </div>
           <div class="chat-input">
             <input type="Text" placeholder="Type...">
@@ -257,6 +268,25 @@
       </form>
     </div>
 
+    <div class="paper-clip-popup" id="paper-clip-popup">
+      <form class="paper-clip-popup-container">
+        <div class="paper-clip-container">
+          <div class="paper-clip-close-btn">
+            <button type="button" class="paper-clip-close" onclick="paper_clip_close()">
+              <img src="icons/x.svg">
+            </button>
+          </div>
+          <p>File Name</p>
+          <div class="file-body">
+            <img src="icons/file.svg">
+          </div>
+          <div class="file-input">
+            <input type="Text" placeholder="Type...">
+            <img src="icons/arrow-forward-up.svg">
+          </div>
+        </div>
+      </form>
+    </div>
     <div class="emoji-popup" id="emoji-popup">
       <form class="emoji-popup-container">
         <div class="emoji-close-btn">

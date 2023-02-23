@@ -517,7 +517,7 @@ body {
 .chat-your-message-time {
   color: #c1c1c1;
   display: flex;
-  margin-left: 45px;
+  margin-left: 40px;
   flex-direction: column-reverse;
 }
 
@@ -575,6 +575,7 @@ body {
   position: relative;
   justify-content: center;
   top: 50%;
+  right: 2%;
 }
 
 .chatting-your-message p {
@@ -1123,15 +1124,15 @@ body {
   }
 }
 
-
 .emoji-popup {
   display: none;
-  height: 30%;
-  width: 15%;
+  height: 40%;
+  width: 17%;
   background: #13315c;
   position: absolute;
-  top: 70%;
-  left: 85%;
+  top: 60%;
+  left: 80%;
+  border-radius: 6%;
   filter: drop-shadow(2px 4px 6px black);
   animation: modal 1s reverse ease;
   animation: Wrapper 1s;
@@ -1152,6 +1153,8 @@ body {
 .emoji-close-btn {
   height: 8%;
     width: 13%;
+    position: relative;
+    top: 2%;
     display: flex;
     justify-content: center;
 }
@@ -1167,4 +1170,106 @@ body {
   display: flex;
   height: 100%;
   top: 10%;
+}
+
+.paper-clip-popup {
+  display: none;
+  height: 93%;
+  width: 74%;
+  background: #0b2545;
+  position: absolute;
+  top: 7%;
+  left: 26%;
+  filter: drop-shadow(1px 1px 6px black);
+  animation: modal 1s reverse ease;
+  animation: Wrapper 1s;
+}
+
+.paper-clip-popup-container {
+  height: 100%;
+  justify-content: end;
+  width: 100%;
+  display: flex;
+}
+
+.paper-clip-close {
+  background-color: transparent;
+  border: 0;
+}
+
+.paper-clip-close-btn {
+  height: 8%;
+    width: 5%;
+    position: relative;
+    left: 1%;
+    display: flex;
+    justify-content: center;
+}
+
+.paper-clip-btn {
+  background: transparent;
+  display: flex;
+  position: relative;
+  border: none;
+}
+
+.paper-clip-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.paper-clip-container p {
+  font-style: normal;
+    font-weight: 60;
+    height: 7%;
+    width: 100%;
+    position: relative;
+    left: 15%;
+    text-align: center;
+    min-width: fit-content;
+    font-size: 1rem;
+    color: #e9edef;
+}
+
+.file-input {
+  position: absolute;
+    display: flex;
+    align-items: center;
+    width: 98%;
+    height: 10%;
+    top: 90%;
+    left: 2%;
+}
+
+.file-input input {
+  padding: 10px 10px 10px 20px;
+  background-color: #13315c;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  width: 90%;
+}
+
+.file-input img {
+  position: relative;
+  left: 2%;
+}
+
+.file-body {
+  background:transparent;
+    width: 50%;
+    height: 55%;
+    top: 20%;
+    right: 32%;
+    display: flex;
+    position: relative;
+}
+
+.your-message-file {
+  background: red;
+}
+
+.frnd-message-file {
+  background: red;
 }

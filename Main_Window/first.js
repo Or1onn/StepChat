@@ -20,7 +20,7 @@ function new_chat_close() {
 }
 
 function emoji_popup() {
-    document.getElementById("emoji-popup").style.top = "62%";
+    document.getElementById("emoji-popup").style.top = "50.5%";
     document.getElementById("emoji-popup").style.display = "flex";
 }
 
@@ -28,6 +28,13 @@ function emoji_close() {
     document.getElementById("emoji-popup").style.display = "none";
 }
 
+function paper_clip_popup() {
+    document.getElementById("paper-clip-popup").style.display = "flex";
+}
+
+function paper_clip_close() {
+    document.getElementById("paper-clip-popup").style.display = "none";
+}
 
 function user_close() {
     document.getElementById("user-popup").style.display = "none";
