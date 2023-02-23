@@ -65,47 +65,58 @@ namespace StepChat.Hubs
 
         public async Task SendMessage(string text, string email, int Id)
         {
-            if (email != null && text != null)
+            try
             {
-                try
-                {
-                    var user2 = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+                var user2 = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
 
-                    var ImageId = await _context.Users
-                               .Where(x => x.Id == Id)
-                               .Select(x => x.ImageId)
-                               .FirstOrDefaultAsync();
+                var ImageId = await _context.Users
+                           .Where(x => x.Id == Id)
+                           .Select(x => x.ImageId)
+                           .FirstOrDefaultAsync();
 
-                    var chatId = await _context.ChatUsers
-                               .Where(x => x.User1 == Id && x.User2 == user2.Id || x.User2 == Id && x.User1 == user2.Id)
-                               .Select(x => x.ChatId)
-                               .FirstOrDefaultAsync();
+                var chatId = await _context.ChatUsers
+                           .Where(x => x.User1 == Id && x.User2 == user2.Id || x.User2 == Id && x.User1 == user2.Id)
+                           .Select(x => x.ChatId)
+                           .FirstOrDefaultAsync();
 
-                    var chatName = await _context.Users
-                               .Where(x => x.Id == Id)
-                               .Select(x => x.FullName)
-                               .FirstOrDefaultAsync();
+                var chatName = await _context.Users
+                           .Where(x => x.Id == Id)
+                           .Select(x => x.FullName)
+                           .FirstOrDefaultAsync();
 
-                    var image = await _context.Images
-                               .Where(x => x.ImageId == ImageId)
-                               .Select(x => x.Image)
-                               .FirstOrDefaultAsync();
+                var image = await _context.Images
+                           .Where(x => x.ImageId == ImageId)
+                           .Select(x => x.Image)
+                           .FirstOrDefaultAsync();
 
-                    MessagesModel messagesModel = new MessagesModel() { UserId = Id, ChatId = chatId, Text = text, CreateTime = DateTime.Now };
+                MessagesModel messagesModel = new MessagesModel() { UserId = Id, ChatId = chatId, Text = text, CreateTime = DateTime.Now };
 
-                    await _context.AddAsync(messagesModel);
-                    await _context.SaveChangesAsync();
+                await _context.AddAsync(messagesModel);
+                await _context.SaveChangesAsync();
 
-                    MessagesStatusModel messagesStatusModel = new MessagesStatusModel() { Id = messagesModel.Id, UserId = Id, IsRead = false };
-                    await _context.AddAsync(messagesStatusModel);
-                    await _context.SaveChangesAsync();
+                MessagesStatusModel messagesStatusModel = new MessagesStatusModel() { Id = messagesModel.Id, UserId = Id, IsRead = false };
+                await _context.AddAsync(messagesStatusModel);
+                await _context.SaveChangesAsync();
 
-                    await Clients.User(email!).SendAsync("ReceiveMessage", text, messagesModel.UserId.ToString(), chatId, chatName, image, Context?.User?.Identity?.Name);
-                }
-                catch (Exception)
-                {
-                    throw new ArgumentException();
-                }
+                await Clients.User(email!).SendAsync("ReceiveMessage", text, messagesModel.UserId.ToString(), chatId, chatName, image, Context?.User?.Identity?.Name);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public async Task SendFiles(int FileId, string email)
+        {
+            try
+            {
+                //var file = await _context.Files.FindAsync(FileId);
+                    
+                await Clients.User(email!).SendAsync("ReceiveFile", FileId);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException();
             }
         }
 

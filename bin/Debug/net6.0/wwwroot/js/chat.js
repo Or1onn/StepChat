@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 let token;
 let userId;
@@ -38,6 +38,11 @@ id = document.getElementById("userId").value;
 
 
 async function openChat(_this) {
+    if (startBoxStyle.display != "none") {
+        startBoxStyle.display = "none";
+        document.getElementById("chat-box").style.display = "flex";
+    }
+
     if (_this.querySelector(".new-message_container").style.display == "flex") {
         _this.querySelector(".new-message_container").style.display = "none";
         _this.querySelector(".new-message").textContent = "";
@@ -53,10 +58,6 @@ async function openChat(_this) {
 
 
 $(document).on("click", ".block", async function () {
-    if (startBoxStyle.display != "none") {
-        startBoxStyle.display = "none";
-        document.getElementById("chat-box").style.display = "flex";
-    }
     await openChat(this);
 
     $.post('/getPrivateKey', { chatId: chatId }, function (response) {
@@ -100,10 +101,11 @@ document.getElementById("message").addEventListener('keyup', async function (eve
 
 async function sendMessage() {
     const message = document.getElementById("message").value;
-    let date = new Date();
-    document.getElementById('messageList').insertAdjacentHTML(
-        'afterbegin',
-        ` <div class="chat-message-container-your">
+    if (message != "") {
+        let date = new Date();
+        document.getElementById('messageList').insertAdjacentHTML(
+            'afterbegin',
+            ` <div class="chat-message-container-your">
                             <div class="chat-message-your">
                                 <div class="chatting-your-message-text">
                                     ${message}
@@ -117,11 +119,12 @@ async function sendMessage() {
                                 </svg>
                             </div>
                         </div>`)
-    document.getElementById("message").value = "";
-    let text = EncryptMessage(message);
+        document.getElementById("message").value = "";
+        let text = EncryptMessage(message);
 
-    hubConnection.invoke("SendMessage", text, userId, Number(id))
-        .catch(error => console.error(error));
+        hubConnection.invoke("SendMessage", text, userId, Number(id))
+            .catch(error => console.error(error));
+    }
 }
 
 
@@ -274,7 +277,7 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
 
                     divElement.querySelector(".new-message_container").style.display = "flex";
 
-                    if (divElement.querySelector("#message-preview").textContent != null) {
+                    if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
                         divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
                     }
                     else {
@@ -314,7 +317,7 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
                                 </div>
                                 <div id="user-cl" class="message-container">
                                     <div class="message">
-                                        <p>${DecryptMessage(messages, privateKey)}</p>
+                                        <p id="message-preview">${DecryptMessage(messages, privateKey)}</p>
                                     </div>
                                     <div class="new-message_container">
                                         <div id="new_message" class="new-message">1</div>
@@ -331,6 +334,73 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
     }
 });
 
+hubConnection.on("ReceiveFile", (fileId) => {
+    // Создать объект XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+    var params = JSON.stringify({ fileId: fileId });
+    // Установить URL-адрес действия контроллера
+    xhr.open('POST', '/donloadFile', true);
+
+    var data = new FormData();
+    data.append('fileId', fileId);
+    // Установить тип ответа в blob (двоичные данные)
+    xhr.responseType = 'blob';
+
+    // Обработать ответ от сервера
+    xhr.onload = function () {
+        // Создать ссылку для загрузки изображения
+        let url = window.URL.createObjectURL(xhr.response);
+        let filename;
+        // Создать ссылку на загрузку и открыть ее
+        let a = document.createElement('a');
+        a.href = url;
+
+        const disposition = xhr.getResponseHeader('Content-Disposition'); // получаем значение заголовка Content-Disposition
+        if (disposition && disposition.indexOf('attachment') !== -1) {
+            let filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+            let matches = filenameRegex.exec(disposition);
+            if (matches != null && matches[1]) {
+                filename = matches[1].replace(/['"]/g, '');
+            }
+        }
+
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+
+        document.body.removeChild(a);
+    };
+
+    xhr.send(data);
+    //$.ajax({
+    //    url: "/donloadFile",
+    //    type: "POST",
+    //    data: { "fileId": fileId },
+    //    success: function (data) {
+    //        // 3. Create a Blob from the response data and create a URL for it
+    //        const blob = new Blob([Buffer.from(data, 'binary').toString('ansi')], { type: 'image/png' });
+    //        const url = window.URL.createObjectURL(blob);
+
+    //        // 4. Create a link and click it to trigger the download
+    //        const link = document.createElement('a');
+    //        link.href = url;
+    //        link.download = 'myFile.png';
+    //        document.body.appendChild(link);
+    //        link.click();
+
+    //        // 5. Clean up the URL and the link
+    //        window.URL.revokeObjectURL(url);
+    //        document.body.removeChild(link);
+    //    },
+    //    error: function (xhr, status, error) {
+
+    //    }
+    //});
+});
+
+//hubConnection.on("ReceivePhoto", (messages, sendId, checkChatId, chatName, image, email) => {
+
+//});
 
 //connection.on("ReceiveMessageGroup", (message) => {
 //});

@@ -9,7 +9,7 @@ fileInput.addEventListener("change", function () {
 $("#fileForm").submit(function (event) {
     
     event.preventDefault();
-    var form = $('#myForm')[0];
+    var form = $('#fileForm')[0];
     var formData = new FormData(form);
 
     $.ajax({
@@ -18,8 +18,9 @@ $("#fileForm").submit(function (event) {
         data: formData,
         processData: false,
         contentType: false,
-        success: function (result) {
-           
+        success: function (fileId) {
+            hubConnection.invoke("SendFiles", fileId, userId)
+                .catch(error => console.error(error));
         },
         error: function (xhr, status, error) {
             

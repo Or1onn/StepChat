@@ -1130,3 +1130,16 @@ body {
     }
 }
 
+
+.file-upload {
+    display: none;
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

@@ -40,7 +40,7 @@ namespace StepChat.Controllers
         }
 
         [HttpPost("/uploadFile")]
-        public async Task UploadImage(IFormFile fileUpload)
+        public async Task<int> UploadImage(IFormFile fileUpload)
         {
             if (fileUpload != null && fileUpload.Length > 0)
             {
@@ -50,9 +50,36 @@ namespace StepChat.Controllers
                     await stream.ReadAsync(fileContent, 0, (int)fileUpload.Length);
                 }
 
-                await _context.Files.AddAsync(new FilesModel() { File = fileContent, Name = fileUpload.FileName });
+                var a = fileUpload.ContentType;
+                var file = new FilesModel() { File = fileContent, Name = fileUpload.FileName, ContentType = fileUpload.ContentType };
+                await _context.Files.AddAsync(file);
                 await _context.SaveChangesAsync();
+
+                return file.Id;
             }
+
+            return -1;
+        }
+
+        [HttpPost("/donloadFile")]
+        public async Task<IActionResult> DownloadFile(int fileId)
+        {
+            // Получите файл из базы данных по его идентификатору (fileId)
+            var file = await _context.Files.FindAsync(fileId);
+
+            if (file == null)
+            {
+                return NotFound();
+            }
+
+            // Создайте поток для чтения данных файла
+            var stream = new MemoryStream(file.File);
+
+            // Верните файл клиенту в виде FileStreamResult
+            return new FileStreamResult(stream, file.ContentType)
+            {
+                FileDownloadName = file.Name
+            };
         }
 
         public void UploadFile()

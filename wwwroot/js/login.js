@@ -12,8 +12,11 @@
 });
 
 document.getElementById("phoneInput").addEventListener("input", function () {
-    var regex = /^\+994(?:50|51|55|70|77)\d{7}$|^\+994\d{2}\d{7}$/gm;
+    var regex = /^\994(?:50|51|55|70|77)\d{7}$|^\+994\d{2}\d{7}$/gm;
     if (!regex.test(this.value)) {
-        this.style.borderColor = "red";
+        document.getElementById("phone-container").style.border = "3px solid red";
+    }
+    else {
+        document.getElementById("phone-container").style.border = "none";
     }
 });
