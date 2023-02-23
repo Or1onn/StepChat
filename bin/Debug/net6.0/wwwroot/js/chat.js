@@ -54,11 +54,6 @@ async function openChat(_this) {
 
     userId = _this.getAttribute("data-email").toString();
     chatId = _this.getAttribute("data-chatId").toString();
-}
-
-
-$(document).on("click", ".block", async function () {
-    await openChat(this);
 
     $.post('/getPrivateKey', { chatId: chatId }, function (response) {
         if (response != undefined) {
@@ -67,6 +62,11 @@ $(document).on("click", ".block", async function () {
                 .catch(error => console.error(error));
         }
     });
+}
+
+
+$(document).on("click", ".block", async function () {
+    await openChat(this);
 });
 
 
@@ -335,27 +335,21 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
 });
 
 hubConnection.on("ReceiveFile", (fileId) => {
-    // Создать объект XMLHttpRequest
     var xhr = new XMLHttpRequest();
-    var params = JSON.stringify({ fileId: fileId });
-    // Установить URL-адрес действия контроллера
-    xhr.open('POST', '/donloadFile', true);
-
     var data = new FormData();
-    data.append('fileId', fileId);
-    // Установить тип ответа в blob (двоичные данные)
-    xhr.responseType = 'blob';
 
-    // Обработать ответ от сервера
+    xhr.open('POST', '/donloadFile', true);
+    xhr.responseType = 'blob';
+    data.append('fileId', fileId);
+
     xhr.onload = function () {
-        // Создать ссылку для загрузки изображения
         let url = window.URL.createObjectURL(xhr.response);
         let filename;
-        // Создать ссылку на загрузку и открыть ее
         let a = document.createElement('a');
+
         a.href = url;
 
-        const disposition = xhr.getResponseHeader('Content-Disposition'); // получаем значение заголовка Content-Disposition
+        const disposition = xhr.getResponseHeader('Content-Disposition');
         if (disposition && disposition.indexOf('attachment') !== -1) {
             let filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
             let matches = filenameRegex.exec(disposition);
@@ -372,41 +366,4 @@ hubConnection.on("ReceiveFile", (fileId) => {
     };
 
     xhr.send(data);
-    //$.ajax({
-    //    url: "/donloadFile",
-    //    type: "POST",
-    //    data: { "fileId": fileId },
-    //    success: function (data) {
-    //        // 3. Create a Blob from the response data and create a URL for it
-    //        const blob = new Blob([Buffer.from(data, 'binary').toString('ansi')], { type: 'image/png' });
-    //        const url = window.URL.createObjectURL(blob);
-
-    //        // 4. Create a link and click it to trigger the download
-    //        const link = document.createElement('a');
-    //        link.href = url;
-    //        link.download = 'myFile.png';
-    //        document.body.appendChild(link);
-    //        link.click();
-
-    //        // 5. Clean up the URL and the link
-    //        window.URL.revokeObjectURL(url);
-    //        document.body.removeChild(link);
-    //    },
-    //    error: function (xhr, status, error) {
-
-    //    }
-    //});
 });
-
-//hubConnection.on("ReceivePhoto", (messages, sendId, checkChatId, chatName, image, email) => {
-
-//});
-
-//connection.on("ReceiveMessageGroup", (message) => {
-//});
-
-////connection.invoke("AddToGroup", groupName);
-
-//function sendMessage(message) {
-//    connection.invoke("SendMessage", groupName, message);
-//}

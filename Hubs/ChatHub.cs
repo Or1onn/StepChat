@@ -110,8 +110,6 @@ namespace StepChat.Hubs
         {
             try
             {
-                //var file = await _context.Files.FindAsync(FileId);
-                    
                 await Clients.User(email!).SendAsync("ReceiveFile", FileId);
             }
             catch (Exception)
