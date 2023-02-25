@@ -1174,15 +1174,15 @@ body {
 
 .paper-clip-popup {
   display: none;
-  height: 93%;
-  width: 74%;
-  background: #0b2545;
-  position: absolute;
-  top: 7%;
-  left: 26%;
-  filter: drop-shadow(1px 1px 6px black);
-  animation: modal 1s reverse ease;
-  animation: Wrapper 1s;
+    height: 40%;
+    width: 30%;
+    background: #0b2545;
+    position: absolute;
+    top: 51%;
+    left: 26.5%;
+    filter: drop-shadow(1px 1px 6px black);
+    animation: modal 1s reverse ease;
+    animation: Wrapper 1s;
 }
 
 .paper-clip-popup-container {
@@ -1236,9 +1236,9 @@ body {
   position: absolute;
     display: flex;
     align-items: center;
-    width: 98%;
+    width: 95%;
     height: 10%;
-    top: 90%;
+    top: 86%;
     left: 2%;
 }
 
