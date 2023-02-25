@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\StepChat.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\audio\\new_message.mp3",
+      "PackagePath": "staticwebassets\\audio\\new_message.mp3"
+    },
+    {
       "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\css\\login.css",
       "PackagePath": "staticwebassets\\css\\login.css"
     },

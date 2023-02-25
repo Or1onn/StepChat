@@ -25,7 +25,7 @@
     <script defer src="~/js/chat.js"></script>
     <script defer src="~/js/main_page_styles.js"></script>
     <script defer src="~/js/upload_file.js"></script>
-    @*<script defer src="~/js/data_base.js"></script>*@
+    <script defer src="~/js/data_base.js"></script>
 
     <title>Step Chat</title>
 </head>
@@ -54,7 +54,6 @@
     {
         var chat = _context!.ChatUsers.FirstOrDefault(x => x.User1 == userId && x.ChatId == chatId || x.User2 == userId && x.ChatId == chatId);
 
-        //var chat = await _context.Chats.FirstOrDefaultAsync(x => x.ChatId == chatId);
         if (chat.User1 != userId)
         {
             var user = _context.Users.Find(chat.User1);
@@ -65,11 +64,6 @@
             var user = _context.Users.Find(chat.User2);
             return user.Email;
         }
-    }
-
-    void SendFile()
-    {
-        //ViewData["newElement"] = ;
     }
 }
 
@@ -352,6 +346,9 @@
             </form>
         </div>
     </div>
+    <audio id="new-message">
+        <source src="~/audio/new_message.mp3" type="audio/mp3">
+    </audio>
 </body>
 
 @section Scripts {

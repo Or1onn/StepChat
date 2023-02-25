@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gIR7w8sSIDQ1aCOduNR6EpkaWjviqWOKfS4DHnpxllo=",
+  "Hash": "oGfcQTvCBweCdU90gOz5m1mwC0TUU31Ws3g+U0YtCFI=",
   "Source": "StepChat",
   "BasePath": "_content/StepChat",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\StepChat.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\audio\\new_message.mp3",
+      "SourceId": "StepChat",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\",
+      "BasePath": "_content/StepChat",
+      "RelativePath": "audio/new_message.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\audio\\new_message.mp3"
     },
     {
       "Identity": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\css\\login.css",

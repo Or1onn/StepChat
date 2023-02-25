@@ -54,11 +54,6 @@ async function openChat(_this) {
 
     userId = _this.getAttribute("data-email").toString();
     chatId = _this.getAttribute("data-chatId").toString();
-}
-
-
-$(document).on("click", ".block", async function () {
-    await openChat(this);
 
     $.post('/getPrivateKey', { chatId: chatId }, function (response) {
         if (response != undefined) {
@@ -67,6 +62,11 @@ $(document).on("click", ".block", async function () {
                 .catch(error => console.error(error));
         }
     });
+}
+
+
+$(document).on("click", ".block", async function () {
+    await openChat(this);
 });
 
 
@@ -335,7 +335,6 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
 });
 
 hubConnection.on("ReceiveFile", (fileId) => {
-    // Создать объект XMLHttpRequest
     var xhr = new XMLHttpRequest();
     var data = new FormData();
 
