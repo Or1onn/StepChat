@@ -372,3 +372,4 @@ C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\ref
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\StepChat.pdb
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\StepChat.genruntimeconfig.cache
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Release\net6.0\ref\StepChat.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Release\net6.0\wwwroot\favicon.ico

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "oGfcQTvCBweCdU90gOz5m1mwC0TUU31Ws3g+U0YtCFI=",
+  "Hash": "R1W+deoYIrIUrrpwDTMhwVD5aXLPcnnqBC/c5EzNya8=",
   "Source": "StepChat",
   "BasePath": "_content/StepChat",
   "Mode": "Default",
@@ -131,7 +131,7 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
+      "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },

@@ -1,25 +1,25 @@
 ﻿let db;
-const dbName = "private_keys";
+const dbName = "last_messages";
 
-const users = [
-    { userId: "tom@gmail.com", key: "sdfdsfdgd/sduygHJKFSD;'LGKJH/234t" },
-    { userId: "bob@gmail.com", key: "dsfsdfH/234dfgdfgtw43534t4334sdfs" }
-];
+//const users = [
+//    { userId: "tom@gmail.com", key: "sdfdsfdgd/sduygHJKFSD;'LGKJH/234t" },
+//    { userId: "bob@gmail.com", key: "dsfsdfH/234dfgdfgtw43534t4334sdfs" }
+//];
 
 function getKey(userId) {
-    db.transaction("usersKeys", "readonly").objectStore("usersKeys").get(userId).onsuccess = (event) => {
+    db.transaction("userLastMessage", "readonly").objectStore("lastMessage").get(userId).onsuccess = (event) => {
         return event.target.result.key;
     };
 
 
 }
 
-function addUser(user) {
-    db.transaction("usersKeys", "readwrite").objectStore("usersKeys").put(user);
+function addLastMessage(user) {
+    db.transaction("userLastMessage", "readwrite").objectStore("lastMessage").put(user);
 }
 
-function deleteUser(userId) {
-    db.transaction("usersKeys", "readwrite").objectStore("usersKeys").delete(userId);
+function deleteLastMessage(userId) {
+    db.transaction("userLastMessage", "readwrite").objectStore("lastMessage").delete(userId);
 }
 
 const request = indexedDB.open(dbName, 1);
@@ -31,29 +31,23 @@ request.onerror = (event) => {
 request.onupgradeneeded = (event) => {
     db = event.target.result;
 
-    if (!db.objectStoreNames.contains('usersKeys')) {
-        objectStore = db.createObjectStore("usersKeys", { keyPath: "userId" });
+    if (!db.objectStoreNames.contains('lastMessage')) {
+        objectStore = db.createObjectStore("lastMessage", { keyPath: "userId" });
 
         objectStore.createIndex("userId", "userId", { unique: true });
 
-        objectStore.createIndex("key", "key", { unique: true });
+        objectStore.createIndex("lastMessage", "lastMessage", { unique: false });
     }
 
 
     objectStore.transaction.oncomplete = (event) => {
-        const usersKeysObjectStore = db.transaction("usersKeys", "readwrite").objectStore("usersKeys");
+        const lastMessageObjectStore = db.transaction("lastMessage", "readwrite").objectStore("lastMessage");
         users.forEach((customer) => {
-            usersKeysObjectStore.add(customer);
+            lastMessageObjectStore.add(customer);
         });
     };
 };
 
 request.onsuccess = (event) => {
     db = event.target.result;
-
-    let user = {
-        userId: 'tom1@gmail.com',
-        key: 'dfdfg[sdfdsjurhew/gdoirwueyewrjkmk',
-    };
-    addUser(user);
 };

@@ -184,7 +184,6 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
         }
     }
     if (!document.hidden) {
-
         if (allChatsId.includes(checkChatId.toString())) {
             if (chatId == checkChatId) {
                 if (messages.constructor === Array) {
@@ -335,11 +334,41 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
                     const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
                     divElement.querySelector(".new-message_container").style.display = "flex";
 
+                    if (!allChatsId.includes(checkChatId.toString())) {
+                        allChatsId.push(checkChatId.toString());
+                    }
                 }
             });
         }
     }
     else {
+
+        $.post('/getPrivateKey', { chatId: checkChatId }, function (response) {
+            if (response != undefined) {
+                privateKey = response;
+
+                const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
+
+                divElement.querySelector(".new-message_container").style.display = "flex";
+
+                if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
+                    divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                }
+                else {
+                    divElement.querySelector("#message-preview").textContent = "";
+                    divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                }
+
+                const messageCount = divElement.querySelector(".new-message").textContent;
+
+                if (messageCount == "") {
+                    divElement.querySelector(".new-message").textContent = "1";
+                }
+                else {
+                    divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
+                }
+            }
+        });
         document.getElementById("new-message").play();
     }
 });
