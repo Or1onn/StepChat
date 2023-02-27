@@ -21,6 +21,7 @@ appsettings.json
 mono_crash.*
 
 # Build results
+.config/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
