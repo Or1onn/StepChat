@@ -34,7 +34,7 @@ namespace StepChat.Classes.Auth
 
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
-        public bool ValidateToken(string? key, string? issuer, string? audience, string? token)
+        public bool ValidateToken(string key, string issuer, string audience, string token)
         {
             var mySecret = Encoding.UTF8.GetBytes(key);
             var mySecurityKey = new SymmetricSecurityKey(mySecret);

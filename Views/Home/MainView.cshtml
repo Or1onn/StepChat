@@ -1,7 +1,5 @@
 ﻿@using Microsoft.EntityFrameworkCore;
 @using StepChat.Contexts;
-@using System.Security.Cryptography;
-@using System.Text;
 
 @model StepChat.Models.UsersModel
 @inject MessengerDataDbContext _context
@@ -30,7 +28,7 @@
 </head>
 
 @{
-    int userId = this.Model.Id;
+    int userId = Model.Id;
     List<List<ChatsModel>> chats = new();
 
     var chatsId = await _context!.ChatUsers
@@ -39,7 +37,6 @@
                     .ToListAsync();
 
     @Html.HiddenFor(model => model.Id , new { Id = "userId" })
-    ;
 
     foreach (var item in chatsId)
     {
@@ -53,15 +50,15 @@
     {
         var chat = _context!.ChatUsers.FirstOrDefault(x => x.User1 == userId && x.ChatId == chatId || x.User2 == userId && x.ChatId == chatId);
 
-        if (chat.User1 != userId)
+        if (chat != null && chat.User1 != userId)
         {
             var user = _context.Users.Find(chat.User1);
-            return user.Email;
+            return user?.Email;
         }
         else
         {
             var user = _context.Users.Find(chat.User2);
-            return user.Email;
+            return user?.Email;
         }
     }
 }
@@ -76,7 +73,7 @@
                 </div>
                 <div class="new-chat" id="new-chat">
                     <button type="button" class="new-chat-btn" onclick="new_chat()">
-                        <img src="/icons/messages.svg">
+                        <img src="/icons/messages.svg" alt="message">
                     </button>
                 </div>
             </div>
@@ -90,11 +87,11 @@
                                 <div class="image-padding">
                                     @if (@item2.CreateChatUserId == @userId)
                                     {
-                                        <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item2.User2ImageId).Image)">
+                                        <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item2.User2ImageId)?.Image)" alt="avatar">
                                     }
                                     else
                                     {
-                                        <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item2.User1ImageId).Image)">
+                                        <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item2.User1ImageId)?.Image)">
                                     }
                                 </div>
                             </div>
@@ -170,7 +167,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="convo-main">
+                <div id="convoMain" class="convo-main">
                     <div id="messageList" class="chatting"></div>
                 </div>
                 <div class="convo-input">
@@ -209,7 +206,7 @@
                         <div class="new-chat-user" data-email=@item.Email>
                             <div class="image-box">
                                 <div class="image-padding">
-                                    <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId).Image)">
+                                    <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId)?.Image)">
                                 </div>
                             </div>
                             <div class="user-info">
@@ -238,7 +235,7 @@
                         <div class="new-chat-user" data-email=@item.Email @*onclick=@CreateNewChat()*@>
                             <div class="image-box">
                                 <div class="image-padding">
-                                    <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId).Image)">
+                                    <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId)?.Image)">
                                 </div>
                             </div>
                             <div class="user-info">

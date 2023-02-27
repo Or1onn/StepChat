@@ -6,8 +6,9 @@ let chatId;
 let privateKey;
 let id;
 let startBoxStyle = document.getElementById("start-box").style;
+let isScrollIgnored = false;
+let messagesCount = 0;
 let allChatsId = [];
-
 
 function EncryptMessage(message) {
     var encrypted = CryptoJS.AES.encrypt(message, privateKey).toString();
@@ -36,7 +37,6 @@ fetch("/getToken")
 
 id = document.getElementById("userId").value;
 
-
 async function openChat(_this) {
     if (startBoxStyle.display != "none") {
         startBoxStyle.display = "none";
@@ -58,57 +58,26 @@ async function openChat(_this) {
     $.post('/getPrivateKey', {chatId: chatId}, function (response) {
         if (response != undefined) {
             privateKey = response;
-            hubConnection.invoke("LoadMessages", Number(chatId))
+            hubConnection.invoke("LoadMessages", Number(chatId), messagesCount)
                 .catch(error => console.error(error));
         }
     });
 }
 
 
-$(document).on("click", ".block", async function () {
-    await openChat(this);
-});
-
-
-$(".new-chat-user").click(async function () {
-    userId = this.getAttribute("data-email").toString();
-
-    const elements = document.getElementsByClassName('block');
-
-    for (let i = 0; i < elements.length; i++) {
-        if (userId == elements[i].getAttribute("data-email")) {
-            await openChat(elements[i]);
-            return;
-        }
-    }
-
-    privateKey = CryptoJS.lib.WordArray.random(32).toString();
-    new_chat_close();
-    startBoxStyle.display = "none";
-    document.getElementById("messageList").innerHTML = "";
-    document.getElementById("chat-box").style.display = "flex";
-    document.getElementById('message').disabled = true;
-
-    hubConnection.invoke("StartMessaging", userId, privateKey, Number(id))
-        .catch(error => console.error(error));
-});
-
-document.getElementById("message").addEventListener('keyup', async function (event) {
-    if (event.keyCode === 13) {
-        await sendMessage();
-    }
-});
-
 async function createYourMessage(message, privateKey) {
     let date = new Date();
+    let decryptedMessage = DecryptMessage(message, privateKey);
+
+    if (decryptedMessage != "") {
+        message = decryptedMessage;
+    }
 
     document.getElementById('messageList').insertAdjacentHTML(
         'afterbegin',
         `<div class="chat-message-container-your">
                                 <div class="chat-message-your">
-                                    <div class="chatting-your-message-text">
-                                         ${DecryptMessage(message, privateKey)}
-                                    </div>
+                                    <div class="chatting-your-message-text">${message}</div>
                                     <span class="chat-your-message-time">${date.getHours() + ':' + date.getMinutes()}</span>
                                 </div>
                                 <div class="message-kr">
@@ -120,7 +89,6 @@ async function createYourMessage(message, privateKey) {
                             </div>`
     )
 }
-
 
 async function createFriendMessage(message, privateKey) {
     let date = new Date();
@@ -159,6 +127,52 @@ async function sendMessage() {
     }
 }
 
+
+document.getElementById('messageList').addEventListener("scroll", function() {
+    if (isScrollIgnored) return;
+    
+    if (this.scrollTop === 0) {
+        hubConnection.invoke("LoadMessages", Number(chatId), messagesCount += 10)
+            .catch(error => console.error(error));
+    }
+});
+
+
+$(document).on("click", ".block", async function () {
+    isScrollIgnored = true;
+    messagesCount = 0;
+    await openChat(this);
+    document.getElementById("messageList").scrollTo(0,document.getElementById("messageList").scrollHeight);
+});
+
+$(".new-chat-user").click(async function () {
+    userId = this.getAttribute("data-email").toString();
+
+    const elements = document.getElementsByClassName('block');
+
+    for (let i = 0; i < elements.length; i++) {
+        if (userId == elements[i].getAttribute("data-email")) {
+            await openChat(elements[i]);
+            return;
+        }
+    }
+
+    privateKey = CryptoJS.lib.WordArray.random(32).toString();
+    new_chat_close();
+    startBoxStyle.display = "none";
+    document.getElementById("messageList").innerHTML = "";
+    document.getElementById("chat-box").style.display = "flex";
+    document.getElementById('message').disabled = true;
+
+    hubConnection.invoke("StartMessaging", userId, privateKey, Number(id))
+        .catch(error => console.error(error));
+});
+
+document.getElementById("message").addEventListener('keyup', async function (event) {
+    if (event.keyCode === 13) {
+        await sendMessage();
+    }
+});
 
 document.getElementById("sendBtn").addEventListener("click", async () => {
     if (document.getElementById("message").value != "") {
@@ -223,7 +237,8 @@ hubConnection.on("ReceiveMessage", async (messages, sendId, checkChatId, chatNam
                             await createFriendMessage(element.text, privateKey)
                         }
                     }
-
+                    
+                    isScrollIgnored = false;
                     return;
                 } else {
                     if (sendId == id) {

@@ -444,10 +444,9 @@ body {
 
 .chatting {
     position: relative;
-    display: flex;
-    flex-direction: column-reverse;
+    overflow-anchor: none;
     width: 100%;
-    overflow: overlay;
+    overflow-y: scroll;
     height: 100%;
 }
 

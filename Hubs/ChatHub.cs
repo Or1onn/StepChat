@@ -118,12 +118,17 @@ namespace StepChat.Hubs
             }
         }
 
-        public async Task LoadMessages(int chatId)
+        public async Task LoadMessages(int chatId, int messagesCount)
         {
             try
             {
-                var messages = await _context?.Messages.Where(x => x.ChatId == chatId).ToListAsync()!;
-
+                var messages = await _context.Messages
+                    .OrderByDescending(x => x.Id)
+                    .Where(x => x.ChatId == chatId)
+                    .Skip(messagesCount)
+                    .Take(30)
+                    .ToListAsync();
+                
                 await Clients.Caller.SendAsync("ReceiveMessage", messages, "0", chatId);
             }
             catch (Exception ex)

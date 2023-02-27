@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using StepChat.Contexts;
 using StepChat.Models;
 using System.Diagnostics;
-// ReSharper disable All
 
 namespace StepChat.Controllers
 {
