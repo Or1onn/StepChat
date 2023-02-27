@@ -96,3 +96,7 @@ function group_edit() {
     document.getElementById("group-buttons").style.display = "none";
 }
 
+function chat_list_back() {
+    document.getElementById("chat-box").style.display = "none";
+    document.getElementById("search-box").style.display = "flex";
+}

@@ -338,7 +338,6 @@ body {
 .convo-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   height: 7%;
   background: #13315c;
@@ -612,7 +611,7 @@ body {
 .convo-search {
   position: relative;
   display: flex;
-  margin-right: 15px;
+  left: 83%;
 }
 
 .convo-search:hover {
@@ -818,7 +817,7 @@ body {
   display: none;
   width: 30%;
   height: 30px;
-  margin-right: 15px;
+  left: 58%;
   align-items: center;
 }
 
@@ -1119,8 +1118,13 @@ body {
   .convo-search-input {
     width: 50%;
     top: 5%;
-    margin-right: 0px;
-    margin-left: 5%;
+    left: 12%;
+  }
+  .mobile-arrow-back {
+    display: flex;
+  }
+  .convo-search {
+    left: 47%;
   }
 }
 
@@ -1272,4 +1276,17 @@ body {
 
 .frnd-message-file {
   background: red;
+}
+
+.mobile-arrow-back {
+  display: none;
+  position: relative;
+  width: 7%;
+}
+
+.mobile-arrow-back-btn {
+  display: flex;
+  background: transparent;
+  position: relative;
+  border: none;
 }
