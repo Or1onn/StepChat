@@ -21,7 +21,7 @@ function DecryptMessage(text, privateKey) {
 
 
 const hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub", { accessTokenFactory: () => token })
+    .withUrl("/chatHub", {accessTokenFactory: () => token})
     .build();
 
 
@@ -31,8 +31,8 @@ fetch("/getToken")
         hubConnection.start()
             .catch(err => console.error(err.toString()));
     }).catch(function (error) {
-        console.log('request failed', error)
-    });
+    console.log('request failed', error)
+});
 
 id = document.getElementById("userId").value;
 
@@ -55,7 +55,7 @@ async function openChat(_this) {
     userId = _this.getAttribute("data-email").toString();
     chatId = _this.getAttribute("data-chatId").toString();
 
-    $.post('/getPrivateKey', { chatId: chatId }, function (response) {
+    $.post('/getPrivateKey', {chatId: chatId}, function (response) {
         if (response != undefined) {
             privateKey = response;
             hubConnection.invoke("LoadMessages", Number(chatId))
@@ -99,27 +99,59 @@ document.getElementById("message").addEventListener('keyup', async function (eve
     }
 });
 
+async function createYourMessage(message, privateKey) {
+    let date = new Date();
+
+    document.getElementById('messageList').insertAdjacentHTML(
+        'afterbegin',
+        `<div class="chat-message-container-your">
+                                <div class="chat-message-your">
+                                    <div class="chatting-your-message-text">
+                                         ${DecryptMessage(message, privateKey)}
+                                    </div>
+                                    <span class="chat-your-message-time">${date.getHours() + ':' + date.getMinutes()}</span>
+                                </div>
+                                <div class="message-kr">
+                                    <svg viewBox="1 1 8 13" preserveAspectRatio="xMinYMin meet" height="20" width="20" class=""
+                                         version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13" xml:space="preserve">
+                                    <path fill="#00a884" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
+                                </svg>
+                                </div>
+                            </div>`
+    )
+}
+
+
+async function createFriendMessage(message, privateKey) {
+    let date = new Date();
+
+    document.getElementById('messageList').insertAdjacentHTML(
+        'afterbegin',
+        `<div class="chat-message-container-frnd">
+                            <div class="frnd-message-kr">
+                                <svg viewBox="0 1.3 8 13" height="20" width="20" preserveAspectRatio="xMaxYMax meet" class=""
+                                     version="1.1" x="0px" y="0px" xml:space="preserve">
+                                <path fill="#3b4a54" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z"></path>
+                            </svg>
+                            </div>
+                            <div class="chat-message-frnd">
+                                <div class="chatting-frnd-message-text">
+                                     ${DecryptMessage(message, privateKey)}
+                                </div>
+                                <span class="chat-frnd-message-time">${date.getHours() + ':' + date.getMinutes()}</span>
+                            </div>
+                        </div>`
+    )
+}
+
 async function sendMessage() {
     const message = document.getElementById("message").value;
     if (message != "") {
-        let date = new Date();
-        document.getElementById('messageList').insertAdjacentHTML(
-            'afterbegin',
-            ` <div class="chat-message-container-your">
-                            <div class="chat-message-your">
-                                <div class="chatting-your-message-text">
-                                    ${message}
-                                </div>
-                                <span class="chat-your-message-time">${date.getHours() + ':' + date.getMinutes()}</span>
-                            </div>
-                            <div class="message-kr">
-                                <svg viewBox="1 1 8 13" preserveAspectRatio="xMinYMin meet" height="20" width="20" class=""
-                                     version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13" xml:space="preserve">
-                                <path fill="#00a884" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
-                                </svg>
-                            </div>
-                        </div>`)
+
+        await createYourMessage(message, privateKey);
+
         document.getElementById("message").value = "";
+
         let text = EncryptMessage(message);
 
         hubConnection.invoke("SendMessage", text, userId, Number(id))
@@ -128,14 +160,11 @@ async function sendMessage() {
 }
 
 
-
 document.getElementById("sendBtn").addEventListener("click", async () => {
     if (document.getElementById("message").value != "") {
         await sendMessage();
     }
 });
-
-
 
 
 hubConnection.on("CreateChat", (email, _chatId, fullName, image) => {
@@ -173,7 +202,7 @@ hubConnection.on("CreateChat", (email, _chatId, fullName, image) => {
     document.getElementById('chat-name').textContent = fullName;
 });
 
-hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, image, email) => {
+hubConnection.on("ReceiveMessage", async (messages, sendId, checkChatId, chatName, image, email) => {
     const date = new Date();
 
     if (allChatsId.length == 0) {
@@ -187,92 +216,24 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
         if (allChatsId.includes(checkChatId.toString())) {
             if (chatId == checkChatId) {
                 if (messages.constructor === Array) {
-                    messages.forEach(function (element) {
+                    for (const element of messages) {
                         if (element.userId == id) {
-                            document.getElementById('messageList').insertAdjacentHTML(
-                                'afterbegin',
-                                `<div class="chat-message-container-your">
-                            <div class="chat-message-your">
-                                <div class="chatting-your-message-text">
-                                     ${DecryptMessage(element.text, privateKey)}
-                                </div>
-                                <span class="chat-your-message-time">${date.getHours() + ':' + date.getMinutes()}</span>
-                            </div>
-                            <div class="message-kr">
-                                <svg viewBox="1 1 8 13" preserveAspectRatio="xMinYMin meet" height="20" width="20" class=""
-                                     version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13" xml:space="preserve">
-                                <path fill="#00a884" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
-                            </svg>
-                            </div>
-                        </div>`
-                            )
+                            await createYourMessage(element.text, privateKey);
+                        } else {
+                            await createFriendMessage(element.text, privateKey)
                         }
-                        else {
-                            document.getElementById('messageList').insertAdjacentHTML(
-                                'afterbegin',
-                                `<div class="chat-message-container-frnd">
-                            <div class="frnd-message-kr">
-                                <svg viewBox="0 1.3 8 13" height="20" width="20" preserveAspectRatio="xMaxYMax meet" class=""
-                                     version="1.1" x="0px" y="0px" xml:space="preserve">
-                                <path fill="#3b4a54" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z"></path>
-                            </svg>
-                            </div>
-                            <div class="chat-message-frnd">
-                                <div class="chatting-frnd-message-text">
-                                     ${DecryptMessage(element.text, privateKey)}
-                                </div>
-                                <span class="chat-frnd-message-time">${date.getHours() + ':' + date.getMinutes()}</span>
-                            </div>
-                        </div>`
-                            )
-                        }
-                    });
+                    }
 
                     return;
-                }
-                else {
+                } else {
                     if (sendId == id) {
-                        document.getElementById('messageList').insertAdjacentHTML(
-                            'afterbegin',
-                            `<div class="chat-message-container-your">
-                                <div class="chat-message-your">
-                                    <div class="chatting-your-message-text">
-                                         ${DecryptMessage(messages, privateKey)}
-                                    </div>
-                                    <span class="chat-your-message-time">${date.getHours() + ':' + date.getMinutes()}</span>
-                                </div>
-                                <div class="message-kr">
-                                    <svg viewBox="1 1 8 13" preserveAspectRatio="xMinYMin meet" height="20" width="20" class=""
-                                         version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13" xml:space="preserve">
-                                    <path fill="#00a884" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
-                                </svg>
-                                </div>
-                            </div>`
-                        )
-                    }
-                    else {
-                        document.getElementById('messageList').insertAdjacentHTML(
-                            'afterbegin',
-                            `<div class="chat-message-container-frnd">
-                                <div class="frnd-message-kr">
-                                    <svg viewBox="0 1.3 8 13" height="20" width="20" preserveAspectRatio="xMaxYMax meet" class=""
-                                         version="1.1" x="0px" y="0px" xml:space="preserve">
-                                    <path fill="#3b4a54" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z"></path>
-                                    </svg>
-                                </div>
-                                <div class="chat-message-frnd">
-                                    <div class="chatting-frnd-message-text">
-                                        ${DecryptMessage(messages, privateKey)}
-                                    </div>
-                                    <span class="chat-frnd-message-time">${date.getHours() + ':' + date.getMinutes()}</span>
-                                </div>
-                            </div>`
-                        )
+                        await createYourMessage(messages, privateKey);
+                    } else {
+                        await createFriendMessage(messages, privateKey)
                     }
                 }
-            }
-            else {
-                $.post('/getPrivateKey', { chatId: checkChatId }, function (response) {
+            } else {
+                $.post('/getPrivateKey', {chatId: checkChatId}, function (response) {
                     if (response != undefined) {
                         privateKey = response;
 
@@ -282,8 +243,7 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
 
                         if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
                             divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
-                        }
-                        else {
+                        } else {
                             divElement.querySelector("#message-preview").textContent = "";
                             divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
                         }
@@ -292,8 +252,7 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
 
                         if (messageCount == "") {
                             divElement.querySelector(".new-message").textContent = "1";
-                        }
-                        else {
+                        } else {
                             divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
                         }
                     }
@@ -301,9 +260,8 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
 
                 document.getElementById("new-message").play();
             }
-        }
-        else {
-            $.post('/getPrivateKey', { chatId: checkChatId }, function (response) {
+        } else {
+            $.post('/getPrivateKey', {chatId: checkChatId}, function (response) {
                 if (response != undefined) {
                     privateKey = response;
 
@@ -340,10 +298,9 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
                 }
             });
         }
-    }
-    else {
+    } else {
 
-        $.post('/getPrivateKey', { chatId: checkChatId }, function (response) {
+        $.post('/getPrivateKey', {chatId: checkChatId}, function (response) {
             if (response != undefined) {
                 privateKey = response;
 
@@ -353,8 +310,7 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
 
                 if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
                     divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
-                }
-                else {
+                } else {
                     divElement.querySelector("#message-preview").textContent = "";
                     divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
                 }
@@ -363,8 +319,7 @@ hubConnection.on("ReceiveMessage", (messages, sendId, checkChatId, chatName, ima
 
                 if (messageCount == "") {
                     divElement.querySelector(".new-message").textContent = "1";
-                }
-                else {
+                } else {
                     divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
                 }
             }
