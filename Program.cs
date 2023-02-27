@@ -12,7 +12,6 @@ using StepChat.Classes.Auth;
 using StepChat.Classes.Configuration;
 using StepChat.Services;
 using Microsoft.EntityFrameworkCore;
-// ReSharper disable All
 
 
 //                              :-= +*****************************************+=
