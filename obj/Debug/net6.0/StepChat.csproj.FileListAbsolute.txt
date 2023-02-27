@@ -624,9 +624,7 @@ C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\stati
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\staticwebassets.pack.json
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\scopedcss\bundle\StepChat.styles.css
-C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\scopedcss\projectbundle\StepChat.bundle.scp.css
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\StepChat.csproj.CopyComplete
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\StepChat.dll
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\obj\Debug\net6.0\refint\StepChat.dll
@@ -646,3 +644,4 @@ C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Syste
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\System.Threading.Channels.dll
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\appsettings.json
 C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll
+C:\Users\Orion\source\repos\Course Work\StepChat\StepChat\bin\Debug\net6.0\wwwroot\favicon.ico

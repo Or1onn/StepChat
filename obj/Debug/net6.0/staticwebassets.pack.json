@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\StepChat.bundle.scp.css",
-      "PackagePath": "staticwebassets\\StepChat.bundle.scp.css"
+      "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\audio\\new_message.mp3",
+      "PackagePath": "staticwebassets\\audio\\new_message.mp3"
     },
     {
       "Id": "C:\\Users\\Orion\\source\\repos\\Course Work\\StepChat\\StepChat\\wwwroot\\css\\login.css",

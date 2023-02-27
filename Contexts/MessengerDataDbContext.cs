@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using StepChat.Classes.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 using StepChat.Models;
 
 namespace StepChat.Contexts;

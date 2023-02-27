@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using StepChat.Hubs;
-using StepChat.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
@@ -8,16 +7,12 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.DataProtection;
 using System.Text;
 using StepChat.Contexts;
-using Newtonsoft.Json.Linq;
 using StepChat.Classes.Provider;
 using StepChat.Classes.Auth;
 using StepChat.Classes.Configuration;
-using Microsoft.AspNetCore.Authentication.OAuth;
-using System.Net;
-using System;
 using StepChat.Services;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
+// ReSharper disable All
 
 
 //                              :-= +*****************************************+=
@@ -50,7 +45,7 @@ using System.Configuration;
 
 namespace StepChat
 {
-    public class Program
+    public abstract class Program
     {
         public static void Main(string[] args)
         {
@@ -64,7 +59,7 @@ namespace StepChat
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddTransient<ITokenService, TokenService>();
-            builder.Services.AddTransient<IConfigService>(param => new ConfigService("appsettings.json"));
+            builder.Services.AddTransient<IConfigService>(_ => new ConfigService("appsettings.json"));
 
             builder.Services.AddSingleton<IUserIdProvider, UserIdProvider>();
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

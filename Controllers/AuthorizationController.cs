@@ -1,22 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
-using NuGet.Protocol.Plugins;
-using StepChat.Classes.Auth;
 using StepChat.Classes.Configuration;
 using StepChat.Contexts;
 using StepChat.Models;
 using StepChat.Services;
-using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -25,28 +15,14 @@ namespace StepChat.Controllers
     public class AuthorizationController : Controller
     {
         private readonly IConfigService _configService;
-        private readonly ITokenService _tokenService;
         private readonly MessengerDataDbContext _context;
         private readonly EmailSender _emailSender;
 
-        public AuthorizationController(ITokenService tokenService, IConfigService configService, MessengerDataDbContext context, EmailSender sender)
+        public AuthorizationController(IConfigService configService, MessengerDataDbContext context, EmailSender sender)
         {
-            _tokenService = tokenService;
             _configService = configService;
             _context = context;
             _emailSender = sender;
-        }
-
-        // GET: LoginController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: LoginController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         public SymmetricSecurityKey GetSymmetricSecurityKey(string? key)
@@ -59,7 +35,7 @@ namespace StepChat.Controllers
         public async Task<ActionResult> LogIn(UsersModel loginUser)
         {
             PasswordHasher hasher = new PasswordHasher();
-            UsersModel? user = await _context.Users!.FirstOrDefaultAsync(x => x.Email == loginUser.Email);
+            UsersModel? user = await _context.Users.FirstOrDefaultAsync(x => x.Email == loginUser.Email);
 
             if (user != null && hasher.VerifyHashedPassword(user.Password, loginUser.Password))
             {
@@ -67,19 +43,21 @@ namespace StepChat.Controllers
                 var audience = _configService.GetValue("Jwt:Audience");
                 var key = _configService.GetValue("Jwt:Key");
 
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email!) };
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email) };
                 var jwt = new JwtSecurityToken(
-                issuer: issuer,
-                audience: audience,
-                claims: claims,
-                expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(60)),
-                   signingCredentials: new SigningCredentials(GetSymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256));
+                    issuer: issuer,
+                    audience: audience,
+                    claims: claims,
+                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(60)),
+                    signingCredentials: new SigningCredentials(GetSymmetricSecurityKey(key),
+                        SecurityAlgorithms.HmacSha256));
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
                 TempData["Token"] = encodedJwt;
 
                 return RedirectToAction("MainView", "Home", new { userId = user.Id });
             }
+
             return NotFound();
         }
 
@@ -87,6 +65,7 @@ namespace StepChat.Controllers
         {
             return View();
         }
+
         [HttpGet("/getToken")]
         public string? GetToken()
         {
@@ -101,13 +80,13 @@ namespace StepChat.Controllers
         // POST: LoginController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(UsersModel? user, string? Name, string? Surname, string? Patronimic)
+        public async Task<ActionResult> Create(UsersModel? user, string? name, string? surname, string? patronymic)
         {
             try
             {
                 if (user != null)
                 {
-                    user.FullName = Name + ' ' + Surname + ' ' + Patronimic;
+                    user.FullName = name + ' ' + surname + ' ' + patronymic;
                     PasswordHasher hasher = new PasswordHasher();
                     var callbackUrl = Url.Action(
                         "ConfirmEmail",
@@ -123,14 +102,15 @@ namespace StepChat.Controllers
                         },
                         protocol: HttpContext.Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(user.Email + "@itstep.edu.az", $"<a href='{callbackUrl}'>Verify<a>");
+                    await _emailSender.SendEmailAsync(user.Email + "@itstep.edu.az",
+                        $"<a href='{callbackUrl}'>Verify<a>");
 
                     return RedirectToAction("EmailConfirmationPage", "Authorization");
                 }
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                Console.WriteLine(e.Message);
             }
 
             return View("LoginPage");
@@ -140,16 +120,8 @@ namespace StepChat.Controllers
         [ValidateAntiForgeryToken]
         public async Task<List<UsersModel>> GetAllAsync()
         {
-            return await _context.Users.ToListAsync<UsersModel>();
+            return await _context.Users.ToListAsync();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditUser(int id)
-        {
-            return View(await _context.Users.FindAsync(id));
-        }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -171,68 +143,30 @@ namespace StepChat.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string email, string password, string fullname, string phoneNumber, int imageId, string role)
+        public async Task<ActionResult> ConfirmEmail(string email, string password, string fullname, string phoneNumber,
+            int imageId, string role)
         {
-            UsersModel user = new() { Email = email, Password = password!, FullName = fullname, PhoneNumber = phoneNumber, ImageId = imageId, Role = role };
-
-            user.PrivateKeysStorageId = _context.Users.Count() == 0 ? 0 : _context.Users.Max(x => x.PrivateKeysStorageId + 1);
-
-            PrivateKeysStorageModel privateKeysStorageModel = new PrivateKeysStorageModel() { KeysId = user!.PrivateKeysStorageId };
-
-            if (user != null)
+            UsersModel user = new()
             {
-                await _context.Users.AddAsync(user);
-                await _context.PrivateKeysStorages.AddAsync(privateKeysStorageModel);
+                Email = email, Password = password, FullName = fullname, PhoneNumber = phoneNumber, ImageId = imageId,
+                Role = role,
+                PrivateKeysStorageId = !_context.Users.Any() ? 0 : _context.Users.Max(x => x.PrivateKeysStorageId + 1)
+            };
 
-                await _context.SaveChangesAsync();
+            PrivateKeysStorageModel privateKeysStorageModel = new PrivateKeysStorageModel()
+                { KeysId = user.PrivateKeysStorageId };
 
-                return RedirectToAction("LoginPage", "Authorization");
-            }
-            else
-            {
-                return View(null);
-            }
+            await _context.Users.AddAsync(user);
+            await _context.PrivateKeysStorages.AddAsync(privateKeysStorageModel);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("LoginPage", "Authorization");
         }
-
 
         public ActionResult EmailConfirmationPage()
         {
             return View();
-        }
-        // GET: LoginController/Edit/5
-        public ActionResult Edit()
-        {
-            return View();
-        }
-
-        // POST: LoginController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // POST: LoginController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
