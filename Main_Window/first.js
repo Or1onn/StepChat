@@ -20,12 +20,14 @@ function new_chat_close() {
 }
 
 function emoji_popup() {
-    document.getElementById("emoji-popup").style.top = "50.5%";
     document.getElementById("emoji-popup").style.display = "flex";
+    document.getElementById("emoji-close-btn").style.display = "flex";
+    // document.getElementById("emoji-popup").style.top = "51.5%";
 }
 
 function emoji_close() {
     document.getElementById("emoji-popup").style.display = "none";
+    document.getElementById("emoji-close-btn").style.display = "none";
 }
 
 function paper_clip_popup() {
