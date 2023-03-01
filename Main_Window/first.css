@@ -1138,7 +1138,7 @@ body {
   border-radius: 6%;
   /* animation: modal 1s reverse ease; */
   animation: Wrapper reverse 0.7s;
-  filter: blur(5px) opacity(0.97);
+  filter: blur(5px) opacity(0.9);
 }
 
 @keyframes Wrapper {
