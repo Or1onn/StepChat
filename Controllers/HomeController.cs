@@ -9,12 +9,23 @@ namespace StepChat.Controllers
     public class HomeController : Controller
     {
         private readonly MessengerDataDbContext _context;
+        private IWebHostEnvironment WebHostEnvironment { get; }
 
-        public int MyProperty { get; set; }
-        public HomeController(MessengerDataDbContext context)
+        public HomeController(MessengerDataDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            WebHostEnvironment = webHostEnvironment;
         }
+        
+        
+        // public void UploadImage()
+        // {
+        //     var webRootPath = WebHostEnvironment.WebRootPath + "/images/stepwpicon.jpg";
+        //
+        //     ImagesModel images = new() { Image = System.IO.File.ReadAllBytes(webRootPath), ImageId = 1 };
+        //     _context!.Images.Add(images);
+        //     _context!.SaveChanges();
+        // }
         
         public IActionResult MainView(int userId)
         {
@@ -45,7 +56,6 @@ namespace StepChat.Controllers
         [HttpPost("/donloadFile")]
         public async Task<IActionResult> DownloadFile(int fileId)
         {
-            // Получите файл из базы данных по его идентификатору (fileId)
             var file = await _context.Files.FindAsync(fileId);
 
             if (file == null)
@@ -53,10 +63,8 @@ namespace StepChat.Controllers
                 return NotFound();
             }
 
-            // Создайте поток для чтения данных файла
             var stream = new MemoryStream(file.File);
 
-            // Верните файл клиенту в виде FileStreamResult
             return new FileStreamResult(stream, file.ContentType)
             {
                 FileDownloadName = file.Name
@@ -68,7 +76,8 @@ namespace StepChat.Controllers
         {
             var key = await _context.Keys
                        .Where(x => x.ChatId == chatId)
-                       .Select(x => x.Key)
+                       .AsNoTracking()
+                       .Select(x => x.Key )
                        .FirstOrDefaultAsync();
 
             return key;

@@ -38,12 +38,18 @@ fetch("/getToken")
 id = document.getElementById("userId").value;
 
 async function openChat(_this) {
-    if (startBoxStyle.display != "none") {
+
+    userId = _this.getAttribute("data-email").toString();
+    chatId = _this.getAttribute("data-chatId").toString();
+    
+    await checkPrivateKeys(chatId);
+    
+    if (startBoxStyle.display !== "none") {
         startBoxStyle.display = "none";
         document.getElementById("chat-box").style.display = "flex";
     }
 
-    if (_this.querySelector(".new-message_container").style.display == "flex") {
+    if (_this.querySelector(".new-message_container").style.display === "flex") {
         _this.querySelector(".new-message_container").style.display = "none";
         _this.querySelector(".new-message").textContent = "";
     }
@@ -52,74 +58,22 @@ async function openChat(_this) {
     document.getElementById("chat-image").src = _this.getElementsByTagName('img')[0].src;
     document.getElementById("messageList").innerHTML = "";
 
-    userId = _this.getAttribute("data-email").toString();
-    chatId = _this.getAttribute("data-chatId").toString();
 
-    $.post('/getPrivateKey', {chatId: chatId}, function (response) {
-        if (response != undefined) {
-            privateKey = response;
-            hubConnection.invoke("LoadMessages", Number(chatId), messagesCount)
-                .catch(error => console.error(error));
-        }
-    });
+    hubConnection.invoke("LoadMessages", Number(chatId), messagesCount)
+        .catch(error => console.error(error));
 }
 
-
-async function createYourMessage(message, privateKey) {
-    let date = new Date();
-    let decryptedMessage = DecryptMessage(message, privateKey);
-
-    if (decryptedMessage != "") {
-        message = decryptedMessage;
-    }
-
-    document.getElementById('messageList').insertAdjacentHTML(
-        'afterbegin',
-        `<div class="chat-message-container-your">
-                                <div class="chat-message-your">
-                                    <div class="chatting-your-message-text">${message}</div>
-                                    <span class="chat-your-message-time">${date.getHours() + ':' + date.getMinutes()}</span>
-                                </div>
-                                <div class="message-kr">
-                                    <svg viewBox="1 1 8 13" preserveAspectRatio="xMinYMin meet" height="20" width="20" class=""
-                                         version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13" xml:space="preserve">
-                                    <path fill="#00a884" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
-                                </svg>
-                                </div>
-                            </div>`
-    )
-}
-
-async function createFriendMessage(message, privateKey) {
-    let date = new Date();
-
-    document.getElementById('messageList').insertAdjacentHTML(
-        'afterbegin',
-        `<div class="chat-message-container-frnd">
-                            <div class="frnd-message-kr">
-                                <svg viewBox="0 1.3 8 13" height="20" width="20" preserveAspectRatio="xMaxYMax meet" class=""
-                                     version="1.1" x="0px" y="0px" xml:space="preserve">
-                                <path fill="#3b4a54" d="M1.533,3.568L8,12.193V1H2.812 C1.042,1,0.474,2.156,1.533,3.568z"></path>
-                            </svg>
-                            </div>
-                            <div class="chat-message-frnd">
-                                <div class="chatting-frnd-message-text">
-                                     ${DecryptMessage(message, privateKey)}
-                                </div>
-                                <span class="chat-frnd-message-time">${date.getHours() + ':' + date.getMinutes()}</span>
-                            </div>
-                        </div>`
-    )
-}
 
 async function sendMessage() {
     const message = document.getElementById("message").value;
-    if (message != "") {
+    if (message !== "") {
 
-        await createYourMessage(message, privateKey);
-
+        await createInputYourMessage(message, privateKey);
+        
         document.getElementById("message").value = "";
 
+        document.getElementById("messageList").scrollTo(0, document.getElementById("messageList").scrollHeight);
+        
         let text = EncryptMessage(message);
 
         hubConnection.invoke("SendMessage", text, userId, Number(id))
@@ -127,12 +81,26 @@ async function sendMessage() {
     }
 }
 
+async function checkPrivateKeys(chatId) {
+    privateKey = localStorage.getItem(chatId);
 
-document.getElementById('messageList').addEventListener("scroll", function() {
+    if (privateKey === null) {
+        $.post('/getPrivateKey', {chatId: chatId}, function (response) {
+            if (response !== undefined) {
+                privateKey = response;
+
+                localStorage.setItem(chatId, privateKey);
+            }
+        });
+    }
+}
+
+
+document.getElementById('messageList').addEventListener("scroll", function () {
     if (isScrollIgnored) return;
-    
+
     if (this.scrollTop === 0) {
-        hubConnection.invoke("LoadMessages", Number(chatId), messagesCount += 10)
+        hubConnection.invoke("LoadMessages", Number(chatId), messagesCount += 30)
             .catch(error => console.error(error));
     }
 });
@@ -142,7 +110,6 @@ $(document).on("click", ".block", async function () {
     isScrollIgnored = true;
     messagesCount = 0;
     await openChat(this);
-    document.getElementById("messageList").scrollTo(0,document.getElementById("messageList").scrollHeight);
 });
 
 $(".new-chat-user").click(async function () {
@@ -151,7 +118,7 @@ $(".new-chat-user").click(async function () {
     const elements = document.getElementsByClassName('block');
 
     for (let i = 0; i < elements.length; i++) {
-        if (userId == elements[i].getAttribute("data-email")) {
+        if (userId === elements[i].getAttribute("data-email")) {
             await openChat(elements[i]);
             return;
         }
@@ -175,7 +142,7 @@ document.getElementById("message").addEventListener('keyup', async function (eve
 });
 
 document.getElementById("sendBtn").addEventListener("click", async () => {
-    if (document.getElementById("message").value != "") {
+    if (document.getElementById("message").value !== "") {
         await sendMessage();
     }
 });
@@ -208,9 +175,9 @@ hubConnection.on("CreateChat", (email, _chatId, fullName, image) => {
                         </div>`
     )
 
-
     allChatsId.push(_chatId.toString());
-
+    
+    localStorage.setItem(chatId, privateKey);
     document.getElementById('message').disabled = false;
     document.getElementById('chat-image').src = "data:image/png;base64," + image;
     document.getElementById('chat-name').textContent = fullName;
@@ -219,7 +186,7 @@ hubConnection.on("CreateChat", (email, _chatId, fullName, image) => {
 hubConnection.on("ReceiveMessage", async (messages, sendId, checkChatId, chatName, image, email) => {
     const date = new Date();
 
-    if (allChatsId.length == 0) {
+    if (allChatsId.length === 0) {
         const elements = document.getElementsByClassName('block');
 
         for (let i = 0; i < elements.length; i++) {
@@ -228,64 +195,64 @@ hubConnection.on("ReceiveMessage", async (messages, sendId, checkChatId, chatNam
     }
     if (!document.hidden) {
         if (allChatsId.includes(checkChatId.toString())) {
-            if (chatId == checkChatId) {
-                if (messages.constructor === Array) {
+            if (chatId === checkChatId.toString()) {
+                if (messages.constructor !== Array) {
+                    if (sendId === id) {
+                        await createYourMessage(messages, privateKey);
+                    } else {
+                        await createInputFriendMessage(messages, privateKey)
+                    }
+                } else {
                     for (const element of messages) {
-                        if (element.userId == id) {
+                        if (element.userId === Number(id)) {
                             await createYourMessage(element.text, privateKey);
                         } else {
                             await createFriendMessage(element.text, privateKey)
                         }
                     }
                     
+                    document.getElementById("messageList").scrollTo(0, 100);
+                    
+                    if (messagesCount === 0){
+                        document.getElementById("messageList").scrollTo(0, document.getElementById("messageList").scrollHeight);
+                    }
                     isScrollIgnored = false;
                     return;
-                } else {
-                    if (sendId == id) {
-                        await createYourMessage(messages, privateKey);
-                    } else {
-                        await createFriendMessage(messages, privateKey)
-                    }
                 }
             } else {
-                $.post('/getPrivateKey', {chatId: checkChatId}, function (response) {
-                    if (response != undefined) {
-                        privateKey = response;
+                if (messages.constructor !== Array) {
+                    await checkPrivateKeys(checkChatId);
 
-                        const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
+                    const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
 
-                        divElement.querySelector(".new-message_container").style.display = "flex";
+                    divElement.querySelector(".new-message_container").style.display = "flex";
 
-                        if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
-                            divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
-                        } else {
-                            divElement.querySelector("#message-preview").textContent = "";
-                            divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
-                        }
-
-                        const messageCount = divElement.querySelector(".new-message").textContent;
-
-                        if (messageCount == "") {
-                            divElement.querySelector(".new-message").textContent = "1";
-                        } else {
-                            divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
-                        }
+                    if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
+                        divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                    } else {
+                        divElement.querySelector("#message-preview").textContent = "";
+                        divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
                     }
-                });
 
-                document.getElementById("new-message").play();
+                    const messageCount = divElement.querySelector(".new-message").textContent;
+
+                    if (messageCount === "") {
+                        divElement.querySelector(".new-message").textContent = "1";
+                    } else {
+                        divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
+                    }
+                    document.getElementById("new-message").play();
+                }
             }
         } else {
-            $.post('/getPrivateKey', {chatId: checkChatId}, function (response) {
-                if (response != undefined) {
-                    privateKey = response;
+            await checkPrivateKeys(checkChatId);
 
-                    document.getElementById('chat-list').insertAdjacentHTML(
-                        'beforebegin',
-                        `<div id="user-cl" class="block" data-email="${email}" data-chatId="${checkChatId}">
+            document.getElementById('chat-list').insertAdjacentHTML(
+                'beforebegin',
+                `<div id="user-cl" class="block" data-email="${email}" data-chatId="${checkChatId}">
                             <div class="image-box">
                                 <div class="image-padding">
-                                    <img class="image" src="data:image;base64,${image}">
+                                    <img class="image" src="data:image;base64,${image}" alt="avatar">
                                 </div>
                             </div>
                             <div id="user-cl" class="details">
@@ -304,48 +271,46 @@ hubConnection.on("ReceiveMessage", async (messages, sendId, checkChatId, chatNam
                             </div>
                         </div>`)
 
-                    const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
-                    divElement.querySelector(".new-message_container").style.display = "flex";
+            const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
+            divElement.querySelector(".new-message_container").style.display = "flex";
 
-                    if (!allChatsId.includes(checkChatId.toString())) {
-                        allChatsId.push(checkChatId.toString());
-                    }
-                }
-            });
+            if (!allChatsId.includes(checkChatId.toString())) {
+                allChatsId.push(checkChatId.toString());
+            }
         }
     } else {
+        await checkPrivateKeys(checkChatId);
 
-        $.post('/getPrivateKey', {chatId: checkChatId}, function (response) {
-            if (response != undefined) {
-                privateKey = response;
+        const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
 
-                const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
+        divElement.querySelector(".new-message_container").style.display = "flex";
 
-                divElement.querySelector(".new-message_container").style.display = "flex";
+        if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
+            divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+        } else {
+            divElement.querySelector("#message-preview").textContent = "";
+            divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+        }
 
-                if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
-                    divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
-                } else {
-                    divElement.querySelector("#message-preview").textContent = "";
-                    divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
-                }
+        const messageCount = divElement.querySelector(".new-message").textContent;
 
-                const messageCount = divElement.querySelector(".new-message").textContent;
+        if (messageCount === "") {
+            divElement.querySelector(".new-message").textContent = "1";
+        } else {
+            divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
+        }
 
-                if (messageCount == "") {
-                    divElement.querySelector(".new-message").textContent = "1";
-                } else {
-                    divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
-                }
-            }
-        });
+        if (chatId === checkChatId.toString()) {
+            await createFriendMessage(messages, privateKey)
+        }
+
         document.getElementById("new-message").play();
     }
 });
 
 hubConnection.on("ReceiveFile", (fileId) => {
-    var xhr = new XMLHttpRequest();
-    var data = new FormData();
+    let xhr = new XMLHttpRequest();
+    let data = new FormData();
 
     xhr.open('POST', '/donloadFile', true);
     xhr.responseType = 'blob';

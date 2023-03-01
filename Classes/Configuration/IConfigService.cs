@@ -2,8 +2,8 @@
 {
     public interface IConfigService
     {
-        public string IConfigPath { get; set; }
+        public string? IConfigPath { get; set; }
         public IConfigurationRoot BuildConfiguration();
-        public string GetValue(string key);
+        public string? GetValue(string key);
     }
 }

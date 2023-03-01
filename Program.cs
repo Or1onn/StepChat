@@ -12,10 +12,6 @@ using StepChat.Classes.Auth;
 using StepChat.Classes.Configuration;
 using StepChat.Services;
 using Microsoft.EntityFrameworkCore;
-<<<<<<< HEAD
-=======
-
->>>>>>> d6602e56260588f144130cd52d72dee2e277ea19
 
 //                              :-= +*****************************************+=
 //                          :+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%

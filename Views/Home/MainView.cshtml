@@ -20,15 +20,15 @@
     <script defer src="~/lib/crypto-js/crypto-js.min.js"></script>
     <script defer src="~/lib/signalr/dist/browser/signalr.min.js"></script>
     <script defer src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script defer src="~/js/messages_creation.js"></script>
     <script defer src="~/js/chat.js"></script>
     <script defer src="~/js/main_page_styles.js"></script>
-    <script defer src="~/js/upload_file.js"></script>
 
     <title>Step Chat</title>
 </head>
 
 @{
-    int userId = Model.Id;
+    var userId = Model.Id;
     List<List<ChatsModel>> chats = new();
 
     var chatsId = await _context!.ChatUsers

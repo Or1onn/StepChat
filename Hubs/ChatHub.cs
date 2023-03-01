@@ -42,6 +42,7 @@ namespace StepChat.Hubs
                                 var chatUserModel = new ChatUserModel() { ChatId = chatsModel.ChatId, User1 = user.Id, User2 = user2.Id };
                                 var image = await _context.Images
                                     .Where(x => x.ImageId == user2.ImageId)
+                                    .AsNoTracking()
                                     .Select(x => x.Image)
                                     .FirstOrDefaultAsync();
 
@@ -71,21 +72,25 @@ namespace StepChat.Hubs
 
                 var imageId = await _context.Users
                            .Where(x => x.Id == id)
+                           .AsNoTracking()
                            .Select(x => x.ImageId)
                            .FirstOrDefaultAsync();
 
                 var chatId = await _context.ChatUsers
                            .Where(x => user2 != null && (x.User1 == id && x.User2 == user2.Id || x.User2 == id && x.User1 == user2.Id))
+                           .AsNoTracking()
                            .Select(x => x.ChatId)
                            .FirstOrDefaultAsync();
 
                 var chatName = await _context.Users
                            .Where(x => x.Id == id)
+                           .AsNoTracking()
                            .Select(x => x.FullName)
                            .FirstOrDefaultAsync();
 
                 var image = await _context.Images
                            .Where(x => x.ImageId == imageId)
+                           .AsNoTracking()
                            .Select(x => x.Image)
                            .FirstOrDefaultAsync();
 
@@ -122,12 +127,13 @@ namespace StepChat.Hubs
         {
             try
             {
-                var messages = await _context.Messages
-                    .OrderByDescending(x => x.Id)
+                var messages = await _context?.Messages
                     .Where(x => x.ChatId == chatId)
+                    .OrderByDescending(x => x.Id)
+                    .AsNoTracking()
                     .Skip(messagesCount)
                     .Take(30)
-                    .ToListAsync();
+                    .ToListAsync()!;
                 
                 await Clients.Caller.SendAsync("ReceiveMessage", messages, "0", chatId);
             }

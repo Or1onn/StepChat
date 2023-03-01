@@ -2,7 +2,7 @@
 {
     public class ConfigService : IConfigService
     {
-        public string IConfigPath { get; set; }
+        public string? IConfigPath { get; set; }
 
         public ConfigService(string? iConfigPath)
         {
@@ -11,7 +11,7 @@
 
         public IConfigurationRoot BuildConfiguration()
         {
-            ConfigurationBuilder? builder = new();
+            ConfigurationBuilder builder = new();
 
             if (IConfigPath!.Contains(".json"))
             {
@@ -23,7 +23,7 @@
 
         }
 
-        public string GetValue(string? key)
+        public string? GetValue(string? key)
         {
             return BuildConfiguration().GetValue(typeof(string), key).ToString();
         }
