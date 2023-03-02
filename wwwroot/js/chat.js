@@ -38,12 +38,6 @@ fetch("/getToken")
 id = document.getElementById("userId").value;
 
 async function openChat(_this) {
-
-    userId = _this.getAttribute("data-email").toString();
-    chatId = _this.getAttribute("data-chatId").toString();
-    
-    await checkPrivateKeys(chatId);
-    
     if (startBoxStyle.display !== "none") {
         startBoxStyle.display = "none";
         document.getElementById("chat-box").style.display = "flex";
@@ -58,9 +52,15 @@ async function openChat(_this) {
     document.getElementById("chat-image").src = _this.getElementsByTagName('img')[0].src;
     document.getElementById("messageList").innerHTML = "";
 
+    userId = _this.getAttribute("data-email").toString();
+    chatId = _this.getAttribute("data-chatId").toString();
 
-    hubConnection.invoke("LoadMessages", Number(chatId), messagesCount)
-        .catch(error => console.error(error));
+    await checkPrivateKeys(chatId)
+        .then(returnedPrivateKey => {
+            privateKey = returnedPrivateKey;
+            hubConnection.invoke("LoadMessages", Number(chatId), messagesCount)
+                .catch(error => console.log(error));
+        }).catch(error => console.log(error));
 }
 
 
@@ -69,11 +69,11 @@ async function sendMessage() {
     if (message !== "") {
 
         await createInputYourMessage(message, privateKey);
-        
+
         document.getElementById("message").value = "";
 
         document.getElementById("messageList").scrollTo(0, document.getElementById("messageList").scrollHeight);
-        
+
         let text = EncryptMessage(message);
 
         hubConnection.invoke("SendMessage", text, userId, Number(id))
@@ -82,19 +82,24 @@ async function sendMessage() {
 }
 
 async function checkPrivateKeys(chatId) {
-    privateKey = localStorage.getItem(chatId);
+    return new Promise((resolve, reject) => {
+        let privateKey = localStorage.getItem(chatId);
 
-    if (privateKey === null) {
-        $.post('/getPrivateKey', {chatId: chatId}, function (response) {
-            if (response !== undefined) {
-                privateKey = response;
-
-                localStorage.setItem(chatId, privateKey);
-            }
-        });
-    }
+        if (privateKey !== null) {
+            resolve(privateKey);
+        } else {
+            $.post('/getPrivateKey', {chatId: chatId}, function (response) {
+                if (response !== undefined) {
+                    privateKey = response;
+                    localStorage.setItem(chatId, privateKey);
+                    resolve(response);
+                } else {
+                    reject('Error: Failed to get private key');
+                }
+            });
+        }
+    });
 }
-
 
 document.getElementById('messageList').addEventListener("scroll", function () {
     if (isScrollIgnored) return;
@@ -107,6 +112,10 @@ document.getElementById('messageList').addEventListener("scroll", function () {
 
 
 $(document).on("click", ".block", async function () {
+    if ($(window).width() <= 800) {
+        document.getElementById('search-box').style.display = "none";
+    }
+
     isScrollIgnored = true;
     messagesCount = 0;
     await openChat(this);
@@ -176,7 +185,7 @@ hubConnection.on("CreateChat", (email, _chatId, fullName, image) => {
     )
 
     allChatsId.push(_chatId.toString());
-    
+
     localStorage.setItem(chatId, privateKey);
     document.getElementById('message').disabled = false;
     document.getElementById('chat-image').src = "data:image/png;base64," + image;
@@ -210,10 +219,10 @@ hubConnection.on("ReceiveMessage", async (messages, sendId, checkChatId, chatNam
                             await createFriendMessage(element.text, privateKey)
                         }
                     }
-                    
+
                     document.getElementById("messageList").scrollTo(0, 100);
-                    
-                    if (messagesCount === 0){
+
+                    if (messagesCount === 0) {
                         document.getElementById("messageList").scrollTo(0, document.getElementById("messageList").scrollHeight);
                     }
                     isScrollIgnored = false;
@@ -221,35 +230,39 @@ hubConnection.on("ReceiveMessage", async (messages, sendId, checkChatId, chatNam
                 }
             } else {
                 if (messages.constructor !== Array) {
-                    await checkPrivateKeys(checkChatId);
+                    await checkPrivateKeys(chatId)
+                        .then(returnedPrivateKey => {
+                            privateKey = returnedPrivateKey;
+                            const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
 
-                    const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
+                            divElement.querySelector(".new-message_container").style.display = "flex";
 
-                    divElement.querySelector(".new-message_container").style.display = "flex";
+                            if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
+                                divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                            } else {
+                                divElement.querySelector("#message-preview").textContent = "";
+                                divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                            }
 
-                    if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
-                        divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
-                    } else {
-                        divElement.querySelector("#message-preview").textContent = "";
-                        divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
-                    }
+                            const messageCount = divElement.querySelector(".new-message").textContent;
 
-                    const messageCount = divElement.querySelector(".new-message").textContent;
-
-                    if (messageCount === "") {
-                        divElement.querySelector(".new-message").textContent = "1";
-                    } else {
-                        divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
-                    }
-                    document.getElementById("new-message").play();
+                            if (messageCount === "") {
+                                divElement.querySelector(".new-message").textContent = "1";
+                            } else {
+                                divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
+                            }
+                            document.getElementById("new-message").play();
+                        }).catch(error => console.log(error));
                 }
             }
         } else {
-            await checkPrivateKeys(checkChatId);
+            await checkPrivateKeys(chatId)
+                .then(returnedPrivateKey => {
+                    privateKey = returnedPrivateKey;
 
-            document.getElementById('chat-list').insertAdjacentHTML(
-                'beforebegin',
-                `<div id="user-cl" class="block" data-email="${email}" data-chatId="${checkChatId}">
+                    document.getElementById('chat-list').insertAdjacentHTML(
+                        'beforebegin',
+                        `<div id="user-cl" class="block" data-email="${email}" data-chatId="${checkChatId}">
                             <div class="image-box">
                                 <div class="image-padding">
                                     <img class="image" src="data:image;base64,${image}" alt="avatar">
@@ -271,40 +284,44 @@ hubConnection.on("ReceiveMessage", async (messages, sendId, checkChatId, chatNam
                             </div>
                         </div>`)
 
-            const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
-            divElement.querySelector(".new-message_container").style.display = "flex";
+                    const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
+                    divElement.querySelector(".new-message_container").style.display = "flex";
 
-            if (!allChatsId.includes(checkChatId.toString())) {
-                allChatsId.push(checkChatId.toString());
-            }
+                    if (!allChatsId.includes(checkChatId.toString())) {
+                        allChatsId.push(checkChatId.toString());
+                    }
+                }).catch(error => console.log(error));
         }
     } else {
-        await checkPrivateKeys(checkChatId);
+        await checkPrivateKeys(chatId)
+            .then(async returnedPrivateKey => {
+                privateKey = returnedPrivateKey;
 
-        const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
+                const divElement = document.querySelector(`div[data-chatId="${checkChatId}"]`);
 
-        divElement.querySelector(".new-message_container").style.display = "flex";
+                divElement.querySelector(".new-message_container").style.display = "flex";
 
-        if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
-            divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
-        } else {
-            divElement.querySelector("#message-preview").textContent = "";
-            divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
-        }
+                if (divElement.querySelector("#message-preview") && divElement.querySelector("#message-preview").textContent != null) {
+                    divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                } else {
+                    divElement.querySelector("#message-preview").textContent = "";
+                    divElement.querySelector("#message-preview").textContent = DecryptMessage(messages, privateKey);
+                }
 
-        const messageCount = divElement.querySelector(".new-message").textContent;
+                const messageCount = divElement.querySelector(".new-message").textContent;
 
-        if (messageCount === "") {
-            divElement.querySelector(".new-message").textContent = "1";
-        } else {
-            divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
-        }
+                if (messageCount === "") {
+                    divElement.querySelector(".new-message").textContent = "1";
+                } else {
+                    divElement.querySelector(".new-message").textContent = (Number(divElement.querySelector(".new-message").textContent) + 1).toString();
+                }
 
-        if (chatId === checkChatId.toString()) {
-            await createFriendMessage(messages, privateKey)
-        }
+                if (chatId === checkChatId.toString()) {
+                    await createInputFriendMessage(messages, privateKey)
+                }
 
-        document.getElementById("new-message").play();
+                document.getElementById("new-message").play();
+            }).catch(error => console.log(error));
     }
 });
 

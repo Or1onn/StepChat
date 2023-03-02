@@ -1,12 +1,8 @@
 ﻿function admin_panel() {
     document.getElementById("admin-popup").style.display = "block";
-    document.getElementById("search-box").style.filter = "blur(2px)";
-    document.getElementById("chat-box").style.filter = "blur(2px)";
 }
 
 function admin_close() {
-    document.getElementById("search-box").style.filter = "blur(0px)";
-    document.getElementById("chat-box").style.filter = "blur(0px)";
     document.getElementById("admin-popup").style.display = "none";
 }
 
@@ -17,6 +13,24 @@ function new_chat() {
 
 function new_chat_close() {
     document.getElementById("new-chat-popup").style.display = "none";
+}
+
+function emoji_popup() {
+    document.getElementById("emoji-popup").style.display = "flex";
+    document.getElementById("emoji-close-btn").style.display = "flex";
+}
+
+function emoji_close() {
+    document.getElementById("emoji-popup").style.display = "none";
+    document.getElementById("emoji-close-btn").style.display = "none";
+}
+
+function paper_clip_popup() {
+    document.getElementById("paper-clip-popup").style.display = "flex";
+}
+
+function paper_clip_close() {
+    document.getElementById("paper-clip-popup").style.display = "none";
 }
 
 function user_close() {
@@ -77,4 +91,9 @@ function group_edit() {
     document.getElementById("group-create-submit").style.display = "flex";
     document.getElementById("user-delete-submit").style.display = "none";
     document.getElementById("group-buttons").style.display = "none";
+}
+
+function chat_list_back() {
+    document.getElementById("chat-box").style.display = "none";
+    document.getElementById("search-box").style.display = "flex";
 }

@@ -22,6 +22,7 @@
     <script defer src="~/lib/jquery/dist/jquery.min.js"></script>
     <script defer src="~/js/messages_creation.js"></script>
     <script defer src="~/js/chat.js"></script>
+    <script defer src="~/js/upload_file.js"></script>
     <script defer src="~/js/main_page_styles.js"></script>
 
     <title>Step Chat</title>
@@ -32,11 +33,11 @@
     List<List<ChatsModel>> chats = new();
 
     var chatsId = await _context!.ChatUsers
-                    .Where(x => x.User1 == userId || x.User2 == userId)
-                    .Select(e => e.ChatId)
-                    .ToListAsync();
+        .Where(x => x.User1 == userId || x.User2 == userId)
+        .Select(e => e.ChatId)
+        .ToListAsync();
 
-    @Html.HiddenFor(model => model.Id , new { Id = "userId" })
+    @Html.HiddenFor(model => model.Id, new { Id = "userId" })
 
     foreach (var item in chatsId)
     {
@@ -46,6 +47,7 @@
 }
 
 @functions {
+
     string? GetEmail(int chatId, int userId)
     {
         var chat = _context!.ChatUsers.FirstOrDefault(x => x.User1 == userId && x.ChatId == chatId || x.User2 == userId && x.ChatId == chatId);
@@ -61,289 +63,274 @@
             return user?.Email;
         }
     }
+
 }
 
 
 <body>
-    <div class="container">
-        <div class="search-box" id="search-box">
-            <div class="header">
-                <div class="search-chat">
-                    <input type="text" placeholder="Search">
-                </div>
-                <div class="new-chat" id="new-chat">
-                    <button type="button" class="new-chat-btn" onclick="new_chat()">
-                        <img src="/icons/messages.svg" alt="message">
-                    </button>
-                </div>
-            </div>
-            <div id="chat-list" class="chat-list">
-                @foreach (var item in chats)
-                {
-                    foreach (var item2 in item)
-                    {
-                        <div id="user-cl" class="block" data-email=@GetEmail(@item2.ChatId, @userId) data-chatId=@item2.ChatId>
-                            <div class="image-box">
-                                <div class="image-padding">
-                                    @if (@item2.CreateChatUserId == @userId)
-                                    {
-                                        <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item2.User2ImageId)?.Image)" alt="avatar">
-                                    }
-                                    else
-                                    {
-                                        <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item2.User1ImageId)?.Image)">
-                                    }
-                                </div>
-                            </div>
-                            <div id="user-cl" class="details">
-                                <div class="head-list">
-                                    <h4>
-                                        @if (@item2.CreateChatUserId == @userId)
-                                        {
-                                            @item2.User2Name
-                                        }
-                                        else
-                                        {
-                                            @item2.User1Name
-                                        }
-                                    </h4>
-                                    <p class="time">@item2.Time!.Value.ToString(@"hh\:mm")</p>
-                                </div>
-                                <div id="user-cl" class="message-container">
-                                    <div class="message">
-                                        <p id="message-preview"></p>
-                                    </div>
-                                    <div class="new-message_container">
-                                        <div id="new_message" class="new-message"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
-            </div>
-
-            <div class="settings-admin">
-                <div class="admin-logos">
-                    <div class="admin-panel">
-                        <button class="admin-panel-btn" onclick="admin_panel()">
-                            <img src="/icons/tool.svg">
-                        </button>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+<div class="search-box" id="search-box">
+    <div class="header">
+        <div class="search-chat">
+            <input type="text" placeholder="Search">
         </div>
-
-        <div id="start-box" class="start-box">
-            <div class="start-box-container">
-                <img class="step-icon" src="~/icons/step_logo.svg" width="300" height="310">
-                <br />
-                <label style="text-align: center; color: #FFFFFF; font-size: 23px;">Step IT Local Chat</label>
-                <br />
-                <label style="color: #c1c1c1; font-size: 16px;">Chat with your teachers and friends everywhere</label>
-            </div>
-        </div>
-
-        <div id="chat-box" class="chat-box">
-            <div id="convo" class="convo">
-                <div class="convo-head">
-                    <div class="convo-user">
-                        <div class="convo-image-box">
-                            <div class="image-padding">
-                                <img id="chat-image" class="image" src="~/images/blank-profile-picture.png">
-                            </div>
-                        </div>
-                        <h4 id="chat-name"></h4>
-                    </div>
-                    <div class="convo-search-input" id="convo-search-input">
-                        <input type="text" placeholder="Search">
-                        <button type="button" class="search-close" onclick="search_close()">
-                            <img src="~/icons/x.svg">
-                        </button>
-                    </div>
-                    <div class="convo-search" id="convo-search">
-                        <button class="search-btn" onclick="search_input()">
-                            <img src="~/icons/search.svg">
-                        </button>
-                    </div>
-                </div>
-                <div id="convoMain" class="convo-main">
-                    <div id="messageList" class="chatting"></div>
-                </div>
-                <div class="convo-input">
-                    <form id="fileForm" enctype="multipart/form-data">
-                        <div id="file-upload" class="file-upload">
-                            <button type="submit" id="sendFile"></button>
-                        </div>
-                        <div class="paper-clip">
-                            <label style="cursor: pointer;" for="file-input">
-                                <img src="/icons/circle-plus.svg">
-                            </label>
-                            <input name="fileUpload" id="file-input" class="file-input" type="file" />
-                        </div>
-                    </form>
-                    <div class="chat-input">
-                        <input id="message" type="Text" placeholder="Type...">
-                    </div>
-                    <div class="smile">
-                        <img src="/icons/mood-smile.svg">
-                    </div>
-                    <div id="sendBtn" class="send">
-                        <img src="/icons/arrow-forward-up.svg">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="new-chat-popup" id="new-chat-popup">
-            <form class="new-chat-popup-container">
-                <div class="search-new-chat">
-                    <input type="text" placeholder="Search">
-                </div>
-                <div class="select-chat-user">
-                    @foreach (var item in _context.Users.Where(x => x.Id != userId))
-                    {
-                        <div class="new-chat-user" data-email=@item.Email>
-                            <div class="image-box">
-                                <div class="image-padding">
-                                    <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId)?.Image)">
-                                </div>
-                            </div>
-                            <div class="user-info">
-                                <h4>@item.FullName</h4>
-                                <h5>@item.Email</h5>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div class="new-chat-close-btn">
-                    <button type="button" class="new-chat-close" onclick="new_chat_close()">
-                        <img src="~/icons/x.svg">
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <div class="new-chat-popup" id="new-chat-popup">
-            <form class="new-chat-popup-container">
-                <div class="search-new-chat">
-                    <input type="text" placeholder="Search">
-                </div>
-                <div class="select-chat-user">
-                    @foreach (var item in _context.Users)
-                    {
-                        <div class="new-chat-user" data-email=@item.Email @*onclick=@CreateNewChat()*@>
-                            <div class="image-box">
-                                <div class="image-padding">
-                                    <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId)?.Image)">
-                                </div>
-                            </div>
-                            <div class="user-info">
-                                <div class="new-user-name-container">
-                                    <h4>@item.FullName</h4>
-                                </div>
-                                <div class="new-user-email-container">
-                                    <h5>@item.Email</h5>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div class="new-chat-close-btn">
-                    <button type="button" class="new-chat-close" onclick="new_chat_close()">
-                        <img src="/icons/x.svg">
-                    </button>
-                </div>
-            </form>
-        </div>
-        @*
-        <div class="new-chat-popup" id="new-chat-popup">
-        <form class="new-chat-popup-container">
-        <div class="search-new-chat">
-        <input type="text" placeholder="Search">
-        </div>
-        <div class="select-chat-user">
-        @foreach (var item in _context.Users)
-        {
-        <div class="new-chat-user" data-email=@item.Email>
-        <div class="image-box">
-        <div class="image-padding">
-        <img class="image" src="data:image;base64,@System.Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId).Image)">
-        </div>
-        </div>
-        <h4>@item.FullName</h4>
-        </div>
-        }
-        </div>
-        <div class="new-chat-close-btn">
-        <button type="button" class="new-chat-close" onclick="new_chat_close()">
-        <img src="/icons/x.svg">
-        </button>
-        </div>
-        </form>
-        </div>*@
-
-        <div class="admin-popup" id="admin-popup">
-            <form class="admin-container">
-                <div class="group-buttons" id="group-buttons">
-                    <button class="group-create-btn" type="button" onclick="group_create()">
-                        <img src="/icons/users.svg">
-                    </button>
-                    <button class="user-add-btn" type="button" onclick="group_create()">
-                        <img src="/icons/user-plus.svg">
-                    </button>
-                    <button class="user-delete-btn" type="button" onclick="group_create()">
-                        <img src="/icons/user-minus.svg">
-                    </button>
-                </div>
-                <div class="group-input" id="group-input">
-                    <div class="group-submit-image">
-                        <img src="icons/user-circle.svg">
-                    </div>
-                    <div class="group-input-name">
-                        <input type="Text" placeholder="Name">
-                    </div>
-                    <div class="group-create-submit" id="group-create-submit">
-                        <button class="group-create-submit-btn" type="submit">
-                            <p>Create Group</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="select-user" id="select-user">
-                    <div class="select-group-user">
-                        <div class="group-user">
-                            <div class="image-box">
-                                <div class="image-padding">
-                                    <img class="image" src="/images/blank-profile-picture.png">
-                                </div>
-                            </div>
-                            <h4>Орхан</h4>
-                        </div>
-                        <div class="select-user-cb">
-                            <input type="checkbox">
-                        </div>
-                    </div>
-                </div>
-                <div class="group-create-submit" id="group-create-submit">
-                    <button class="group-create-submit-btn" type="submit">
-                        <p>Create Group</p>
-                    </button>
-                </div>
-                <div class="group-edit-submit" id="group-edit-submit">
-                    <button class="group-edit-submit-btn" type="button" onclick="group_edit()">
-                        <p>Edit Group</p>
-                    </button>
-                </div>
-                <div class="admin-close-btn">
-                    <button type="button" class="admin-close" onclick="admin_close()">
-                        <img src="/icons/x.svg">
-                    </button>
-                </div>
-            </form>
+        <div class="new-chat" id="new-chat">
+            <button type="button" class="new-chat-btn" onclick="new_chat()">
+                <img src="/icons/messages.svg" alt="message">
+            </button>
         </div>
     </div>
-    <audio id="new-message">
-        <source src="~/audio/new_message.mp3" type="audio/mp3">
-    </audio>
+    <div id="chat-list" class="chat-list">
+        @foreach (var item in chats)
+        {
+            foreach (var item2 in item)
+            {
+                <div id="user-cl" class="block" data-email=@GetEmail(@item2.ChatId, @userId) data-chatId=@item2.ChatId>
+                    <div class="image-box">
+                        <div class="image-padding">
+                            @if (@item2.CreateChatUserId == @userId)
+                            {
+                                <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item2.User2ImageId)?.Image)" alt="avatar">
+                            }
+                            else
+                            {
+                                <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item2.User1ImageId)?.Image)">
+                            }
+                        </div>
+                    </div>
+                    <div id="user-cl" class="details">
+                        <div class="head-list">
+                            <h4>
+                                @if (@item2.CreateChatUserId == @userId)
+                                {
+                                    @item2.User2Name
+                                }
+                                else
+                                {
+                                    @item2.User1Name
+                                }
+                            </h4>
+                            <p class="time">@item2.Time!.Value.ToString(@"hh\:mm")</p>
+                        </div>
+                        <div id="user-cl" class="message-container">
+                            <div class="message">
+                                <p id="message-preview"></p>
+                            </div>
+                            <div class="new-message_container">
+                                <div id="new_message" class="new-message"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="settings-admin">
+        <div class="admin-logos">
+            <div class="admin-panel">
+                <button class="admin-panel-btn" onclick="admin_panel()">
+                    <img src="/icons/tool.svg">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="start-box" class="start-box">
+    <div class="start-box-container">
+        <img class="step-icon" src="~/icons/step_logo.svg" width="300" height="310">
+        <br/>
+        <label style="text-align: center; color: #FFFFFF; font-size: 23px;">Step IT Local Chat</label>
+        <br/>
+        <label style="color: #c1c1c1; font-size: 16px;">Chat with your teachers and friends everywhere</label>
+    </div>
+</div>
+
+<div id="chat-box" class="chat-box">
+    <div id="convo" class="convo">
+        <div class="convo-head">
+            <div class="mobile-arrow-back">
+                <button class="mobile-arrow-back-btn" type="button" onclick="chat_list_back()">
+                    <img src="icons/arrow-narrow-left.svg">
+                </button>
+            </div>
+            <div class="convo-user">
+                <div class="convo-image-box">
+                    <div class="image-padding">
+                        <img id="chat-image" class="image" src="~/images/blank-profile-picture.png">
+                    </div>
+                </div>
+                <h4 id="chat-name"></h4>
+            </div>
+            <div class="convo-search-input" id="convo-search-input">
+                <input type="text" placeholder="Search">
+                <button type="button" class="search-close" onclick="search_close()">
+                    <img src="~/icons/x.svg">
+                </button>
+            </div>
+            <div class="convo-search" id="convo-search">
+                <button class="search-btn" onclick="search_input()">
+                    <img src="~/icons/search.svg">
+                </button>
+            </div>
+        </div>
+        <div id="convoMain" class="convo-main">
+            <div id="messageList" class="chatting"></div>
+        </div>
+        <div class="convo-input">
+            <form id="fileForm" enctype="multipart/form-data">
+                <div id="file-upload" class="file-upload">
+                    <button type="submit" id="sendFile" class="file-upload"></button>
+                </div>
+                <div class="paper-clip" onclick="paper_clip_popup()">
+                    <label style="cursor: pointer;" for="file-input">
+                        <img src="/icons/circle-plus.svg">
+                    </label>
+                    <input name="fileUpload" id="file-input" class="file-input" type="file"/>
+                </div>
+            </form>
+            <div class="chat-input">
+                <input id="message" type="Text" placeholder="Type...">
+            </div>
+            <div class="smile" onclick="emoji_popup()">
+                <img src="/icons/mood-smile.svg">
+            </div>
+            <div id="sendBtn" class="send">
+                <img src="/icons/arrow-forward-up.svg">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="emoji-popup" id="emoji-popup">
+    <form class="emoji-popup-container">
+        <div class="emoji-container">
+        </div>
+    </form>
+</div>
+<div class="emoji-close-btn" id="emoji-close-btn">
+    <button type="button" class="emoji-close" onclick="emoji_close()">
+        <img src="/icons/x.svg">
+    </button>
+</div>
+
+<div class="paper-clip-popup" id="paper-clip-popup">
+    <form class="paper-clip-popup-container">
+        <div class="paper-clip-container">
+            <div class="paper-clip-close-btn">
+                <button type="button" class="paper-clip-close" onclick="paper_clip_close()">
+                    <img src="/icons/x.svg">
+                </button>
+            </div>
+            <div class="file-body">
+                <div class="file-image">
+                    <img src="/icons/file.svg">
+                </div>
+                <div class="file-name">
+                    <p>File Name</p>
+                </div>
+            </div>
+            <div class="file-input">
+                <input type="Text" placeholder="Type...">
+                <img src="/icons/arrow-forward-up.svg">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="new-chat-popup" id="new-chat-popup">
+    <form class="new-chat-popup-container">
+        <div class="search-new-chat">
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="select-chat-user">
+            @foreach (var item in _context.Users.Where(x => x.Id != userId))
+            {
+                <div class="new-chat-user" data-email=@item.Email>
+                    <div class="image-box">
+                        <div class="image-padding">
+                            <img class="image" src="data:image;base64,@Convert.ToBase64String(_context.Images.FirstOrDefault(x => x.ImageId == item.ImageId)?.Image)">
+                        </div>
+                    </div>
+                    <div class="user-info">
+                        <h4>@item.FullName</h4>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="new-chat-close-btn">
+            <button type="button" class="new-chat-close" onclick="new_chat_close()">
+                <img src="~/icons/x.svg">
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="admin-popup" id="admin-popup">
+      <form class="admin-container">
+        <div class="group-buttons" id="group-buttons">
+          <button class="group-create-btn" type="button" onclick="group_create()">
+            <img src="/icons/users.svg">
+          </button>
+          <button class="user-add-btn" type="button" onclick="user_add()">
+            <img src="/icons/user-plus.svg">
+          </button>
+          <button class="user-delete-btn" type="button" onclick="user_delete()">
+            <img src="/icons/user-minus.svg">
+          </button>
+        </div>
+        <div class="group-input" id="group-input">
+          <div class="group-submit-image">
+            <img src="/icons/user-circle.svg">
+          </div>
+          <div class="group-input-name">
+            <input type="Text" placeholder="Name">
+          </div>
+          <div class="group-create-submit" id="group-create-submit">
+            <button class="group-create-submit-btn" type="submit">
+              <p>Create Group</p>
+            </button>
+          </div>
+        </div>
+        <div class="select-user" id="select-user">
+          <div class="select-group-user">
+            <div class="group-user">
+              <div class="convo-image-box">
+                <div class="image-padding">
+                  <img class="image" src="/images/blank-profile-picture.png">
+                </div>
+              </div>
+              <h4>Орхан</h4>
+            </div>
+            <div class="select-user-cb">
+              <input type="checkbox">
+            </div>
+          </div>
+        </div>
+        <div class="user-add-submit" id="user-add-submit">
+          <button class="user-add-submit-btn" type="submit">
+            <p>Add Users</p>
+          </button>
+        </div>
+        <div class="user-delete-submit" id="user-delete-submit">
+          <button class="user-delete-submit-btn" type="submit">
+            <p>Delete Users</p>
+          </button>
+        </div>
+        <div class="group-edit-submit" id="group-edit-submit">
+          <button class="group-edit-submit-btn" type="button" onclick="group_edit()">
+            <p>Edit Group</p>
+          </button>
+        </div>
+        <div class="admin-close-btn">
+            <button type="button" class="admin-close" onclick="admin_close()"/>
+            <img src="/icons/x.svg">
+        </div>
+      </form>
+    </div>
+
+<audio id="new-message">
+    <source src="~/audio/new_message.mp3" type="audio/mp3">
+</audio>
+</div>
 </body>
 </html>

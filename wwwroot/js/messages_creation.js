@@ -16,7 +16,7 @@
                                 <div class="message-kr">
                                     <svg viewBox="1 1 8 13" preserveAspectRatio="xMinYMin meet" height="20" width="20" class=""
                                          version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13" xml:space="preserve">
-                                    <path fill="#00a884" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
+                                    <path fill="#00a199" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
                                 </svg>
                                 </div>
                             </div>`
@@ -65,7 +65,7 @@ async function createInputYourMessage(message, privateKey) {
                                 <div class="message-kr">
                                     <svg viewBox="1 1 8 13" preserveAspectRatio="xMinYMin meet" height="20" width="20" class=""
                                          version="1.1" x="0px" y="0px" enable-background="new 0 0 8 13" xml:space="preserve">
-                                    <path fill="#00a884" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
+                                    <path fill="#00a199" d="M5.188,1H0v11.193l6.467-8.625 C7.526,2.156,6.958,1,5.188,1z"></path>
                                 </svg>
                                 </div>
                             </div>`
