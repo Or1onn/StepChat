@@ -1,12 +1,12 @@
 function admin_panel() {
     document.getElementById("admin-popup").style.display = "block";
-    document.getElementById("search-box").style.filter = "blur(2px)";
-    document.getElementById("chat-box").style.filter = "blur(2px)";
+    // document.getElementById("search-box").style.filter = "blur(2px)";
+    // document.getElementById("chat-box").style.filter = "blur(2px)";
 }
   
 function admin_close() {
-    document.getElementById("search-box").style.filter = "blur(0px)";
-    document.getElementById("chat-box").style.filter = "blur(0px)";
+    // document.getElementById("search-box").style.filter = "blur(0px)";
+    // document.getElementById("chat-box").style.filter = "blur(0px)";
     document.getElementById("admin-popup").style.display = "none";
 }
 

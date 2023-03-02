@@ -449,6 +449,17 @@ body {
   height: 100%;
 }
 
+.chatting::-webkit-scrollbar {
+  background: #154883;
+  width: 7px;
+}
+
+.chatting::-webkit-scrollbar-thumb {
+  background: #0b2545;
+  width: 5px;
+  border-radius: 8px;
+}
+
 /* .chatting-frnd-message {
   position: relative;
   display: flex;
@@ -664,11 +675,12 @@ body {
   display: none;
   height: 25%;
   width: 25%;
-  background: #13315c;
+  background: rgb(12 39 76 / 50%);
+  backdrop-filter: blur(10px);
   position: absolute;
   top: 30%;
   left: 45%;
-  filter: drop-shadow(2px 4px 6px black);
+  border-radius: 8px;
   animation: modal 1s alternate ease;
   /* animation: Wrapper 1s; */
 }
@@ -696,11 +708,12 @@ body {
   display: none;
   height: 55%;
   width: 20%;
-  background: #13315c;
+  background: rgb(12 39 76 / 50%);
+  backdrop-filter: blur(10px);
   position: absolute;
+  border-radius: 8px;
   top: 2%;
   left: 14%;
-  filter: drop-shadow(2px 4px 6px black);
   animation: modal 1s alternate ease;
 }
 
@@ -883,21 +896,21 @@ body {
 }
 
 .group-create-btn {
-  background-color: #13315c;
+  background-color: transparent;
   border: 0;
   height: fit-content;
   cursor: pointer;
 }
 
 .user-add-btn {
-  background-color: #13315c;
+  background-color: transparent;
   border: 0;
   height: fit-content;
   cursor: pointer;
 }
 
 .user-delete-btn {
-  background-color: #13315c;
+  background-color: transparent;
   border: 0;
   height: fit-content;
   cursor: pointer;
@@ -969,6 +982,12 @@ body {
   border: 0;
   height: 100%;
   cursor: pointer;
+  transition-duration: 0.7s;
+}
+
+.group-create-submit-btn:hover {
+  background: #154883;
+  border-radius: 8px;
 }
 
 .group-create-submit-btn p {
@@ -989,7 +1008,7 @@ body {
 }
 
 .user-add-submit-btn {
-  background-color: #13315c;
+  background-color: transparent;
   border: 0;
   height: 100%;
   cursor: pointer;
@@ -1013,7 +1032,7 @@ body {
 }
 
 .user-delete-submit-btn {
-  background-color: #13315c;
+  background-color: transparent;
   border: 0;
   height: 100%;
   cursor: pointer;
@@ -1078,10 +1097,16 @@ body {
   cursor: pointer;
 }
 
+.group-edit-submit-btn:hover {
+  background: #154883;
+  border-radius: 8px;
+}
+
 .group-edit-submit-btn {
-  background-color: #13315c;
+  background-color: transparent;
   border: 0;
   height: 100%;
+  transition-duration: 0.7s;
   cursor: pointer;
 }
 
@@ -1131,13 +1156,13 @@ body {
   display: none;
   height: 40%;
   width: 17%;
-  background: rgba(19, 49, 92, 0.5);
   position: absolute;
   top: 51.5%;
   left: 80%;
   border-radius: 6%;
   /* animation: modal 1s reverse ease; */
   animation: Wrapper reverse 0.7s;
+  background: rgba(19, 49, 92, 0.5);
   backdrop-filter: blur(10px);
 }
 
@@ -1214,11 +1239,11 @@ body {
 }
 
 .paper-clip-close-btn {
-  height: 15%;
+  height: 18%;
     width: 4%;
     position: relative;
-    left: 1%;
-    top: 5%;
+    left: 2%;
+    top: 10%;
     display: flex;
     justify-content: center;
 }
@@ -1239,10 +1264,9 @@ body {
 .paper-clip-container p {
   font-style: normal;
     font-weight: 60;
-    height: 7%;
     width: 100%;
+    bottom: 50%;
     position: relative;
-    left: 15%;
     text-align: center;
     min-width: fit-content;
     font-size: 1rem;
@@ -1277,9 +1301,10 @@ body {
   background: transparent;
     width: 100%;
     height: 100%;
-    bottom: 40%;
+    bottom: 0%;
     justify-content: center;
-    display: flex;
+    display: grid;
+    align-content: end;
     position: relative;
 }
 
@@ -1302,4 +1327,29 @@ body {
   background: transparent;
   position: relative;
   border: none;
+}
+
+.file-name {
+  display: flex;
+  height: 50%;
+  position: relative;
+}
+
+.file-image {
+  background: transparent;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.file-input img {
+  transition-duration: 0.7s;
+}
+
+.file-input img:hover {
+  background-color: #154883;
+  border-radius: 20%;
+  color: white;
 }
