@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using StepChat.Contexts;
 using StepChat.Models;
 using System.Diagnostics;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace StepChat.Controllers
 {
@@ -33,7 +34,7 @@ namespace StepChat.Controllers
         }
 
         [HttpPost("/uploadFile")]
-        public async Task<int> UploadFile(IFormFile? fileUpload)
+        public async Task<int> UploadFile(IFormFile? fileUpload, int chatId, int id)
         {
             if (fileUpload is { Length: > 0 })
             {
@@ -46,7 +47,11 @@ namespace StepChat.Controllers
                 var file = new FilesModel() { File = fileContent, Name = fileUpload.FileName, ContentType = fileUpload.ContentType };
                 await _context.Files.AddAsync(file);
                 await _context.SaveChangesAsync();
-
+                
+                var message = new MessagesModel() { Id = file.Id, ChatId = chatId, Text = "type=file", CreateTime = DateTime.Now, UserId = id};
+                await _context.Messages.AddAsync(message);
+                await _context.SaveChangesAsync();
+                
                 return file.Id;
             }
 

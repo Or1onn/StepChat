@@ -180,21 +180,18 @@
         </div>
         <div class="convo-input">
             <form id="fileForm" enctype="multipart/form-data">
-                <div id="file-upload" class="file-upload">
-                    <button type="submit" id="sendFile" class="file-upload"></button>
-                </div>
-                <div class="paper-clip" onclick="paper_clip_popup()">
+                @* <div id="file-upload" class="file-upload"> *@
+                @*     <button type="submit" id="sendFile" class="file-upload"></button> *@
+                @* </div> *@
+                <div class="paper-clip">
                     <label style="cursor: pointer;" for="file-input">
                         <img src="/icons/circle-plus.svg">
                     </label>
-                    <input name="fileUpload" id="file-input" class="file-input" type="file"/>
+                    <input name="fileUpload" id="file-input" style="display: none" type="file"/>
                 </div>
             </form>
             <div class="chat-input">
                 <input id="message" type="Text" placeholder="Type...">
-            </div>
-            <div class="smile" onclick="emoji_popup()">
-                <img src="/icons/mood-smile.svg">
             </div>
             <div id="sendBtn" class="send">
                 <img src="/icons/arrow-forward-up.svg">
@@ -204,7 +201,7 @@
 </div>
 <div class="emoji-popup" id="emoji-popup">
     <form class="emoji-popup-container">
-        <div class="emoji-container">
+        <div id="emojiContainer" class="emoji-container">
         </div>
     </form>
 </div>
@@ -215,7 +212,7 @@
 </div>
 
 <div class="paper-clip-popup" id="paper-clip-popup">
-    <form class="paper-clip-popup-container">
+    <div class="paper-clip-popup-container">
         <div class="paper-clip-container">
             <div class="paper-clip-close-btn">
                 <button type="button" class="paper-clip-close" onclick="paper_clip_close()">
@@ -232,10 +229,13 @@
             </div>
             <div class="file-input">
                 <input type="Text" placeholder="Type...">
-                <img src="/icons/arrow-forward-up.svg">
+                <input type="Text" placeholder="Type...">
+                <button style="background: transparent;" type="submit" form="fileForm">
+                    <img src="/icons/arrow-forward-up.svg">
+                </button>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 <div class="new-chat-popup" id="new-chat-popup">
     <form class="new-chat-popup-container">
@@ -266,67 +266,67 @@
 </div>
 
 <div class="admin-popup" id="admin-popup">
-      <form class="admin-container">
+    <form class="admin-container">
         <div class="group-buttons" id="group-buttons">
-          <button class="group-create-btn" type="button" onclick="group_create()">
-            <img src="/icons/users.svg">
-          </button>
-          <button class="user-add-btn" type="button" onclick="user_add()">
-            <img src="/icons/user-plus.svg">
-          </button>
-          <button class="user-delete-btn" type="button" onclick="user_delete()">
-            <img src="/icons/user-minus.svg">
-          </button>
+            <button class="group-create-btn" type="button" onclick="group_create()">
+                <img src="/icons/users.svg">
+            </button>
+            <button class="user-add-btn" type="button" onclick="user_add()">
+                <img src="/icons/user-plus.svg">
+            </button>
+            <button class="user-delete-btn" type="button" onclick="user_delete()">
+                <img src="/icons/user-minus.svg">
+            </button>
         </div>
         <div class="group-input" id="group-input">
-          <div class="group-submit-image">
-            <img src="/icons/user-circle.svg">
-          </div>
-          <div class="group-input-name">
-            <input type="Text" placeholder="Name">
-          </div>
-          <div class="group-create-submit" id="group-create-submit">
-            <button class="group-create-submit-btn" type="submit">
-              <p>Create Group</p>
-            </button>
-          </div>
+            <div class="group-submit-image">
+                <img src="/icons/user-circle.svg">
+            </div>
+            <div class="group-input-name">
+                <input type="Text" placeholder="Name">
+            </div>
+            <div class="group-create-submit" id="group-create-submit">
+                <button class="group-create-submit-btn" type="submit">
+                    <p>Create Group</p>
+                </button>
+            </div>
         </div>
         <div class="select-user" id="select-user">
-          <div class="select-group-user">
-            <div class="group-user">
-              <div class="convo-image-box">
-                <div class="image-padding">
-                  <img class="image" src="/images/blank-profile-picture.png">
+            <div class="select-group-user">
+                <div class="group-user">
+                    <div class="convo-image-box">
+                        <div class="image-padding">
+                            <img class="image" src="/images/blank-profile-picture.png">
+                        </div>
+                    </div>
+                    <h4>Орхан</h4>
                 </div>
-              </div>
-              <h4>Орхан</h4>
+                <div class="select-user-cb">
+                    <input type="checkbox">
+                </div>
             </div>
-            <div class="select-user-cb">
-              <input type="checkbox">
-            </div>
-          </div>
         </div>
         <div class="user-add-submit" id="user-add-submit">
-          <button class="user-add-submit-btn" type="submit">
-            <p>Add Users</p>
-          </button>
+            <button class="user-add-submit-btn" type="submit">
+                <p>Add Users</p>
+            </button>
         </div>
         <div class="user-delete-submit" id="user-delete-submit">
-          <button class="user-delete-submit-btn" type="submit">
-            <p>Delete Users</p>
-          </button>
+            <button class="user-delete-submit-btn" type="submit">
+                <p>Delete Users</p>
+            </button>
         </div>
         <div class="group-edit-submit" id="group-edit-submit">
-          <button class="group-edit-submit-btn" type="button" onclick="group_edit()">
-            <p>Edit Group</p>
-          </button>
+            <button class="group-edit-submit-btn" type="button" onclick="group_edit()">
+                <p>Edit Group</p>
+            </button>
         </div>
         <div class="admin-close-btn">
             <button type="button" class="admin-close" onclick="admin_close()"/>
             <img src="/icons/x.svg">
         </div>
-      </form>
-    </div>
+    </form>
+</div>
 
 <audio id="new-message">
     <source src="~/audio/new_message.mp3" type="audio/mp3">

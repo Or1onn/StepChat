@@ -214,9 +214,9 @@ hubConnection.on("ReceiveMessage", async (messages, sendId, checkChatId, chatNam
                 } else {
                     for (const element of messages) {
                         if (element.userId === Number(id)) {
-                            await createYourMessage(element.text, privateKey);
+                            await createYourMessage(element.text, privateKey, element.createTime);
                         } else {
-                            await createFriendMessage(element.text, privateKey)
+                            await createFriendMessage(element.text, privateKey, element.createTime)
                         }
                     }
 
@@ -333,13 +333,10 @@ hubConnection.on("ReceiveFile", (fileId) => {
     xhr.responseType = 'blob';
     data.append('fileId', fileId);
 
-    xhr.onload = function () {
+    xhr.onload = async function () {
         let url = window.URL.createObjectURL(xhr.response);
         let filename;
-        let a = document.createElement('a');
-
-        a.href = url;
-
+        
         const disposition = xhr.getResponseHeader('Content-Disposition');
         if (disposition && disposition.indexOf('attachment') !== -1) {
             let filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
@@ -349,11 +346,12 @@ hubConnection.on("ReceiveFile", (fileId) => {
             }
         }
 
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-
-        document.body.removeChild(a);
+        if (filename.indexOf(".png") !== -1 || filename.indexOf(".jpg") !== -1 || filename.indexOf(".jpeg") !== -1) {
+            await createInputFriendImage(xhr.response, filename);
+        }
+        else{
+            await createInputFriendFile(url, filename)
+        }
     };
 
     xhr.send(data);
